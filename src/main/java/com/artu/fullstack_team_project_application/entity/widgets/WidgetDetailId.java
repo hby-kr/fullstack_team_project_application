@@ -4,9 +4,12 @@ import jakarta.persistence.Embeddable;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serial;
+
 @Getter
 @Setter
 @Embeddable
 public class WidgetDetailId implements java.io.Serializable {
+    @Serial
     private static final long serialVersionUID = -6033021146560116394L;
 }
