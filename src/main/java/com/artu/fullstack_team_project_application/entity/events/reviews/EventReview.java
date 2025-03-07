@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.reviews;
 
+import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.users.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -7,6 +8,7 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Getter
@@ -23,6 +25,10 @@ public class EventReview {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
+
     @Column(name = "rate", nullable = false)
     private Integer rate;
 
@@ -36,6 +42,6 @@ public class EventReview {
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at", nullable = false)
-    private Instant createdAt;
+    private Timestamp createdAt;
 
 }
