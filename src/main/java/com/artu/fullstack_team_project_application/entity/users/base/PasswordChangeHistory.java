@@ -1,4 +1,4 @@
-package com.artu.fullstack_team_project_application.entity.postings;
+package com.artu.fullstack_team_project_application.entity.users.base;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
@@ -13,10 +13,10 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "posting_comments")
-public class PostingComment {
+@Table(name = "password_change_histories")
+public class PasswordChangeHistory {
     @Id
-    @Column(name = "comment_id", nullable = false)
+    @Column(name = "change_id", nullable = false)
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -24,16 +24,11 @@ public class PostingComment {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Lob
-    @Column(name = "contents", nullable = false)
-    private String contents;
+    @Column(name = "old_pw", nullable = false)
+    private String oldPw;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
-    private Instant createdAt;
-
-    @ColumnDefault("1")
-    @Column(name = "is_used")
-    private Boolean isUsed;
+    @Column(name = "changed_at")
+    private Instant changedAt;
 
 }

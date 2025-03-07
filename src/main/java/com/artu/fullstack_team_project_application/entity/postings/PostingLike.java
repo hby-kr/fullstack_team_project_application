@@ -1,6 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.postings;
 
-import com.artu.fullstack_team_project_application.entity.users.User;
+import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
