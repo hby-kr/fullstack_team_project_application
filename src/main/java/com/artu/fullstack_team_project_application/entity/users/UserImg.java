@@ -1,6 +1,5 @@
-package com.artu.fullstack_team_project_application.entity.postings;
+package com.artu.fullstack_team_project_application.entity.users;
 
-import com.artu.fullstack_team_project_application.entity.users.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,27 +12,22 @@ import java.time.Instant;
 @Getter
 @Setter
 @Entity
-@Table(name = "posting_comments")
-public class PostingComment {
+@Table(name = "user_img")
+public class UserImg {
     @Id
-    @Column(name = "comment_id", nullable = false)
+    @Column(name = "prf_img_id", nullable = false)
     private Integer id;
+
+    @Column(name = "prf_img_url", nullable = false)
+    private String prfImgUrl;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Lob
-    @Column(name = "contents", nullable = false)
-    private String contents;
-
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at")
-    private Instant createdAt;
-
-    @ColumnDefault("1")
-    @Column(name = "is_used")
-    private Boolean isUsed;
+    @Column(name = "create_at")
+    private Instant createAt;
 
 }

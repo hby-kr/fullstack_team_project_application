@@ -1,6 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.tickets;
 
-import com.artu.fullstack_team_project_application.entity.events.events.Event;
+import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;

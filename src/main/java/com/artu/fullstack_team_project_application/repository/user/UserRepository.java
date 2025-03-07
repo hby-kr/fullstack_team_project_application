@@ -1,6 +1,6 @@
 package com.artu.fullstack_team_project_application.repository.user;
 
-import com.artu.fullstack_team_project_application.entity.user.User;
+import com.artu.fullstack_team_project_application.entity.users.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

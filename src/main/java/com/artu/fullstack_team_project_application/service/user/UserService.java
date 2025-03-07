@@ -1,6 +1,6 @@
 package com.artu.fullstack_team_project_application.service.user;
 
-import com.artu.fullstack_team_project_application.entity.user.User;
+import com.artu.fullstack_team_project_application.entity.users.User;
 import com.artu.fullstack_team_project_application.repository.user.UserRepository;
 import org.springframework.stereotype.Service;
 
