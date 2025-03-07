@@ -4,12 +4,14 @@ import com.artu.fullstack_team_project_application.entity.users.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
 import java.time.Instant;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "event_reviews")
 public class EventReview {
