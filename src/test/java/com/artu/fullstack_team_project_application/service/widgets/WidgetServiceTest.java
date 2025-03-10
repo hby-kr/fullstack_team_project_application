@@ -27,14 +27,8 @@ class WidgetServiceTest {
 
     @Test
     void findWidgetsByUserIdAndUsed() {
-        // Assuming userId "user1" exists and has widgets with widgetIsUsed = true
         List<Widget> widgets = widgetService.findWidgetsByUserIdAndUsed("user1");
         System.out.println("Widgets: " + widgets);
-
-        if (!widgets.isEmpty()) {
-            Widget firstWidget = widgets.get(0);
-            System.out.println("First Widget: " + firstWidget);
-        }
     }
 
     @Test
@@ -58,8 +52,15 @@ class WidgetServiceTest {
         System.out.println("Widgets with theme 'Light': " + widgetIds);
     }
 
+    @Test
+    void findWidgetThemeByWidgetIdAndUserId() {
+        String widgetTheme = widgetService.findWidgetThemeByWidgetIdAndUserId(1, "user1");
+        System.out.println("Widget Theme: " + widgetTheme);
+    }
 
     @Test
-    void testFindWidgetsByUserIdAndUsed() {
+    void findWidgetSizeByWidgetIdAndUserId() {
+        Integer widgetSize = widgetService.findWidgetSizeByWidgetIdAndUserId(1, "user1");
+        System.out.println("Widget Size: " + widgetSize);
     }
 }

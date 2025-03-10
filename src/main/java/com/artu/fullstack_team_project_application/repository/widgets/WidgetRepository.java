@@ -28,6 +28,13 @@ public interface WidgetRepository extends JpaRepository<Widget, Integer> {
 
     @Query("SELECT w.id FROM Widget w WHERE w.widgetTheme = :widgetTheme")
     List<Integer> findWidgetIdsByWidgetTheme(@Param("widgetTheme") String widgetTheme);
+
+    @Query("SELECT w.widgetTheme FROM Widget w WHERE w.id = :widgetId AND w.user.userId = :userId")
+    String findWidgetThemeByWidgetIdAndUserId(@Param("widgetId") Integer widgetId, @Param("userId") String userId);
+
+    @Query("SELECT w.widgetSize FROM Widget w WHERE w.id = :widgetId AND w.user.userId = :userId")
+    Integer findWidgetSizeByWidgetIdAndUserId(@Param("widgetId") Integer widgetId, @Param("userId") String userId);
+    
 }
 
 

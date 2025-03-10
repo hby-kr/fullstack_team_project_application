@@ -45,4 +45,23 @@ public class WidgetService {
     public List<Integer> getWidgetIdsByTheme(String widgetTheme) {
         return widgetRepository.findWidgetIdsByWidgetTheme(widgetTheme);
     }
+
+    // 특정 userId와 관련된 widgetTheme 값을 모두 반환
+    public String findWidgetThemeByWidgetIdAndUserId(Integer widgetId, String userId) {
+        String widgetTheme = widgetRepository.findWidgetThemeByWidgetIdAndUserId(widgetId, userId);
+        if (widgetTheme == null) {
+            throw new IllegalArgumentException("Widget not found with the given widgetId and userId");
+        }
+        return widgetTheme;
+    }
+    
+    // 특정 userId와 관련된 widgetSize 값을 모두 반환
+    public Integer findWidgetSizeByWidgetIdAndUserId(Integer widgetId, String userId) {
+        Integer widgetSize = widgetRepository.findWidgetSizeByWidgetIdAndUserId(widgetId, userId);
+        if (widgetSize == null) {
+            throw new IllegalArgumentException("Widget not found with the given widgetId and userId");
+        }
+        return widgetSize;
+    }
+
 }

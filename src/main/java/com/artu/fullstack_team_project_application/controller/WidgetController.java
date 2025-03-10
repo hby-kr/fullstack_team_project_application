@@ -43,4 +43,24 @@ public class WidgetController {
         List<Integer> widgetIds = widgetService.getWidgetIdsByTheme(theme);
         return ResponseEntity.ok(widgetIds);
     }
+
+    @GetMapping("/{widgetId}/theme")
+    public ResponseEntity<String> getWidgetTheme(@PathVariable Integer widgetId, @RequestParam String userId) {
+        try {
+            String widgetTheme = widgetService.findWidgetThemeByWidgetIdAndUserId(widgetId, userId);
+            return ResponseEntity.ok(widgetTheme);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @GetMapping("/{widgetId}/size")
+    public ResponseEntity<Integer> getWidgetSize(@PathVariable Integer widgetId, @RequestParam String userId) {
+        try {
+            Integer widgetSize = widgetService.findWidgetSizeByWidgetIdAndUserId(widgetId, userId);
+            return ResponseEntity.ok(widgetSize);
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
 }
