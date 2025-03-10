@@ -14,6 +14,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 import java.time.Instant;
 import java.time.LocalDate;
@@ -23,8 +25,15 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@SQLDelete(sql = "UPDATE users SET is_used = false WHERE post_id = ?")
+// @SQLDelete는 실제로 DELETE 명령어를 사용하지 않고, 대신 UPDATE 명령어를 사용하여 is_used 필드를 false로 변경.
+@Where(clause = "is_used = true") // 특정 조건을 만족하는 데이터를 조회할 때 추가적인 필터를 적용하는 데 사용
+// is_used = true라는 조건을 추가하여, is_used가 true인 항목만 조회되도록 설정
 @Table(name = "users")
 public class User {
+
+    public enum Gender {M, F}
+
     @Id
     @Column(name = "user_id", nullable = false, length = 50)
     private String userId;
@@ -41,23 +50,20 @@ public class User {
     @Column(name = "user_birth", nullable = false)
     private LocalDate userBirth;
 
-    @Lob
-    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
     private String gender;
 
-    @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at")
-    private Instant createdAt;
+    private LocalDate createdAt;
 
-    @ColumnDefault("1")
+    @ColumnDefault("true")
     @Column(name = "is_used")
-    private Boolean isUsed;
+    private Boolean isUsed = true;
 
     @Column(name = "dropout_at")
-    private Instant dropoutAt;
+    private LocalDate dropoutAt;
 
-    @OneToMany(mappedBy = "user")
-    private Set<EventCast> eventCasts = new LinkedHashSet<>();
+//  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ join 설정 시작
 
     @OneToMany(mappedBy = "user")
     private Set<UserEventLike> userEventLikes = new LinkedHashSet<>();
