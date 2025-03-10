@@ -22,6 +22,11 @@ public class WidgetDetail {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @MapsId
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "widget_id", nullable = false)
+    private Widget widgetId;
+
     @Column(name = "info_name", nullable = false, length = 50)
     private String infoName;
 
