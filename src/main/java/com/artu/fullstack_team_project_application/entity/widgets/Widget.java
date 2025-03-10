@@ -26,8 +26,6 @@ public class Widget {
     private Boolean widgetIsUsed = false;
 
     @ColumnDefault("'Light'")
-    @Lob
-    @Column(name = "widget_theme")
-    private String widgetTheme;
-
+    @Column(name = "widget_theme", nullable = false)
+    private String widgetTheme = "Light";
 }
