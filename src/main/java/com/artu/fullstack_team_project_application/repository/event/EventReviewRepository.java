@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface EventReviewRepository extends JpaRepository<EventReview, Integer> {
     List<EventReview> findByEventId(Integer eventId);
-    List<EventReview> findByUserId(Integer userId);
+    List<EventReview> findByUser_UserId(String userId);
 }

@@ -17,6 +17,7 @@ import java.time.Instant;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -26,6 +27,10 @@ public class User {
     @Id
     @Column(name = "user_id", nullable = false, length = 50)
     private String userId;
+
+    public User(){
+        this.userId = UUID.randomUUID().toString();
+    }
 
     @Column(name = "user_email", nullable = false, length = 100)
     private String userEmail;
