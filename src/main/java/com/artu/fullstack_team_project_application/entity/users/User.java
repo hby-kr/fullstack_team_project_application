@@ -28,10 +28,6 @@ public class User {
     @Column(name = "user_id", nullable = false, length = 50)
     private String userId;
 
-    public User(){
-        this.userId = UUID.randomUUID().toString();
-    }
-
     @Column(name = "user_email", nullable = false, length = 100)
     private String userEmail;
 
