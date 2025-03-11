@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.service.widgets;
 
+import com.artu.fullstack_team_project_application.entity.users.User;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.repository.widgets.WidgetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,25 @@ public class WidgetService {
     @Autowired
     public WidgetService(WidgetRepository widgetRepository) {
         this.widgetRepository = widgetRepository;
+    }
+
+    // 위젯 새로 생성
+    public Widget createWidget(Integer id, User user, Integer widgetSize, String widgetTheme) {
+        Widget widget = new Widget();
+        widget.setId(id);
+        widget.setUser(user);
+        widget.setWidgetSize(widgetSize);
+        widget.setWidgetTheme(widgetTheme);
+        widget.setWidgetIsUsed(false); // 기본값 설정
+        return widgetRepository.save(widget); // 저장 후 반환
+    }
+
+    // 위젯 삭제
+    public void deleteWidgetById(Integer id) {
+        if (!widgetRepository.existsById(id)) {
+            throw new IllegalArgumentException("Widget with the given ID does not exist");
+        }
+        widgetRepository.deleteById(id);
     }
 
     // 특정 widgetId로 위젯을 찾아 반환
@@ -54,7 +74,7 @@ public class WidgetService {
         }
         return widgetTheme;
     }
-    
+
     // 특정 userId와 관련된 widgetSize 값을 모두 반환
     public Integer findWidgetSizeByWidgetIdAndUserId(Integer widgetId, String userId) {
         Integer widgetSize = widgetRepository.findWidgetSizeByWidgetIdAndUserId(widgetId, userId);
@@ -62,6 +82,11 @@ public class WidgetService {
             throw new IllegalArgumentException("Widget not found with the given widgetId and userId");
         }
         return widgetSize;
+    }
+
+    // 특정 userId와 widgetSize 로 관련된 widgetId 값을 모두 반환
+    public Integer findWidgetIdByWidgetSizeAndUserId(Integer widgetSize, String userId) {
+        return widgetRepository.findWidgetIdByWidgetSizeAndUserId(widgetSize, userId);
     }
 
 }

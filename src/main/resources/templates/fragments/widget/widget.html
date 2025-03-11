@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget List</title>
+    <link rel="stylesheet" href="../../../static/css/style.css">
+</head>
+<body>
+<h1>Available Widgets</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Size</th>
+        <th>Theme</th>
+        <th>Used</th>
+        <th>Info Name</th>
+        <th>Details</th>
+    </tr>
+    </thead>
+    <tbody id="widget-table-body">
+    <!-- 데이터가 여기에 렌더링됨 -->
+    </tbody>
+</table>
+<script>
+    const API_URL = "/api/widgets";
+
+    const tableBody = document.getElementById('widget-table-body');
+
+    // fetch()를 통해 데이터를 가져와서 테이블에 동적으로 출력
+</script>
+</body>
+</html>
