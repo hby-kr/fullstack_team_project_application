@@ -16,6 +16,6 @@ class EventReviewServiceImpTest {
 
     @Test
     void getReviewsByUserId() {
-        System.out.println(eventReviewService.getReviewsByUserId(1));
+        System.out.println(eventReviewService.getReviewsByUserId("user1"));
     }
 }

@@ -21,8 +21,8 @@ public class EventReviewServiceImp implements EventReviewService {
     }
 
     @Override
-    public List<EventReview> getReviewsByUserId(Integer userId) {
-        return eventReviewRepository.findByEventId(userId);
+    public List<EventReview> getReviewsByUserId(String userId) {
+        return eventReviewRepository.findByUser_UserId(userId);
     }
 
     @Override
