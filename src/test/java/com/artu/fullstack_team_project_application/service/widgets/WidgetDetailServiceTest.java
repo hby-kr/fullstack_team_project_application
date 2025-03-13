@@ -1,17 +1,31 @@
 package com.artu.fullstack_team_project_application.service.widgets;
 
-import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetailId;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import java.util.Map;
+
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 @SpringBootTest
 class WidgetDetailServiceTest {
 
     @Autowired
-    WidgetDetailService widgetDetailService;
+    private WidgetDetailService widgetDetailService;
 
+    @Test
+    void testGetWidgetJsonByUserIdAndWidgetId() {
+        Map<String, Object> widgetJson = widgetDetailService.getWidgetJsonByUserIdAndWidgetId("user1", 1);
+
+        assertNotNull(widgetJson);
+        System.out.println("Widget JSON: " + widgetJson);
+    }
+
+    @Test
+    void findWidgetIdByInfoName() {
+        Integer widgetId = widgetDetailService.findWidgetIdByInfoName("Calendar Info");
+        System.out.println("Found widget_id: " + widgetId);
+    }
 
 }

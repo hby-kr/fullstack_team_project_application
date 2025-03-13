@@ -13,6 +13,8 @@ import java.util.List;
 @Repository
 public interface WidgetRepository extends JpaRepository<Widget, Integer> {
 
+    void deleteById(Integer id);
+
     @Query("SELECT w FROM Widget w WHERE w.user.userId = :userId AND w.widgetIsUsed = TRUE")
     List<Widget> findWidgetsByUserIdAndWidgetIsUsedTrue(@Param("userId") String userId);
 
@@ -34,7 +36,9 @@ public interface WidgetRepository extends JpaRepository<Widget, Integer> {
 
     @Query("SELECT w.widgetSize FROM Widget w WHERE w.id = :widgetId AND w.user.userId = :userId")
     Integer findWidgetSizeByWidgetIdAndUserId(@Param("widgetId") Integer widgetId, @Param("userId") String userId);
-    
+
+    @Query("SELECT w.id FROM Widget w WHERE w.widgetSize = :widgetSize AND w.user.userId = :userId")
+    Integer findWidgetIdByWidgetSizeAndUserId(@Param("widgetSize") Integer widgetSize, @Param("userId") String userId);
 }
 
 

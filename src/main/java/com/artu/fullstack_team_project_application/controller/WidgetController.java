@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/widgets")
@@ -62,5 +63,11 @@ public class WidgetController {
         } catch (IllegalArgumentException e) {
             return ResponseEntity.badRequest().body(null);
         }
+    }
+
+    @GetMapping("/all")
+    public ResponseEntity<List<Map<String, Object>>> getAllWidgetsWithDetails() {
+        List<Map<String, Object>> widgetDetails = widgetService.getAllWidgetsWithDetails();
+        return ResponseEntity.ok(widgetDetails);
     }
 }
