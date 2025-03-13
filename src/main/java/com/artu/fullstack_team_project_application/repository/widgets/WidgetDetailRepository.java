@@ -5,9 +5,12 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Map;
 
 public interface WidgetDetailRepository extends JpaRepository<WidgetDetail, Integer> {
+    @Query("SELECT wd FROM WidgetDetail wd WHERE wd.widgetId.id = :widgetId")
+    List<WidgetDetail> findByWidgetId(@Param("widgetId") Integer widgetId);
 
     @Query("SELECT wd.widgetJson FROM WidgetDetail wd WHERE wd.user.userId = :userId AND wd.widgetId.id = :widgetId")
     Map<String, Object> findWidgetJsonByUserIdAndWidgetId(@Param("userId") String userId, @Param("widgetId") Integer widgetId);

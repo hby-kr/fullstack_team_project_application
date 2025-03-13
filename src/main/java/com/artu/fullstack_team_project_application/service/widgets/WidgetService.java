@@ -6,6 +6,9 @@ import com.artu.fullstack_team_project_application.repository.widgets.WidgetRepo
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -13,10 +16,33 @@ import java.util.Optional;
 public class WidgetService {
 
     private final WidgetRepository widgetRepository;
+    private final WidgetDetailService widgetDetailService; // WidgetDetailService 사용
 
     @Autowired
-    public WidgetService(WidgetRepository widgetRepository) {
+    public WidgetService(WidgetRepository widgetRepository, WidgetDetailService widgetDetailService) {
         this.widgetRepository = widgetRepository;
+        this.widgetDetailService = widgetDetailService;
+    }
+
+    public List<Map<String, Object>> getAllWidgetsWithDetails() {
+        List<Widget> widgets = widgetRepository.findAll();
+        List<Map<String, Object>> results = new ArrayList<>();
+
+        for (Widget widget : widgets) {
+            Map<String, Object> widgetMap = new HashMap<>();
+            widgetMap.put("widget_id", widget.getId());
+            widgetMap.put("user_id", widget.getUser().getUserId());
+            widgetMap.put("widget_size", widget.getWidgetSize());
+            widgetMap.put("widget_is_used", widget.getWidgetIsUsed());
+            widgetMap.put("widget_theme", widget.getWidgetTheme());
+
+            // WidgetDetailService 호출
+            Map<String, Object> details = widgetDetailService.getDetailsForWidget(widget.getId());
+            widgetMap.putAll(details);
+
+            results.add(widgetMap);
+        }
+        return results;
     }
 
     // 위젯 새로 생성
@@ -88,5 +114,4 @@ public class WidgetService {
     public Integer findWidgetIdByWidgetSizeAndUserId(Integer widgetSize, String userId) {
         return widgetRepository.findWidgetIdByWidgetSizeAndUserId(widgetSize, userId);
     }
-
 }
