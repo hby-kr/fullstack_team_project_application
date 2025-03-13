@@ -13,6 +13,7 @@ import java.time.Instant;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @ToString
 @Table(name = "event_review_images")
