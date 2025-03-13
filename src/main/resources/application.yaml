@@ -1,8 +1,8 @@
 spring:
-application:
-name: fullstack_team_project_application
-profiles:
-include: dev_db
+  application:
+    name: fullstack_team_project_application
+  profiles:
+    include: dev_db
 
 logging:
   level:

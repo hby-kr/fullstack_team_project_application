@@ -10,11 +10,14 @@ import java.util.Optional;
 
 public interface UserService {
 
+
+    // 관리자 페이지, 회원 검색
     public Page<User> readAll(Pageable pageable);
 
+    //
     public Optional<User> readOne(String userId);
 
-    public void save(User user);
+    public User save(User user);
 
     public void delete(String userId);
 

@@ -51,8 +51,9 @@ public class User {
     private LocalDate userBirth;
 
     @Enumerated(EnumType.STRING)
-    private String gender;
+    private Gender gender;
 
+//  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     @Column(name = "created_at")
     private LocalDate createdAt;
 

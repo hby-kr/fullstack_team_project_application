@@ -8,31 +8,39 @@
 <h1>회원가입 페이지</h1>
 
 <h2>회원가입 폼</h2>
-<form action="/signup.do" method="POST">
+<form action="/user/signUp.do" method="POST">
 
-  <label for="user_id">아이디:</label>
-  <input type="text" id="user_id" name="user_id" required value="user30"><br><br>
+    <label>아이디:
+        <input type="text" id="userId" name="userId" required value="user30"><br><br>
+    </label>
 
-  <label for="user_email">이메일:</label>
-  <input type="email" id="user_email" name="user_email"  required><br><br>
+    <label>이메일:
+        <input type="email" id="userEmail" name="userEmail" required value="1234@artu.com"><br><br>
+    </label>
 
-  <label for="password">비밀번호:</label>
-  <input type="password" id="password" name="password" required><br><br>
+    <label>비밀번호:
+        <input type="password" id="password" name="password" required value="artuartu"><br><br>
+    </label>
 
-  <label for="user_name">이름:</label>
-  <input type="text" id="user_name" name="user_name" required><br><br>
+    <label>이름:
+        <input type="text" id="userName" name="userName" required value="홍길동"><br><br>
+    </label>
 
-  <label for="user_birth">생년월일:</label>
-  <input type="date" id="user_birth" name="user_birth" required><br><br>
+    <label>생년월일:
+        <input type="date" id="userBirth" name="userBirth" required value="2025-03-01"><br><br>
+    </label>
 
-  <label for="gender">성별:</label>
-  <select id="gender" name="gender" required>
-    <option value="male">남성</option>
-    <option value="female">여성</option>
-    <option value="other">기타</option>
-  </select><br><br>
+    <label for="gender">성별:
+        <select id="gender" name="gender" required>
+            <option value="male">남성</option>
+            <option value="female">여성</option>
+        </select><br><br>
+    </label>
 
-  <button type="submit">회원가입</button>
+    <p>
+        <button type="reset">초기화</button>
+        <button type="submit">회원가입</button>
+    </p>
 </form>
 </body>
 </html>
