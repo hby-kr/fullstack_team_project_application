@@ -20,6 +20,7 @@ public class EventReviewController {
         this.eventReviewService = eventReviewService;
     }
 
+
     @GetMapping("/{eventId}")
     public String getReviewsByEvent(@PathVariable Integer eventId, Model model) {
         List<EventReview> reviews=eventReviewService.getReviewsByEventId(eventId);

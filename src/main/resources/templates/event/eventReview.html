@@ -1,11 +1,47 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>공연 리뷰 페이지</title>
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>공연 리뷰</title>
 </head>
 <body>
-    <h1>공연 리뷰</h1>
+<h2>리뷰</h2>
 
+<h3>사진 & 동영상</h3>
+<div class="review-images">
+    <img src="/images/sample1.jpg" alt="리뷰 이미지">
+    <img src="/images/sample2.jpg" alt="리뷰 이미지">
+    <img src="/images/sample3.jpg" alt="리뷰 이미지">
+    <img src="/images/sample4.jpg" alt="리뷰 이미지">
+    <img src="/images/sample5.jpg" alt="리뷰 이미지">
+    <button onclick="loadMoreImages()">more ></button>
+</div>
+
+<div id="review-list">
+    <ul>
+        <!-- 리뷰 리스트 -->
+        <li th:each="review : ${reviews}">
+            <p><strong th:text="${review.user.userId}"></strong> <span th:text="${review.createdAt}"></span></p>
+            <p>⭐ <span th:text="${review.rate}"></span>/5</p>
+            <p th:text="${review.contents}"></p>
+            <button>좋아요 <span th:text="${review.isUsed}"></span></button>
+        </li>
+    </ul>
+</div>
+
+<button id="write-review">리뷰 작성하기</button>
+
+<script>
+    function loadMoreImages() {
+        alert("더 많은 이미지를 불러옵니다.");
+    }
+
+    document.getElementById("write-review").addEventListener("click", function() {
+        alert("리뷰 작성 페이지로 이동합니다.");
+    });
+</script>
 </body>
 </html>
