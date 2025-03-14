@@ -3,6 +3,10 @@ spring:
     name: fullstack_team_project_application
   profiles:
     include: dev_db
+  jpa:
+    hibernate:
+      ddl-auto: update  # 기존 테이블을 수정 가능
+    show-sql: true
 
 logging:
   level:

@@ -17,6 +17,7 @@ import java.time.Instant;
 @SQLDelete(sql = "UPDATE user_follow SET is_used = true WHERE followee_id = ? AND follower_id = ?")
 @Where(clause = "is_used = true")
 @Table(name = "user_follow")
+@IdClass(UserFollowId.class)
 public class UserFollow {
     // @EmbeddedId
     // private UserFollowId id;

@@ -17,7 +17,7 @@ public class UserInquireReply {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "reply_id", nullable = false)
-    private Integer id;
+    private Integer replyId;
 
     @MapsId
     @OneToOne(fetch = FetchType.LAZY, optional = false)

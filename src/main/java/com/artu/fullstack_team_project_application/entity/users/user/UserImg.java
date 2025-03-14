@@ -16,7 +16,7 @@ import java.time.Instant;
 public class UserImg {
     @Id
     @Column(name = "prf_img_id", nullable = false)
-    private Integer id;
+    private Integer prfImgId;
 
     @Column(name = "prf_img_url", nullable = false)
     private String prfImgUrl;

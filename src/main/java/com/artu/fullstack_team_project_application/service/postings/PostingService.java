@@ -25,7 +25,7 @@ public interface PostingService {
     List<Posting> findByUser_UserId(String userId);
 
     // 게시글 이미지
-    List<PostingImage> findByPost_PostId(Posting postId);
+    // List<PostingImage> findByPost_PostId(Posting postId);
 
     // bookmark
     // Map<String, Long> getUserActivityCounts(Long userNum);

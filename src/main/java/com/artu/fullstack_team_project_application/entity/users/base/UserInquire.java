@@ -15,9 +15,12 @@ import java.time.Instant;
 @Entity
 @Table(name = "user_inquires")
 public class UserInquire {
+
+    public enum InquiryState {Pending, Completed}
+
     @Id
     @Column(name = "inquire_id", nullable = false)
-    private Integer id;
+    private Integer inquireId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -46,7 +49,7 @@ public class UserInquire {
     @ColumnDefault("'Pending'")
     @Lob
     @Column(name = "inquiry_state")
-    private String inquiryState;
+    private InquiryState inquiryState;
 
     @Column(name = "state_updated_at")
     private Instant stateUpdatedAt;

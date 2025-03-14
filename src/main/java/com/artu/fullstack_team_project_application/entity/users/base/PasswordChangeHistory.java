@@ -17,7 +17,7 @@ import java.time.Instant;
 public class PasswordChangeHistory {
     @Id
     @Column(name = "change_id", nullable = false)
-    private Integer id;
+    private Integer changeId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

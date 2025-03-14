@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 public interface UserService {
@@ -25,9 +26,13 @@ public interface UserService {
     public List<UserInterest> readInterests(String userId);
     public List<UserInterest> saveInterests(UserInterest userInterest);
 
-    // follow
-    public List<UserFollow> findByFolloweeId(String followeeId);
-    public List<UserFollow> findByFollowerId(String followerId);
+    // follow 리스트
+    List<UserFollow> findByFolloweeId(String userId);
+    List<UserFollow> findByFollowerId(String userId);
+
+    // follow 수
+    Map<String, Long> getCountFollower(String followeeId);
+    Map<String, Long> getCountFollowee(String followerId);
 
 
 

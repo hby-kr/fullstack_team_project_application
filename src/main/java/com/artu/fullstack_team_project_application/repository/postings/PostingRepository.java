@@ -15,8 +15,8 @@ public interface PostingRepository extends JpaRepository<Posting, Integer> {
     List<Posting> findByUser_UserId(String userId);
 
     // 위치 태그
-    List<Posting> findByLocationTag(String locationTag);
+    // List<Posting> findByLocationTag(String locationTag);
 
     // 사람 태그
-    List<Posting> findByPersonTagId(String personTagId);
+    // List<Posting> findByPersonTagId(String personTagId);
 }

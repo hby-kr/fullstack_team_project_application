@@ -34,6 +34,9 @@ public class Posting {
     @Column(name = "location_tag")
     private String locationTag;
 
+    @JoinColumn(name = "person_tag_id")
+    private String personTagId;
+
     @ColumnDefault("'All'")
     @Lob
     @Column(name = "visibility_type")

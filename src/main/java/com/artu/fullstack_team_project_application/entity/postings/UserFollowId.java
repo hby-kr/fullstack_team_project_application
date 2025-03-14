@@ -19,4 +19,11 @@ public class UserFollowId implements java.io.Serializable {
 
     // 기본 생성자
     public UserFollowId() {}
+
+    // 필드를 포함한 생성자
+    public UserFollowId(String followerId, String followeeId) {
+        this.followerId = followerId;
+        this.followeeId = followeeId;
+    }
+
 }

@@ -14,9 +14,14 @@ import java.time.Instant;
 @Entity
 @Table(name = "user_settings")
 public class UserSetting {
+
+    public enum DisplayColor {Light, Dark}
+
+    public enum Language {System, English, Korean}
+
     @Id
     @Column(name = "setting_id", nullable = false)
-    private Integer id;
+    private Integer settingId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -26,12 +31,12 @@ public class UserSetting {
     @ColumnDefault("'Light'")
     @Lob
     @Column(name = "display_color")
-    private String displayColor;
+    private DisplayColor displayColor;
 
     @ColumnDefault("'System'")
     @Lob
     @Column(name = "language")
-    private String language;
+    private Language language;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "set_at")

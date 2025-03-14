@@ -39,10 +39,10 @@ public class PostingServiceImp implements PostingService {
         return postingRepository.findByUser_UserId(userId);
     }
 
-    @Override
-    public List<PostingImage> findByPost_PostId(Posting postId) {
-        return postingImageRepository.findByPost_PostId(postId);
-    }
+//    @Override
+//    public List<PostingImage> findByPost_PostId(Posting postId) {
+//        return postingImageRepository.findByPost_PostId(postId);
+//    }
 
 //    @Override
 //    public Map<String, Long> getUserActivityCounts(Long userNum) {

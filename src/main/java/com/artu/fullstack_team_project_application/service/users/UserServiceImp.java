@@ -10,7 +10,9 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -50,14 +52,33 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public List<UserFollow> findByFolloweeId(String followeeId) {
-        return userFollowRepository.findByFolloweeId(followeeId);
+    public List<UserFollow> findByFolloweeId(String userId) {
+        return userFollowRepository.findByFolloweeId(userId);
     }
 
     @Override
-    public List<UserFollow> findByFollowerId(String followerId) {
-        return userFollowRepository.findByFollowerId(followerId);
+    public List<UserFollow> findByFollowerId(String userId) {
+        return userFollowRepository.findByFollowerId(userId);
     }
+
+    //
+    @Override
+    public Map<String, Long> getCountFollower(String followeeId) {
+        Long countFollower = userFollowRepository.countFolloweeByUserId(followeeId);
+        Map<String, Long> countFollowerMap = new HashMap<>();
+        countFollowerMap.put("countFollower", countFollower);
+        return countFollowerMap;
+    }
+
+    @Override
+    public Map<String, Long> getCountFollowee(String followerId) {
+        Long countFollowee = userFollowRepository.countFollowerByUserId(followerId);
+        Map<String, Long> countFolloweeMap = new HashMap<>();
+        countFolloweeMap.put("countFollowee", countFollowee);
+        return countFolloweeMap;
+    }
+
+
 
 //
 //    public UserService(UserRepository userRepository) {

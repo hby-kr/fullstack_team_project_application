@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Controller
@@ -36,24 +37,34 @@ public class PostingController {
         model.addAttribute("user", user);  // user 객체를 모델에 담기
         model.addAttribute("userId", userId);  // userId도 모델에 담기
 
+        // followee 수
+        Map<String, Long> countFolloweeMap = userService.getCountFollowee(userId);
+        Long countFolloweeCount = countFolloweeMap.get("countFollowee");
+        model.addAttribute("countFolloweeMap", countFolloweeMap);
+        model.addAttribute("countFolloweeCount", countFolloweeCount);
+
+        // follower 수
+        Map<String, Long> countFollowerMap = userService.getCountFollower(userId);
+        Long countFollowerCount = countFollowerMap.get("countFollower");
+        model.addAttribute("countFollowerMap", countFollowerMap);
+        model.addAttribute("countFollowerCount", countFollowerCount);
 
         // 템플릿에 user, followerCounts, followeeCounts를 전달
         return "posting/userpage";
     }
-
-    @GetMapping("/{userId}/.do")
-    public String follower(String followerId, Model model) {
-        List<UserFollow> findByFollowerId = userService.findByFollowerId(followerId);
-        model.addAttribute("followerId", findByFollowerId); // 팔로워 리스트를 모델에 추가
-        return "artu/follower"; // follower.html로 이동
-    }
-
-    @GetMapping("/{userId}/followee.do")
-    public String followee(String followeeId, Model model) {
-        List<UserFollow> findByFolloweeId = userService.findByFolloweeId(followeeId);
-        model.addAttribute("followeeId", findByFolloweeId); // 팔로우된 리스트를 모델에 추가
-        return "artu/followee"; // followee.html로 이동
-    }
-
+//
+//    @GetMapping("/{userId}/follower.do")
+//    public String follower(String followerId, Model model) {
+//        List<UserFollow> findByFollowerId = userService.findByFollowerId(followerId);
+//        model.addAttribute("followerId", findByFollowerId); // 팔로워 리스트를 모델에 추가
+//        return "artu/follower"; // follower.html로 이동
+//    }
+//
+//    @GetMapping("/{userId}/followee.do")
+//    public String followee(String followeeId, Model model) {
+//        List<UserFollow> findByFolloweeId = userService.findByFolloweeId(followeeId);
+//        model.addAttribute("followeeId", findByFolloweeId); // 팔로우된 리스트를 모델에 추가
+//        return "artu/followee"; // followee.html로 이동
+//    }
 
 }

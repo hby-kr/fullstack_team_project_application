@@ -15,7 +15,6 @@ import java.time.Instant;
 @Setter
 @ToString
 @Entity
-@ToString
 @Table(name = "event_review_images")
 public class EventReviewImage {
     @Id
