@@ -1,7 +1,9 @@
 package com.artu.fullstack_team_project_application.service.users;
 
+import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.user.UserInterest;
+import com.artu.fullstack_team_project_application.repository.postings.UserFollowRepository;
 import com.artu.fullstack_team_project_application.repository.users.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import java.util.Optional;
 public class UserServiceImp implements UserService {
 
     private final UserRepository userRepository;
+    private final UserFollowRepository userFollowRepository;
 
     @Override
     public Page<User> readAll(Pageable pageable) {
@@ -44,6 +47,16 @@ public class UserServiceImp implements UserService {
     @Override
     public List<UserInterest> saveInterests(UserInterest userInterest) {
         return List.of();
+    }
+
+    @Override
+    public List<UserFollow> findByFolloweeId(String followeeId) {
+        return userFollowRepository.findByFolloweeId(followeeId);
+    }
+
+    @Override
+    public List<UserFollow> findByFollowerId(String followerId) {
+        return userFollowRepository.findByFollowerId(followerId);
     }
 
 //

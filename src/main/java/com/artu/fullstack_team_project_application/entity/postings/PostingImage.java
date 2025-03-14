@@ -1,23 +1,26 @@
 package com.artu.fullstack_team_project_application.entity.postings;
 
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.ToString;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
+@ToString
+@SQLDelete(sql = "UPDATE postings SET is_used = true WHERE post_id = ?")
+@Where(clause = "is_used = true")
 @Table(name = "posting_images")
 public class PostingImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "img_id", nullable = false)
-    private Integer id;
+    private Integer imgId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

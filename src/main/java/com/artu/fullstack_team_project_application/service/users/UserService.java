@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.service.users;
 
+import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.user.UserInterest;
 import org.springframework.data.domain.Page;
@@ -23,6 +24,12 @@ public interface UserService {
 
     public List<UserInterest> readInterests(String userId);
     public List<UserInterest> saveInterests(UserInterest userInterest);
+
+    // follow
+    public List<UserFollow> findByFolloweeId(String followeeId);
+    public List<UserFollow> findByFollowerId(String followerId);
+
+
 
 
 }

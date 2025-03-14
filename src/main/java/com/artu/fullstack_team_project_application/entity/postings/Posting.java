@@ -2,22 +2,25 @@ package com.artu.fullstack_team_project_application.entity.postings;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
+import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+import lombok.ToString;
+import org.hibernate.annotations.*;
 
 import java.time.Instant;
 
 @Getter
 @Setter
 @Entity
+@ToString
+@SQLDelete(sql = "UPDATE postings SET is_used = true WHERE post_id = ?")
+@Where(clause = "is_used = true")
 @Table(name = "postings")
 public class Posting {
     @Id
     @Column(name = "post_id", nullable = false)
-    private Integer id;
+    private Integer postId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

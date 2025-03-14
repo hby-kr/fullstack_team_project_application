@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>개인페이지</title>
+</head>
+<body>
+<h1><span th:text="${user.userId}"></span>님의 페이지</h1>
+<p th:text="${user.userName}"></p>
+<p th:text="${user.userEmail}"></p>
+<p><a th:href="@{'/{userId}/follower'(userId=${user.userId})}">팔로워</a> <span th:text="${followerCount}"></span></p>
+<p><a th:href="@{'/{userId}/followee'(userId=${user.userId})}">팔로우</a> <span th:text="${followeeCount}"></span></p>
+<div>
+    <button id="postingBtn">포스트</button>
+    <div id="postLocation"></div>
+</div>
+
+</body>
+</html>

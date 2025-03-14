@@ -94,6 +94,7 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<PostingLike> postingLikes = new LinkedHashSet<>();
 
+    // Posting 엔티티와의 관계 설정
     @OneToMany(mappedBy = "user")
     private Set<Posting> postings = new LinkedHashSet<>();
 
@@ -139,10 +140,12 @@ public class User {
     @OneToMany(mappedBy = "user")
     private Set<Widget> widgets = new LinkedHashSet<>();
 
+    // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "follower")
-    private Set<UserFollow> userFollowers = new LinkedHashSet<>();
+    private Set<UserFollow> followers = new LinkedHashSet<>();
 
+    // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followee")
-    private Set<UserFollow> userFollowees = new LinkedHashSet<>();
+    private Set<UserFollow> followees = new LinkedHashSet<>();
 
 }
