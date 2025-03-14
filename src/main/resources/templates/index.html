@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./../static/css/style.css">
+    <link rel="stylesheet" href="./../css/style.css">
     <title>위젯 테스트 페이지</title>
 </head>
 <body>
@@ -22,7 +22,7 @@
 <a href="fragments/widget/widget.do">widget</a>
 
 <h2>개인페이지(posting, follow)</h2>
-<p><a th:href="@{'/{userId}/userpage.do'(userId=${user.userId})}">개인페이지</a></p>
-
+<!--<p><a th:href="@{'/posting/{userId}/userpage.do'(userId=${user.userId})}">개인페이지</a></p>-->
+<!--여기는 가장 앞 단인 index.html 이에요. user.userId로 들어올 값이 없습니다. 그래서 오류가 나는 것 같아요  -->
 </body>
 </html>
