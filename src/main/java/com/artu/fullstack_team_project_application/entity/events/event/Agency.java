@@ -3,12 +3,14 @@ package com.artu.fullstack_team_project_application.entity.events.event;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "agency")
 public class Agency {

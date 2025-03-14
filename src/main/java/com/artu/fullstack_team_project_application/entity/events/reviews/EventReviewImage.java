@@ -1,6 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.reviews;
 
-import com.artu.fullstack_team_project_application.entity.users.User;
+import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,6 +15,7 @@ import java.time.Instant;
 @Setter
 @ToString
 @Entity
+@ToString
 @Table(name = "event_review_images")
 public class EventReviewImage {
     @Id

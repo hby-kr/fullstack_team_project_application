@@ -9,4 +9,5 @@ import lombok.Setter;
 @Embeddable
 public class UserFollowId implements java.io.Serializable {
     private static final long serialVersionUID = -4195320815653977628L;
+
 }

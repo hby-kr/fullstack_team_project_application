@@ -1,20 +1,19 @@
 package com.artu.fullstack_team_project_application.entity.events.reviews;
 
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
-import com.artu.fullstack_team_project_application.entity.users.User;
+import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
-import java.sql.Timestamp;
-import java.time.Instant;
+import java.time.LocalDate;
 
 @Getter
 @Setter
-@ToString
 @Entity
+@ToString
 @Table(name = "event_reviews")
 public class EventReview {
     @Id
@@ -42,6 +41,6 @@ public class EventReview {
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at", nullable = false)
-    private Timestamp createdAt;
+    private LocalDate createdAt;
 
 }

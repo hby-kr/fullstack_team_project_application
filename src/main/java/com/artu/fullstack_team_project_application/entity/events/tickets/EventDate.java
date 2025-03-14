@@ -4,6 +4,7 @@ import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -14,6 +15,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "event_dates")
 public class EventDate {

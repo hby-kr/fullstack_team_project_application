@@ -1,6 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.widgets;
 
-import com.artu.fullstack_team_project_application.entity.users.User;
+import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,8 +26,6 @@ public class Widget {
     private Boolean widgetIsUsed = false;
 
     @ColumnDefault("'Light'")
-    @Lob
-    @Column(name = "widget_theme")
-    private String widgetTheme;
-
+    @Column(name = "widget_theme", nullable = false)
+    private String widgetTheme = "Light";
 }

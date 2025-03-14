@@ -1,15 +1,23 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
-import com.artu.fullstack_team_project_application.entity.users.User;
+import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.artu.fullstack_team_project_application.entity.users.base.Category;
+import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "events")
 public class Event {
@@ -52,6 +60,10 @@ public class Event {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ctgr_id", nullable = false)
-    private com.artu.fullstack_team_project_application.entity.users.Category ctgr;
+    private Category ctgr;
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<EventDate>eventDates=new LinkedHashSet<>();
+
 
 }

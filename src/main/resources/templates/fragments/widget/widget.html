@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Widget List</title>
+    <link rel="stylesheet" href="./../../../static/css/style.css">
+</head>
+<body>
+<h1>Available Widgets</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Size</th>
+        <th>Used</th>
+        <th>Theme</th>
+        <th>Info Name</th>
+        <th>Details (JSON)</th>
+    </tr>
+    </thead>
+    <tbody id="widget-table-body">
+    <!-- 데이터가 여기에 렌더링됩니다 -->
+    </tbody>
+</table>
+<button>등록</button>
+<script>
+    const API_URL = "/api/widgets/all"; // API 엔드포인트
+
+    const tableBody = document.getElementById('widget-table-body');
+
+    async function fetchWidgetData() {
+        try {
+            const response = await fetch(API_URL);
+            const widgets = await response.json();
+
+            widgets.forEach(widget => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${widget.widget_id}</td>
+                    <td>${widget.user_id}</td>
+                    <td>${widget.widget_size}</td>
+                    <td>${widget.widget_is_used}</td>
+                    <td>${widget.widget_theme}</td>
+                    <td>${widget.info_name || 'N/A'}</td>
+                    <td>${JSON.stringify(widget.widget_json) || 'N/A'}</td>
+                    <button>수정</button>
+                    <button>삭제</button>
+                `;
+                tableBody.appendChild(row);
+            });
+        } catch (error) {
+            console.error('Error fetching widget data:', error);
+        }
+    }
+
+    // 데이터 가져오기
+    fetchWidgetData();
+</script>
+</body>
+</html>
