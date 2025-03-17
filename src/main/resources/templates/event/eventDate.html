@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EventDate List</title>
+</head>
+<body>
+  <h1>EventDate List</h1>
+  <thead>
+  <tr>
+      <th>날짜 id</th>
+      <th>공연 id</th>
+      <th>공연 날짜</th>
+      <th>공연 가격</th>
+      <th>is used</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="eventDate : ${eventDate}"></tr>
+      <td th:text="${eventDate.id}"></td>
+      <td th:text="${eventDate.eventid}"></td>
+      <td th:text="${eventDate.eventdate}"></td>
+      <td th:text="${eventDate.eventprice}"></td>
+      <td th:text="${eventDate.isused}"></td>
+  </tr>
+  </tbody>
+</body>
+</html>
