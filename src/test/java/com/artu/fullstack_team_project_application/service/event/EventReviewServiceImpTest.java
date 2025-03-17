@@ -22,4 +22,10 @@ class EventReviewServiceImpTest {
         System.out.println(eventReviewService.getReviewsByUserId("user1"));
 
     }
+
+    @Test
+    @Transactional
+    void getAllEventReviews() {
+        System.out.println(eventReviewService.getAllEventReviews());
+    }
 }
