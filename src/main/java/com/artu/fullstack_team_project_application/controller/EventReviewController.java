@@ -61,4 +61,5 @@ public class EventReviewController {
         return "event/eventReview"; // eventReview.html 을 반환
     }
 
+
 }

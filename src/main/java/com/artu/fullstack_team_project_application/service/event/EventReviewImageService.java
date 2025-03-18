@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventReviewImageService {
+    List<EventReviewImage> getImagesByEventId(Integer eventId);
     List<EventReviewImage> getImagesByUserId(String userId);
     Optional<EventReviewImage> getImageById(Integer imageId);
     EventReviewImage saveImage(EventReviewImage eventReviewImage);
