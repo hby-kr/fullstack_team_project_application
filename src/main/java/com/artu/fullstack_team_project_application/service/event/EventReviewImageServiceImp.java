@@ -18,6 +18,11 @@ public class EventReviewImageServiceImp implements EventReviewImageService {
     }
 
     @Override
+    public List<EventReviewImage> getImagesByEventId(Integer eventId) {
+        return eventReviewImageRepository.findByEventId(eventId);
+    }
+
+    @Override
     public List<EventReviewImage> getImagesByUserId(String userId) {
         return eventReviewImageRepository.findByUser_UserId(userId);
     }

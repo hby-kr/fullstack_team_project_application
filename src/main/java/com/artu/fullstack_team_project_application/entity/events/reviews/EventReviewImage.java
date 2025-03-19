@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.reviews;
 
+import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class EventReviewImage {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "event_id", nullable = false)
+    private Event event;
 
     @Column(name = "img_url", nullable = false)
     private String imgUrl;

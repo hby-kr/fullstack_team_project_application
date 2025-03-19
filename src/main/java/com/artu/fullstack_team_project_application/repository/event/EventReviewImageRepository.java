@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface EventReviewImageRepository extends JpaRepository<EventReviewImage, Integer> {
-    List<EventReviewImage> findByUser_UserId(String userId);
+    List<EventReviewImage> findByUser_UserId(String userId); //유저아이디별 이미지 조회
+    List<EventReviewImage> findByEventId(Integer eventId); // 공연별 이미지 조회
 }
