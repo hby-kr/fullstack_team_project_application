@@ -5,7 +5,7 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="./../static/css/style.css">
+    <link rel="stylesheet" href="./../css/style.css">
     <title>위젯 테스트 페이지</title>
 </head>
 <body>
@@ -13,15 +13,16 @@
 <h1>홈</h1>
 <h3>임시로 필요하면 링크만들어 넣고 사용하세요</h3>
 
+
 <p><a href="/user/signIn.do">로그인</a></p>
 <p><a href="/user/signUp.do">회원가입</a></p>
+
 
 <h2>위젯 테스트 페이지</h2>
 <a href="fragments/widget/widget.do">widget</a>
 
 <h2>개인페이지(posting, follow)</h2>
-<p><a href="/posting/findAll.do">users</a></p>
-<!--<p><a th:href="@{'/artu/{userId}/userpage.do'(userId=${user.userId})}">개인페이지</a></p>-->
+<p><a th:href="@{'/{userId}/userpage.do'(userId=${user.userId})}">개인페이지</a></p>
 
 </body>
 </html>

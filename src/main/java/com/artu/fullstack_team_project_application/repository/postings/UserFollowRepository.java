@@ -13,16 +13,14 @@ import java.util.List;
 public interface UserFollowRepository extends JpaRepository<UserFollow, UserFollowId> {
     /*
     // follow 리스트
-    @Query("SELECT uf.followeeId, u.userName, u.userEmail FROM UserFollow uf " +
-            "LEFT JOIN User u " +
-            "ON uf.followerId = u.userId" +
-            "WHERE uf.followerId =: userId")
+    @Query("SELECT uf.followerId, u.userName, u.userEmail FROM UserFollow uf " +
+            "LEFT JOIN User u ON uf.followeeId = u.userId " +
+            "WHERE uf.followeeId = :userId")
     List<UserFollow> findByFollowerId(@Param("followerId") String followerId);
 
     @Query("SELECT uf.followerId, u.userName, u.userEmail FROM UserFollow uf " +
-            "LEFT JOIN User u " +
-            "ON uf.followeeId = u.userId" +
-            "WHERE uf.followeeId =: userId")
+            "LEFT JOIN User u ON uf.followeeId = u.userId " +
+            "WHERE uf.followeeId = :userId")
     List<UserFollow> findByFolloweeId(@Param("followeeId") String followeeId);
      */
 
