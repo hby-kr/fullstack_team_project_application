@@ -28,7 +28,7 @@ public class EventReviewImage {
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "evnet_id", nullable = false)
+    @JoinColumn(name = "event_id", nullable = false)
     private Event event;
 
     @Column(name = "img_url", nullable = false)
