@@ -29,15 +29,15 @@ public class PostingServiceImp implements PostingService {
         postingRepository.delete(posting);
     }
 
-    @Override
-    public Page<Posting> findAll(Pageable pageable) {
-        return null;
-    }
+//    @Override
+//    public Page<Posting> findAll(Pageable pageable) {
+//        return null;
+//    }
 
-    @Override
-    public List<Posting> findByUser_UserId(String userId) {
-        return postingRepository.findByUser_UserId(userId);
-    }
+//    @Override
+//    public List<Posting> findByUser_UserId(String userId) {
+//        return postingRepository.findByUser_UserId(userId);
+//    }
 
 //    @Override
 //    public List<PostingImage> findByPost_PostId(Posting postId) {

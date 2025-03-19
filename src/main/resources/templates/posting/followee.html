@@ -5,8 +5,9 @@
     <title>Followee</title>
 </head>
 <body>
-<h1><span th:text="${user.userId}"></span> Followee</h1>
-<p th:text="${followeeId}"></p>
+<h1><span th:text="${user.userName}">님의 Followee</h1>
+<p th:text="${user.followers[0].followees.userName}"></p>
+<p th:text="${user.followers[0].followees.userEmail}"></p>
 
 </body>
 </html>

@@ -35,14 +35,14 @@ public class UserFollow {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "follower_id", nullable = false)
-    private User follower;
+    private User followers;
 
     // follower 팔로원한 user
     // @MapsId("followerId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "followee_id", nullable = false)
-    private User followee;
+    private User followees;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "followed_at")

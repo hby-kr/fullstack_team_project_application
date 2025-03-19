@@ -9,11 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -82,6 +80,24 @@ public class UserServiceImp implements UserService {
     public List<User> findAll() {
         return userRepository.findAll();
     }
+
+    @Override
+    public Optional<User> findByUserId(String userId) {
+        return userRepository.findById(userId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<UserFollow> findByFollowerId(String followerId) {
+        return userFollowRepository.findByFollowerId(followerId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<UserFollow> findByFolloweeId(String followeeId) {
+        return userFollowRepository.findByFolloweeId(followeeId);
+    }
+
     //
 //    public UserService(UserRepository userRepository) {
 //        this.userRepository = userRepository;

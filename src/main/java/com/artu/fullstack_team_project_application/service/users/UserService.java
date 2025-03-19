@@ -9,6 +9,7 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 public interface UserService {
 
@@ -35,4 +36,8 @@ public interface UserService {
     Map<String, Long> getCountFollowee(String followerId);
 
     List<User> findAll();
+    Set<UserFollow> findByFollowerId(String followerId);
+    Set<UserFollow> findByFolloweeId(String followeeId);
+
+    Optional<User> findByUserId(String userId);
 }

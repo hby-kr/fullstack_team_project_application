@@ -141,11 +141,11 @@ public class User {
     private Set<Widget> widgets = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "follower")
+    @OneToMany(mappedBy = "followers")
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "followee")
+    @OneToMany(mappedBy = "followees")
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
 }
