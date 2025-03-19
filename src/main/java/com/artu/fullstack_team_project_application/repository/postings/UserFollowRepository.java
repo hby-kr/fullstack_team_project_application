@@ -11,6 +11,7 @@ import java.util.List;
 
 @Repository
 public interface UserFollowRepository extends JpaRepository<UserFollow, UserFollowId> {
+    /*
     // follow 리스트
     @Query("SELECT uf.followeeId, u.userName, u.userEmail FROM UserFollow uf " +
             "LEFT JOIN User u " +
@@ -23,6 +24,7 @@ public interface UserFollowRepository extends JpaRepository<UserFollow, UserFoll
             "ON uf.followeeId = u.userId" +
             "WHERE uf.followeeId =: userId")
     List<UserFollow> findByFolloweeId(@Param("followeeId") String followeeId);
+     */
 
     // follow 수
     @Query("SELECT COUNT(uf.followeeId) " +

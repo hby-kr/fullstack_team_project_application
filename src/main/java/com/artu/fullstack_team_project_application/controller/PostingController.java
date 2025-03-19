@@ -22,6 +22,13 @@ public class PostingController {
     private final PostingService postingService;
     private final UserService userService;
 
+    @GetMapping("/findAll.do")
+    public String findAll(Model model) {
+        List<User> userList = userService.findAll();
+        model.addAttribute("users", userList);
+        return "posting/findAll";
+    }
+
     @GetMapping("/{userId}/userpage.do")
     public String userpage(
             @PathVariable String userId,
@@ -52,19 +59,8 @@ public class PostingController {
         // 템플릿에 user, followerCounts, followeeCounts를 전달
         return "posting/userpage";
     }
-//
-//    @GetMapping("/{userId}/follower.do")
-//    public String follower(String followerId, Model model) {
-//        List<UserFollow> findByFollowerId = userService.findByFollowerId(followerId);
-//        model.addAttribute("followerId", findByFollowerId); // 팔로워 리스트를 모델에 추가
-//        return "artu/follower"; // follower.html로 이동
-//    }
-//
-//    @GetMapping("/{userId}/followee.do")
-//    public String followee(String followeeId, Model model) {
-//        List<UserFollow> findByFolloweeId = userService.findByFolloweeId(followeeId);
-//        model.addAttribute("followeeId", findByFolloweeId); // 팔로우된 리스트를 모델에 추가
-//        return "artu/followee"; // followee.html로 이동
-//    }
+
+
+
 
 }

@@ -40,26 +40,26 @@ public class UserServiceImp implements UserService {
     @Override
     public void delete(String userId) {
     }
+//
+//    @Override
+//    public List<UserInterest> readInterests(String userId) {
+//        return List.of();
+//    }
+//
+//    @Override
+//    public List<UserInterest> saveInterests(UserInterest userInterest) {
+//        return List.of();
+//    }
 
-    @Override
-    public List<UserInterest> readInterests(String userId) {
-        return List.of();
-    }
-
-    @Override
-    public List<UserInterest> saveInterests(UserInterest userInterest) {
-        return List.of();
-    }
-
-    @Override
-    public List<UserFollow> findByFolloweeId(String userId) {
-        return userFollowRepository.findByFolloweeId(userId);
-    }
-
-    @Override
-    public List<UserFollow> findByFollowerId(String userId) {
-        return userFollowRepository.findByFollowerId(userId);
-    }
+//    @Override
+//    public List<UserFollow> findByFolloweeId(String userId) {
+//        return userFollowRepository.findByFolloweeId(userId);
+//    }
+//
+//    @Override
+//    public List<UserFollow> findByFollowerId(String userId) {
+//        return userFollowRepository.findByFollowerId(userId);
+//    }
 
     //
     @Override
@@ -78,9 +78,11 @@ public class UserServiceImp implements UserService {
         return countFolloweeMap;
     }
 
-
-
-//
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
+    //
 //    public UserService(UserRepository userRepository) {
 //        this.userRepository = userRepository;
 //    }

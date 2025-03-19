@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>모든 유저</title>
+</head>
+<body>
+<h1>모든 유저</h1>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>이름</th>
+        <th>Email</th>
+        <th>개인페이지</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user : ${users}">
+        <td th:text="${user.userId}"></td>
+        <td th:text="${user.userName}"></td>
+        <td th:text="${user.userEmail}"></td>
+        <td><a th:href="@{'/posting/{userId}/userpage.do'(userId=${user.userId})}">개인페이지</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

@@ -23,18 +23,16 @@ public interface UserService {
 
     public void delete(String userId);
 
-    public List<UserInterest> readInterests(String userId);
-    public List<UserInterest> saveInterests(UserInterest userInterest);
+//    public List<UserInterest> readInterests(String userId);
+//    public List<UserInterest> saveInterests(UserInterest userInterest);
 
-    // follow 리스트
-    List<UserFollow> findByFolloweeId(String userId);
-    List<UserFollow> findByFollowerId(String userId);
+//    // follow 리스트
+//    List<UserFollow> findByFolloweeId(String userId);
+//    List<UserFollow> findByFollowerId(String userId);
 
     // follow 수
     Map<String, Long> getCountFollower(String followeeId);
     Map<String, Long> getCountFollowee(String followerId);
 
-
-
-
+    List<User> findAll();
 }
