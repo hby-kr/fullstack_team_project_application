@@ -29,7 +29,7 @@ public class EventReviewImage {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
