@@ -21,14 +21,19 @@ public class EventReviewImage {
     @Id
     @Column(name = "image_id", nullable = false)
     private Integer id;
+    @Column(name = "event_id", nullable = false)
+    private int eventId;
+    @Column(name = "user_id", nullable = false, length = 50)
+    private String userId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id", nullable = false,insertable = false, updatable = false)
     private Event event;
 
     @Column(name = "img_url", nullable = false)
