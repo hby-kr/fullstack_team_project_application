@@ -27,9 +27,9 @@ import java.util.UUID;
 @Setter
 @Entity
 @SQLDelete(sql = "UPDATE users SET is_used = false WHERE post_id = ?")
-// @SQLDelete는 실제로 DELETE 명령어를 사용하지 않고, 대신 UPDATE 명령어를 사용하여 is_used 필드를 false로 변경.
+// @SQLDelete 는 실제로 DELETE 명령어를 사용하지 않고, 대신 UPDATE 명령어를 사용하여 is_used 필드를 false로 변경.
 @Where(clause = "is_used = true") // 특정 조건을 만족하는 데이터를 조회할 때 추가적인 필터를 적용하는 데 사용
-// is_used = true라는 조건을 추가하여, is_used가 true인 항목만 조회되도록 설정
+// is_used = true 라는 조건을 추가하여, is_used가 true 인 항목만 조회되도록 설정
 @Table(name = "users")
 public class User {
 

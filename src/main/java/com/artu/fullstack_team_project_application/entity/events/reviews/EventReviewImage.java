@@ -21,6 +21,11 @@ public class EventReviewImage {
     @Id
     @Column(name = "image_id", nullable = false)
     private Integer id;
+    @Column(name = "event_id", nullable = false,insertable = false, updatable = false)
+    private int eventId;
+    @Column(name = "user_id", nullable = false, length = 50)
+    private String userId;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
