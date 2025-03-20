@@ -44,11 +44,11 @@ public class EventReviewImageController {
         try {
             // 파일 저장 (로컬 저장)
             String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-            String filePath = "src/main/resources/static/images/" + fileName; // src/main/resources/static/images/폴더에 저장
+            String filePath = "src/main/resources/static/img/" + fileName; // src/main/resources/static/img/폴더에 저장
             file.transferTo(new File(filePath));
 
             // 저장된 파일의 URL 생성
-            String imgUrl = "/images/" + fileName;
+            String imgUrl = "/img/" + fileName;
 
             return ResponseEntity.ok(imgUrl); // 클라이언트에게 URL 반환
         } catch (Exception e) {

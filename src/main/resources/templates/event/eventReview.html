@@ -12,17 +12,17 @@
 
 <h3>사진 & 동영상</h3>
 <div class="review-images">
-    <img src="/images/sample1.jpg" alt="리뷰 이미지">
-    <img src="/images/sample2.jpg" alt="리뷰 이미지">
-    <img src="/images/sample3.jpg" alt="리뷰 이미지">
-    <img src="/images/sample4.jpg" alt="리뷰 이미지">
-    <img src="/images/sample5.jpg" alt="리뷰 이미지">
-    <button onclick="loadMoreImages()">more ></button>
+<ul>
+    <li th:each="image : ${reviewImages}">
+        <img th:src="${image.imgUrl}" alt="리뷰 이미지">
+    </li>
+</ul>
+<button id="load-more-images" data-event-id="${event.id}">more ></button>
 </div>
 
 <div id="review-list">
+    <h3>리뷰 리스트</h3>
     <ul>
-        <!-- 리뷰 리스트 -->
         <li th:each="review : ${reviews}">
             <p><strong th:text="${review.user.userId}"></strong> <span th:text="${review.createdAt}"></span></p>
             <p>⭐ <span th:text="${review.rate}"></span>/5</p>
