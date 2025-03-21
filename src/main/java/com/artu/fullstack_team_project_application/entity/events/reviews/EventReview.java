@@ -8,8 +8,12 @@ import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 
+import java.awt.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -44,4 +48,9 @@ public class EventReview {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    private Set<EventReviewImage> eventReviews = new HashSet<>();
+
+//    @Column(name="img_url", nullable = false)
+//    private String imgUrl;
 }

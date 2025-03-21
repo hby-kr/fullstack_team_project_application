@@ -43,4 +43,9 @@ public class EventReviewImage {
     @Column(name = "create_at", nullable = false)
     private Instant createAt;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="review_id", nullable = false)
+    private EventReview eventReview;
+
+
 }

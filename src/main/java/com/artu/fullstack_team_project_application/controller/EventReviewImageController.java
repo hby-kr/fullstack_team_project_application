@@ -68,7 +68,7 @@ public class EventReviewImageController {
     public String getReviewImagesPage(Model model) {
         List<EventReviewImage> images = eventReviewImageService.getImagesByUserId("user1");
         model.addAttribute("images", images); //웹 페이지에서 images 라는 이름으로 사진 데이터를 넘겨줌
-        return "event/eventReviewImages"; // templates/event/eventReviewImages.html 페이지로 이동
+        return "event/eventReview"; // templates/event/eventReview.html 페이지로 이동
     }
 
     // 공연 이미지에 대한 리뷰 사진을 가져오기
