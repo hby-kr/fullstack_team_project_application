@@ -4,6 +4,7 @@ import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.base.Category;
 import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -37,13 +38,18 @@ public class Event {
     @Column(name = "address", nullable = false, length = 100)
     private String address;
 
-    @ColumnDefault("'0'")
-    @Lob
+    @Column(name = "how_long", nullable = false)
+    private Integer howLong;
+
+    @Column(name = "ctgr_id", nullable = false)
+    private Byte ctgrId;
+
+
     @Column(name = "age_limit", nullable = false)
     private String ageLimit;
 
-    @Column(name = "how_long", nullable = false)
-    private Integer howLong;
+    @Column(name = "user_id", nullable = false)
+    private String userId;
 
     @ColumnDefault("0")
     @Column(name = "is_approved", nullable = false)
@@ -55,11 +61,16 @@ public class Event {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false,insertable = false, updatable = false)
+    @ToString.Exclude
+    @JsonBackReference
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ctgr_id", nullable = false)
+    @JoinColumn(name = "ctgr_id", nullable = false,insertable = false, updatable = false)
+    @ToString.Exclude
+    @JsonBackReference
+
     private Category ctgr;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
