@@ -1,10 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Event List</title>
 </head>
 <body>
-$END$
+    <h1>Event List</h1>
+    <table>
+        <tr>
+            <th>공연 ID</th>
+            <th>카테고리 ID</th>
+            <th>제목</th>
+            <th>지역</th>
+            <th>주최사</th>
+            <th>주소</th>
+            <th>관람 등급</th>
+            <th>관람 시간</th>
+            <th>is approved</th>
+            <th>is used</th>
+            <th>유저 ID</th>
+            <th>상세</th>
+        </tr>
+        <tr th:each="event : ${events}">
+            <td th:text="${event.id}"></td>
+            <td th:text="${event.ctgrId}"></td>
+            <td th:text="${event.title}"></td>
+            <td th:text="${event.location}"></td>
+            <td th:text="${event.company}"></td>
+            <td th:text="${event.address}"></td>
+            <td th:text="${event.ageLimit}"></td>
+            <td th:text="${event.howLong}"></td>
+            <td th:text="${event.isApproved}"></td>
+            <td th:text="${event.isUsed}"></td>
+            <td th:text="${event.userId}"></td>
+            <td><a herf="@('/event/{id}/detail'(id=${event.id})}">상세</a></td>
+        </tr>
+    </table>
 </body>
 </html>

@@ -1,10 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Event Detail</title>
 </head>
 <body>
-$END$
+    <h1>Event Detail</h1>
+    <p>
+       id:<span th:text="${event.id}"></span>
+    </p>
+    <p>
+       ctgrId:<span th:text="${event.ctgrId}"></span>
+    </p>
+    <p>
+       title:<span th:text="${event.title}"></span>
+    </p>
+    <p>
+       location:<span th:text="${event.location}"></span>
+    </p>
+    <p>
+       address:<span th:text="${event.address}"></span>
+    </p>
+    <p>
+       ageLimit:<span th:text="${event.ageLimit}"></span>
+    </p>
+    <p>
+       howLong:<span th:text="${event.howLong}"></span>
+    </p>
+    <p>
+       isApproved:<span th:text="${event.isApproved}"></span>
+    </p>
+    <p>
+       isUsed:<span th:text="${event.isUsed}"></span>
+    </p>
+    <p>
+       userId:<span th:text="${event.userId}"></span>
+    </p>
+
 </body>
 </html>

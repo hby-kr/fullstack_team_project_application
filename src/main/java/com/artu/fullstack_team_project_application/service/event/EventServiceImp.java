@@ -5,16 +5,22 @@ import com.artu.fullstack_team_project_application.repository.event.EventReposit
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
-public class EventService {
+public class EventServiceImp implements EventService {
     private final EventRepository eventRepository;
 
-    public EventService(EventRepository eventRepository) {
+    public EventServiceImp(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
-
+    @Override
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
+    }
+
+    @Override
+    public Optional<Event> get(int id) {
+        return eventRepository.findById(id);
     }
 }
