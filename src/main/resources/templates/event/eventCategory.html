@@ -1,10 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <title>Event List</title>
 </head>
 <body>
-$END$
+  <h1>Events for Category ID: <span th:text="${categoryId}"></span></h1>
+  <div th:if="${events.isEmpty()}">
+    <p>No events available for this category.</p>
+  </div>
+
+  <ul th:unless="${events.isEmpty()}">
+      <li th:each="event : ${events}" th:text="${event.title}"></li>
+  </ul>
+
+  <a href="/events?categoryId=1">Category 1</a> |
+  <a href="/events?categoryId=2">Category 2</a> |
+  <a href="/events?categoryId=3">Category 3</a> |
+  <a href="/events?categoryId=4">Category 4</a> |
+  <a href="/events?categoryId=5">Category 5</a>
 </body>
 </html>
