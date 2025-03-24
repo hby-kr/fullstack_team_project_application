@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.controller;
 
+import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
 import com.artu.fullstack_team_project_application.repository.event.EventReviewRepository;
 import com.artu.fullstack_team_project_application.service.event.EventReviewService;
@@ -20,11 +21,20 @@ public class EventReviewController {
         this.eventReviewService = eventReviewService;
     }
 
-
+    //다시 확인 해야함.
     @GetMapping("/{eventId}")
     public String getReviewsByEvent(@PathVariable Integer eventId, Model model) {
         List<EventReview> reviews=eventReviewService.getReviewsByEventId(eventId);
-        return "eventReview";
+        model.addAttribute("reviews", reviews);
+
+        if(!reviews.isEmpty()) {
+            model.addAttribute("event", reviews.get(0).getEvent());
+        }else {
+            Event dummyEvent = new Event();
+            dummyEvent.setId(eventId);
+            model.addAttribute("event", dummyEvent);
+        }
+        return "event/eventReview";
     }
 
     @GetMapping("/user/{userId}")
