@@ -5,6 +5,7 @@ import com.artu.fullstack_team_project_application.repository.event.EventReviewR
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -37,7 +38,9 @@ public class EventReviewServiceImp implements EventReviewService {
 
     @Override
     public EventReview createReview(EventReview eventReview) {
-        return null;
+        eventReview.setCreatedAt(LocalDateTime.now());
+        eventReview.setIsUsed(true);
+        return eventReviewRepository.save(eventReview);
     }
 
     @Override

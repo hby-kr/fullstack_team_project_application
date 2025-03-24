@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>ReviewCreate</title>
+</head>
+<body>
+  <form id="reviewForm">
+    <input type="hidden" name="eventId" value="1" />
+    <label>별점:
+      <input type="number" name="rate" min="1" max="5" required />
+    </label><br>
+    <label>내용:
+      <textarea name="contents" required></textarea>
+    </label><br>
+    <button type="submit">작성</button>
+  </form>
+<script>
+  document.getElementById("reviewForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const data={
+      eventId: this.eventId.value,
+      rate: this.rate.value,
+      contents: this.contents.value
+    };
+
+    try{
+      const res = await fetch("/reviews/create",{
+        method:"POST",
+        headers:{ "Content-Type": "application/json"},
+        body:JSON.stringify(data)
+      });
+      const result = await res.json();
+
+      alert("리뷰가 등록되었습니다.");
+      location.href= "/reviews/" + data.eventId;
+    }catch (error){
+      console.error("리뷰 등록 실패:",error);
+      alert("리뷰 등록 중 오류가 발생했습니다.");
+    }
+  });
+</script>
+</body>
+</html>

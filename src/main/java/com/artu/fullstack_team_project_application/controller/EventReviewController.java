@@ -59,4 +59,9 @@ public class EventReviewController {
         model.addAttribute("reviews", reviews);
         return "event/eventReview";
     }
+    @GetMapping("/form")
+    public String reviewForm(@RequestParam("eventId") Integer eventId, Model model) {
+        model.addAttribute("eventId", eventId);
+        return "event/eventReviewForm";
+    }
 }

@@ -48,8 +48,8 @@ public class EventReview {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
-    private Set<EventReviewImage> eventReviews = new HashSet<>();
+    @OneToMany(mappedBy = "eventReview", fetch = FetchType.LAZY)
+    private Set<EventReviewImage> eventReviewImages = new HashSet<>();
 
 //    @Column(name="img_url", nullable = false)
 //    private String imgUrl;

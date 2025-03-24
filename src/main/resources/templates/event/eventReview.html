@@ -28,7 +28,7 @@
             <p>⭐ <span th:text="${review.rate}"></span>/5</p>
             <p th:text="${review.contents}"></p>
             <ul>
-                <li th:each="image : ${review.get}">
+                <li th:each="image : ${review.eventReviewImages}">
                     <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">
                 </li>
             </ul>
@@ -36,8 +36,9 @@
         </li>
     </ul>
 </div>
-
+<a th:if="${event != null}" th:href="@{/reviews/form(eventId=${event.id})}">
 <button id="write-review">리뷰 작성하기</button>
+</a>
 
 <script>
     function loadMoreImages() {
