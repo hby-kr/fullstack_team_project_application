@@ -13,7 +13,7 @@ public interface PostingRepository extends JpaRepository<Posting, Integer> {
     // List<Posting> findByIsUsedFalse();
 
     // user의 게시글 조회
-    // List<Posting> findByUser_UserId(String userId);
+    Set<Posting> findByUser_UserId(String userId);
 
     // post_Id
     // Set<Posting> findByPost_PostId(Posting postId);

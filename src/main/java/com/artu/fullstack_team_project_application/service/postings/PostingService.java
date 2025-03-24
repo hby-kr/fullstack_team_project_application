@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public interface PostingService {
     @Transactional
@@ -20,9 +21,9 @@ public interface PostingService {
 
     // posting 리스트
 //    Page<Posting> findAll(Pageable pageable);
-//
-//    // user 게시글
-//    List<Posting> findByUser_UserId(String userId);
+
+    // user 게시글
+    Set<Posting> findByUserId(String userId);
 
     // 게시글 이미지
     // List<PostingImage> findByPost_PostId(Posting postId);

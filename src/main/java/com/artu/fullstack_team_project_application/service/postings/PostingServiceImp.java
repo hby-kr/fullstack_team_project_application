@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -34,10 +35,10 @@ public class PostingServiceImp implements PostingService {
 //        return null;
 //    }
 
-//    @Override
-//    public List<Posting> findByUser_UserId(String userId) {
-//        return postingRepository.findByUser_UserId(userId);
-//    }
+    @Override
+    public Set<Posting> findByUserId(String userId) {
+        return postingRepository.findByUser_UserId(userId);
+    }
 
 //    @Override
 //    public List<PostingImage> findByPost_PostId(Posting postId) {
