@@ -36,7 +36,12 @@ public class EventReviewImageController {
     @GetMapping("/{imageId}")
     public ResponseEntity<EventReviewImage> getImageById(@PathVariable Integer imageId) {
         Optional<EventReviewImage> image = eventReviewImageService.getImageById(imageId);
-        return image.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
+        if (image.isPresent()) {
+            return ResponseEntity.ok(image.get());
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @PostMapping("/upload") // 사진을 업로드하는 API
