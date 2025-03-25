@@ -53,4 +53,13 @@ public class EventReviewController {
         eventReviewService.deleteReview(reviewId);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/list.do")
+    public String getAllReviews(Model model) {
+        List<EventReview> reviews = eventReviewService.getAllEventReviews();
+        model.addAttribute("reviews", reviews);
+        return "event/eventReview"; // eventReview.html 을 반환
+    }
+
+
 }
