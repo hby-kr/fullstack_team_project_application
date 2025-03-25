@@ -5,39 +5,37 @@
     <title>ReviewCreate</title>
 </head>
 <body>
-  <form id="reviewForm">
-    <input type="hidden" name="eventId" value="1" />
-    <label>별점:
-      <input type="number" name="rate" min="1" max="5" required />
-    </label><br>
-    <label>내용:
-      <textarea name="contents" required></textarea>
-    </label><br>
-    <button type="submit">작성</button>
+  <h3>공연 등록 양식</h3>
+  <form id="registerReviewForm">
+    <p><label>공연번호<input type="text" name="eventId" th:value="${event.id}" readonly></label></p>
+    <p><label>별점:<input type="number" name="rate" min="1" max="5" required /></label></p>
+    <br>
+    <p><label>내용:<textarea name="contents" required></textarea></label></p>
+    <br>
+    <p><label>이미지: <input type="file" name="file" accept="image/*" /></label></p>
+    <button type="submit">리뷰 등록</button>
   </form>
 <script>
-  document.getElementById("reviewForm").addEventListener("submit", async function(e){
+  document.getElementById("registerReviewForm").addEventListener("submit", async function(e){
     e.preventDefault();
 
-    const data={
-      eventId: this.eventId.value,
-      rate: this.rate.value,
-      contents: this.contents.value
-    };
+    const formData = new FormData(this);
 
-    try{
-      const res = await fetch("/reviews/create",{
-        method:"POST",
-        headers:{ "Content-Type": "application/json"},
-        body:JSON.stringify(data)
+    try {
+      const resp = await fetch("/reviews/with-image", {
+        method: "POST",
+        body: formData
       });
-      const result = await res.json();
 
-      alert("리뷰가 등록되었습니다.");
-      location.href= "/reviews/" + data.eventId;
-    }catch (error){
-      console.error("리뷰 등록 실패:",error);
-      alert("리뷰 등록 중 오류가 발생했습니다.");
+      if (resp.ok) {
+        alert("리뷰가 등록되었습니다.");
+        location.href = "/reviews/" + formData.get("eventId");
+      } else {
+        alert("리뷰 등록을 실패했습니다.");
+      }
+    }catch (err){
+      console.error("리뷰 등록 중 오류:", err);
+      alert("에러가 발생했습니다.");
     }
   });
 </script>

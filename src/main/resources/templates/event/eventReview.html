@@ -12,11 +12,11 @@
 
 <h3>사진 & 동영상</h3>
 <div class="review-images">
-<!--<ul>-->
-<!--    <li th:each="image : ${reviewImages}">-->
-<!--        <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">-->
-<!--    </li>-->
-<!--</ul>-->
+<ul>
+    <li th:each="image : ${reviewImages}">
+        <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">
+    </li>
+</ul>
 <button id="load-more-images" data-event-id="${event.id}">more ></button>
 </div>
 
@@ -36,8 +36,8 @@
         </li>
     </ul>
 </div>
-<a th:if="${event != null}" th:href="@{/reviews/form(eventId=${event.id})}">
-<button id="write-review">리뷰 작성하기</button>
+<a th:if="${event != null}" th:href="@{/reviews/form(eventId=${event.id})}" id="write-review">
+리뷰 작성하기
 </a>
 
 <script>
