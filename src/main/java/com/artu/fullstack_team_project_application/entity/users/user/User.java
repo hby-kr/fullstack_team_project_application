@@ -10,6 +10,7 @@ import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.base.*;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -144,11 +145,11 @@ public class User {
     private Set<Widget> widgets = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "follower")
+    @OneToMany(mappedBy = "followers")
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "followee")
+    @OneToMany(mappedBy = "followees")
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
 }
