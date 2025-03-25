@@ -13,6 +13,7 @@ import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -25,6 +26,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @SQLDelete(sql = "UPDATE users SET is_used = false WHERE post_id = ?")
 // @SQLDelete는 실제로 DELETE 명령어를 사용하지 않고, 대신 UPDATE 명령어를 사용하여 is_used 필드를 false로 변경.
@@ -32,6 +34,7 @@ import java.util.UUID;
 // is_used = true라는 조건을 추가하여, is_used가 true인 항목만 조회되도록 설정
 @Table(name = "users")
 public class User {
+
 
     public enum Gender {M, F}
 

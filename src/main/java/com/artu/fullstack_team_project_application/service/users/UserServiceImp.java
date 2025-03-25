@@ -34,7 +34,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User save(User user) {
-        return user;
+        return userRepository.save(user);
     }
 
     @Override
@@ -49,6 +49,16 @@ public class UserServiceImp implements UserService {
     @Override
     public List<UserInterest> saveInterests(UserInterest userInterest) {
         return List.of();
+    }
+
+    @Override
+    public boolean checkUserExists(String userId) {
+        return userRepository.existsByUserId(userId);
+    }
+
+    @Override
+    public boolean checkUserEmailExists(String email) {
+        return userRepository.existsByUserEmail(email);
     }
 
     @Override

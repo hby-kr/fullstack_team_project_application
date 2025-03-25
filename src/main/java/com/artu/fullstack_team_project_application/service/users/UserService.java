@@ -26,6 +26,11 @@ public interface UserService {
     public List<UserInterest> readInterests(String userId);
     public List<UserInterest> saveInterests(UserInterest userInterest);
 
+    // 아이디, 이메일 중복 여부 확인
+    public boolean checkUserExists(String userId);
+    public boolean checkUserEmailExists(String email);
+
+
     // follow 리스트
     List<UserFollow> findByFolloweeId(String userId);
     List<UserFollow> findByFollowerId(String userId);
