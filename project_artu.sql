@@ -3,7 +3,7 @@
 --	
 -- Project of group1 in Fullstack course at TJ Academy	
 --	
--- memebers: 고현, 김기현, 서미란, 이상혁, 채수정, 황보영	
+-- memebers: 고현, 김기원, 서미란, 이상혁, 이수정, 황보영
 --	
 -- title: ArtU _ 공연플랫폼	
 --	

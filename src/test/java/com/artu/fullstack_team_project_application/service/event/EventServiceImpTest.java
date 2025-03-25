@@ -14,6 +14,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventServiceImpTest {
     @Autowired
     private EventService eventServiceImp;
+
     @Test
     void getAllEvents() {
         List<Event> events = eventServiceImp.getAllEvents();
@@ -23,8 +24,16 @@ class EventServiceImpTest {
     @Test
     @Transactional
     void get() {
-        Optional<Event> eventOpt=eventServiceImp.get(1);
+        Optional<Event> eventOpt = eventServiceImp.get(1);
         Event event = eventOpt.get();
         System.out.println(event);
+
+    }
+
+    @Test
+    @Transactional
+    void getEventsByCategory() {
+        List<Event> events = eventServiceImp.getEventsByCategory(1);
+        System.out.println(events);
     }
 }
