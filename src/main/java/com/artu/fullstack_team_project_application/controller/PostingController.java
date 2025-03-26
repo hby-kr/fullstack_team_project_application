@@ -30,7 +30,7 @@ public class PostingController {
     public String findAll(Model model) {
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
-        return "posting/findAll";
+        return "/posting/findAll";
     }
 
     @GetMapping("/{userId}/userpage.do")
@@ -61,7 +61,7 @@ public class PostingController {
         model.addAttribute("countFollowerCount", countFollowerCount);
 
         // 템플릿에 user, followerCounts, followeeCounts를 전달
-        return "posting/userpage";
+        return "/posting/userpage";
     }
 
     // 게시물 비동기식

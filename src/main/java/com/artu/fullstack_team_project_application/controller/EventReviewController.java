@@ -7,6 +7,7 @@ import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.repository.event.EventReviewRepository;
 import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
 import com.artu.fullstack_team_project_application.service.event.EventReviewService;
+import com.artu.fullstack_team_project_application.service.event.EventService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,31 +17,32 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/reviews")
 public class EventReviewController {
 
+    private final EventService eventService;
     private final EventReviewService eventReviewService;
     private final EventReviewImageService eventReviewImageService;
 
-    public EventReviewController(EventReviewService eventReviewService, EventReviewImageService eventReviewImageService) {
+    public EventReviewController(EventService eventService, EventReviewService eventReviewService, EventReviewImageService eventReviewImageService) {
+        this.eventService = eventService;
         this.eventReviewService = eventReviewService;
         this.eventReviewImageService = eventReviewImageService;
     }
 
-    //다시 확인 해야함.
     @GetMapping("/{eventId}")
     public String getReviewsByEvent(@PathVariable Integer eventId, Model model) {
         List<EventReview> reviews = eventReviewService.getReviewsByEventId(eventId);
         model.addAttribute("reviews", reviews);
 
-        if (!reviews.isEmpty()) {
-            model.addAttribute("event", reviews.get(0).getEvent());
+        Optional<Event> eventOpt=eventService.get(eventId);
+        if (eventOpt.isPresent()) {
+            model.addAttribute("event", eventOpt.get());
         } else {
-            Event dummyEvent = new Event();
-            dummyEvent.setId(eventId);
-            model.addAttribute("event", dummyEvent);
+            return "redirect:/not-found";
         }
         return "event/eventReview";
     }
@@ -81,7 +83,12 @@ public class EventReviewController {
 
     @GetMapping("/form")
     public String reviewForm(@RequestParam("eventId") Integer eventId, Model model) {
-        model.addAttribute("eventId", eventId);
+        Optional<Event> eventOpt=eventService.get(eventId);
+
+        if (eventOpt.isEmpty()){
+            return "redirect:/not-found";
+        }
+        model.addAttribute("event", eventOpt.get());
         return "event/eventReviewForm";
     }
 

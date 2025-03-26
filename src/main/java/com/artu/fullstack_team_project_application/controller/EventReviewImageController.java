@@ -41,7 +41,6 @@ public class EventReviewImageController {
         } else {
             return ResponseEntity.notFound().build();
         }
-
     }
 
     @PostMapping("/upload") // 사진을 업로드하는 API
