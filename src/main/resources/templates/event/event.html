@@ -36,5 +36,11 @@
             <td><a herf="@('/event/{id}/detail'(id=${event.id})}">상세</a></td>
         </tr>
     </table>
+    <h2>EventImages</h2>
+    <ul>
+        <li th:each="image : ${event.images}">
+            <img th:src="${image.imageUrl}" alt="Event Image" width="300"/>
+        </li>
+    </ul>
 </body>
 </html>

@@ -53,4 +53,6 @@ public class Posting {
     @Column(name = "is_used")
     private Boolean isUsed;
 
+
+
 }

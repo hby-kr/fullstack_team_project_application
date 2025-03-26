@@ -45,5 +45,6 @@ public class EventController {
     model.addAttribute("events", events);
     return "event/event";
     }
+
 }
 

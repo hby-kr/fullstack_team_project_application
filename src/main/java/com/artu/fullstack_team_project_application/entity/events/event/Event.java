@@ -75,5 +75,7 @@ public class Event {
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<EventDate>eventDates=new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "post")
+    private Set<EventImage> EventImages=new LinkedHashSet<>();
 
 }
