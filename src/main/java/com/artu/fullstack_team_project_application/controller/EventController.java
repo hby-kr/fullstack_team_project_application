@@ -39,5 +39,11 @@ public class EventController {
             return "event/eventdetail";
         }
     }
+    @GetMapping("/event/{ctgrId}")
+    public String eventCategory(Model model, @PathVariable int ctgrId) {
+    List<Event> events = eventServiceImp.getEventsByCategory(ctgrId);
+    model.addAttribute("events", events);
+    return "event/event";
+    }
 }
 

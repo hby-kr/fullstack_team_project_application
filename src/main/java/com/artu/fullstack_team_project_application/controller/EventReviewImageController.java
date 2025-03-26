@@ -82,5 +82,4 @@ public class EventReviewImageController {
         List<EventReviewImage> images = eventReviewImageService.getImagesByEventId(eventId);
         return ResponseEntity.ok(images);
     }
-
 }

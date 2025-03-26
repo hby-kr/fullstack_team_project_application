@@ -5,14 +5,18 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface PostingRepository extends JpaRepository<Posting, Integer> {
     // 논리적 삭제 목록 확인
-    List<Posting> findByIsUsedFalse();
+    // List<Posting> findByIsUsedFalse();
 
     // user의 게시글 조회
-    List<Posting> findByUser_UserId(String userId);
+    Set<Posting> findByUser_UserId(String userId);
+
+    // post_Id
+    // Set<Posting> findByPost_PostId(Posting postId);
 
     // 위치 태그
     // List<Posting> findByLocationTag(String locationTag);

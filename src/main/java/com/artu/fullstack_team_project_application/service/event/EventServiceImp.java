@@ -14,6 +14,7 @@ public class EventServiceImp implements EventService {
     public EventServiceImp(EventRepository eventRepository) {
         this.eventRepository = eventRepository;
     }
+
     @Override
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
@@ -22,5 +23,10 @@ public class EventServiceImp implements EventService {
     @Override
     public Optional<Event> get(int id) {
         return eventRepository.findById(id);
+    }
+
+    @Override
+    public List<Event> getEventsByCategory(int ctgrId) {
+        return eventRepository.findByCtgrId(ctgrId);
     }
 }

@@ -13,4 +13,5 @@ public interface EventReviewService {
     EventReview createReview(EventReview eventReview);
     EventReview updateReview(Integer reviewId, String content, Integer rate);
     void deleteReview(Integer reviewId);
+
 }

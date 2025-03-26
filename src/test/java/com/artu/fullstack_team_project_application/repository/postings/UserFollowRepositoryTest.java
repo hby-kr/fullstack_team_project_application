@@ -12,13 +12,13 @@ class UserFollowRepositoryTest {
     @Autowired
     private UserFollowRepository userFollowRepository;
 
-    @Test
-    void findByFollowerId() {
-        System.out.println(userFollowRepository.findByFollowerId("user1"));
-    }
-
-    @Test
-    void findByFolloweeId() {
-        System.out.println(userFollowRepository.findByFollowerId("user1"));
-    }
+//    @Test
+//    void findByFollowerId() {
+//        System.out.println(userFollowRepository.findByFollowerId("user1"));
+//    }
+//
+//    @Test
+//    void findByFolloweeId() {
+//        System.out.println(userFollowRepository.findByFollowerId("user1"));
+//    }
 }

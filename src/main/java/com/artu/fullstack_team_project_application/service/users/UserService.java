@@ -9,6 +9,8 @@ import org.springframework.data.domain.Pageable;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.Set;
 
 public interface UserService {
 
@@ -23,18 +25,27 @@ public interface UserService {
 
     public void delete(String userId);
 
-    public List<UserInterest> readInterests(String userId);
-    public List<UserInterest> saveInterests(UserInterest userInterest);
+//    public List<UserInterest> readInterests(String userId);
+//    public List<UserInterest> saveInterests(UserInterest userInterest);
 
-    // follow 리스트
-    List<UserFollow> findByFolloweeId(String userId);
-    List<UserFollow> findByFollowerId(String userId);
+    // 아이디, 이메일 중복 여부 확인
+    public boolean checkUserExists(String userId);
+    public boolean checkUserEmailExists(String email);
+
+
+
+
 
     // follow 수
     Map<String, Long> getCountFollower(String followeeId);
     Map<String, Long> getCountFollowee(String followerId);
 
+    // follow 리스트
+    List<User> findAll();
+    Set<UserFollow> findByFollowerId(String followerId);
+    Set<UserFollow> findByFolloweeId(String followeeId);
+//    List<UserFollow> findByFolloweeId(String userId);
+//    List<UserFollow> findByFollowerId(String userId);
 
-
-
+    Optional<User> findByUserId(String userId);
 }

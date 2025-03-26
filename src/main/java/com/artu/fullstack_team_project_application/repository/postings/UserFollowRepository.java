@@ -2,25 +2,22 @@ package com.artu.fullstack_team_project_application.repository.postings;
 
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollowId;
+import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 @Repository
 public interface UserFollowRepository extends JpaRepository<UserFollow, UserFollowId> {
-    // follow 리스트
-    @Query("SELECT uf.followerId, u.userName, u.userEmail FROM UserFollow uf " +
-            "LEFT JOIN User u ON uf.followeeId = u.userId " +
-            "WHERE uf.followeeId = :userId")
-    List<UserFollow> findByFollowerId(@Param("followerId") String followerId);
+    @EntityGraph(attributePaths = {"followers", "followees"})
 
-    @Query("SELECT uf.followerId, u.userName, u.userEmail FROM UserFollow uf " +
-            "LEFT JOIN User u ON uf.followeeId = u.userId " +
-            "WHERE uf.followeeId = :userId")
-    List<UserFollow> findByFolloweeId(@Param("followeeId") String followeeId);
+    Set<UserFollow> findByFollowerId(String followerId);
+    Set<UserFollow> findByFolloweeId(String followeeId);
+
 
     // follow 수
     @Query("SELECT COUNT(uf.followeeId) " +
@@ -36,4 +33,9 @@ public interface UserFollowRepository extends JpaRepository<UserFollow, UserFoll
             "WHERE u.userId = :followeeId " +
             "GROUP BY u.userId")
     Long countFollowerByUserId(@Param("followeeId") String followeeId);
+
+
+
+
+
 }

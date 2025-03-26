@@ -20,4 +20,9 @@ class EventRepositoryTest {
         assertNotNull(events);
         assertTrue(events.size() > 0);
     }
+
+    @Test
+    void findByCategoryId() {
+        List<Event> events = eventRepository.findByCtgrId(1);
+    }
 }

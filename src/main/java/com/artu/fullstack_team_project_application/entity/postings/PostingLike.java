@@ -17,27 +17,27 @@ import java.time.Instant;
 @SQLDelete(sql = "UPDATE postings SET is_used = true WHERE post_id = ?")
 @Where(clause = "is_used = true")
 @Table(name = "posting_like")
-//@IdClass()
+@IdClass(PostingLikeId.class)
 public class PostingLike {
-    @EmbeddedId
-    private PostingLikeId id;
+    // @EmbeddedId
+    // private PostingLikeId id;
 
-//    @Id
-//    @Column(name = "user_id", nullable = false)
-//    private User userId;
-//
-//    @Id
-//    @Column(name = "post_id", nullable = false)
-//    private String postId;
+    @Id
+    @Column(name = "user_id", nullable = false)
+    private String userId;
+
+    @Id
+    @Column(name = "post_id", nullable = false)
+    private String postId;
 
 
-    @MapsId("userId")
+    // @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @MapsId("postId")
+    // @MapsId("postId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "post_id", nullable = false)

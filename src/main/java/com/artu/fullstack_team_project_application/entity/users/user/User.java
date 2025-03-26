@@ -10,9 +10,11 @@ import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.base.*;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
@@ -25,6 +27,7 @@ import java.util.UUID;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @SQLDelete(sql = "UPDATE users SET is_used = false WHERE post_id = ?")
 // @SQLDelete 는 실제로 DELETE 명령어를 사용하지 않고, 대신 UPDATE 명령어를 사용하여 is_used 필드를 false로 변경.
@@ -32,6 +35,7 @@ import java.util.UUID;
 // is_used = true 라는 조건을 추가하여, is_used가 true 인 항목만 조회되도록 설정
 @Table(name = "users")
 public class User {
+
 
     public enum Gender {M, F}
 
@@ -141,11 +145,11 @@ public class User {
     private Set<Widget> widgets = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "follower")
+    @OneToMany(mappedBy = "followers")
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "followee")
+    @OneToMany(mappedBy = "followees")
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
 }
