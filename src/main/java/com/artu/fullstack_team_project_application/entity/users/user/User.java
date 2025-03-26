@@ -75,9 +75,6 @@ public class User {
     private Set<UserEventLike> userEventLikes = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<EventReviewImage> eventReviewImages = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
     private Set<EventReview> eventReviews = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
