@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <<title>게시물 등록 페이지</title>
+</head>
+<style>
+  #searchPopup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    height: 500px;
+    background: #efdcff;
+    padding: 20px;
+    border: 1px solid grey;
+    border-radius: 10%;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  #searchPopup button {
+    margin-top: 10px;
+    position: absolute;
+    top: 25px;
+    right: 40px;
+  }
+</style>
+<body>
+<h1>게시물 등록</h1>
+
+<form name="postRegisterForm" method="post">
+  <!-- 파일 탐색기를 통해서 이미지만 업로드 가능 / 여러 개 등록 가능 -->
+  <p>
+    <label>사진 등록</label>
+    <input type="file" id="imageUpload" name="image" accept="image/*" multiple> <!-- required> -->
+  </p>
+  <p>
+    <label>문구 추가</label>
+    <input name="contents" value="" type="text">
+  </p>
+  <p>
+    <!--      <form action="/serch/userserch.do" method="GET">-->
+    <label for="userSearch">사람 태그</label>
+    <input type="text" id="userSearch" name="usersearch">
+    <button type="button" onclick="searchUsers(event)">검색</button>
+    <!--  전체 form의 submit 제출을 막기 위해서 type을 button으로 변경   -->
+    <!--      </form>-->
+  </p>
+
+  <p>
+    <!--      <form action="/location/search.do" method="GET">-->
+    <label for="search">위치 추가</label>
+    <input type="text" id="search" name="search">
+    <button type="button">검색</button>
+    <!--      </form>-->
+  </p>
+  <p>
+    <label for="status">공개 대상</label>
+    <select name="status" id="status">
+      <option value="ALL">모두 공개</option>
+      <option value="FRIENDS">Follow 공개</option>
+      <option value="PRIVATE">비공개</option>
+    </select>
+  </p>
+  <p>
+    <button type="reset">초기화</button>
+    <button type="submit">등록</button>
+  </p>
+</form>
+
+
+</body>
+<script>
+  const imageUpload = document.getElementById("imageUpload");
+
+  // 이미지 업로드 개수 제한
+  imageUpload.addEventListener('change', function(event) {
+    if (this.files.length > 5) {
+      //alert("최대 5개의 이미지만 업로드할 수 있습니다!");
+      this.value = ""; // 선택된 파일 초기화
+    }
+  });
+</script>
+
+
+</html>

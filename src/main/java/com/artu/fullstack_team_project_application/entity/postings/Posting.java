@@ -3,6 +3,7 @@ package com.artu.fullstack_team_project_application.entity.postings;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -62,6 +63,7 @@ public class Posting {
 
     // 게시물 이미지 조인
     @OneToMany(mappedBy = "post")
+    @OrderBy("imgOrder ASC") // 정렬
     private Set<PostingImage> postingImages = new LinkedHashSet<>();
 
     // 게시물 댓글 조인

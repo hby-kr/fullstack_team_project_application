@@ -35,6 +35,9 @@ public interface UserService {
     Map<String, Long> getCountFollower(String followeeId);
     Map<String, Long> getCountFollowee(String followerId);
 
+    // posting 수
+    Map<String, Long> getCountPosting(String userId);
+
     List<User> findAll();
     Set<UserFollow> findByFollowerId(String followerId);
     Set<UserFollow> findByFolloweeId(String followeeId);
