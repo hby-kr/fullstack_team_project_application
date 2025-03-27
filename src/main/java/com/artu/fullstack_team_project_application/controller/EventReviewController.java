@@ -55,7 +55,7 @@ public class EventReviewController {
 
     @PostMapping("/create")
     public ResponseEntity<EventReview> createReview(@RequestBody EventReview eventReview) {
-        EventReview createReview = eventReviewService.createReview(eventReview);
+        EventReview createReview = eventReviewService.registerReview(eventReview);
         return ResponseEntity.ok(createReview);
     }
 
@@ -64,13 +64,13 @@ public class EventReviewController {
             @PathVariable Integer reviewId,
             @RequestBody EventReview reviewDetails
     ) {
-        EventReview updateReview = eventReviewService.updateReview(reviewId, reviewDetails.getContents(), reviewDetails.getRate());
+        EventReview updateReview = eventReviewService.saveReview(reviewId, reviewDetails.getContents(), reviewDetails.getRate());
         return ResponseEntity.ok(updateReview);
     }
 
     @DeleteMapping("/delete/{reviewId}")
     public ResponseEntity<Void> deleteReview(@PathVariable Integer reviewId) {
-        eventReviewService.deleteReview(reviewId);
+        eventReviewService.removeReview(reviewId);
         return ResponseEntity.noContent().build();
     }
 
@@ -116,7 +116,7 @@ public class EventReviewController {
             review.setCreatedAt(java.time.LocalDateTime.now());
             review.setIsUsed(true);
 
-            EventReview savedReview = eventReviewService.createReview(review);
+            EventReview savedReview = eventReviewService.registerReview(review);
 
             // 2. 이미지 저장
             if (file != null && !file.isEmpty()) {
