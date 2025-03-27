@@ -23,6 +23,7 @@ import java.util.Set;
 public class Event {
     @Id
     @Column(name = "event_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "title", nullable = false, length = 100)
@@ -75,7 +76,7 @@ public class Event {
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<EventDate>eventDates=new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "post")
+    @OneToMany(mappedBy = "event")
     private Set<EventImage> EventImages=new LinkedHashSet<>();
 
 }

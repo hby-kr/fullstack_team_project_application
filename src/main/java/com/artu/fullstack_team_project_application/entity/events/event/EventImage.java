@@ -21,10 +21,12 @@ public class EventImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "img_id", nullable = false)
     private Integer id;
+    @Column(name = "event_id", nullable = false)
+    private int eventId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "event_id", nullable = false)
+    @JoinColumn(name = "event_id", nullable = false,insertable = false, updatable = false)
     @JsonBackReference
     @ToString.Exclude
     private Event event;
