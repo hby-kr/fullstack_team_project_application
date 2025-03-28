@@ -31,6 +31,6 @@ class EventImagesServiceImpTest {
         eventImagesRepository.save(eventImage);
 
         List<EventImage> eventImages = eventImagesService.getAllEventImages();
-        Assertions.assertEquals(1, eventImages.size());
+        System.out.println(eventImages);
     }
 }

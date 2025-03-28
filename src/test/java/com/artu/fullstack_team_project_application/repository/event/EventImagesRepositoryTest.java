@@ -24,5 +24,6 @@ public class EventImagesRepositoryTest {
         eventImagesRepository.save(eventImage);
 
 
+
     }
 }

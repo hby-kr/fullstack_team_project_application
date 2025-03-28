@@ -38,7 +38,7 @@ public class EventImage {
     private Integer imgOrder;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at",insertable = false)
     private Instant createdAt;
 
 }

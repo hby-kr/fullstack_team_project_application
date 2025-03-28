@@ -10,12 +10,12 @@ import java.util.List;
 public class EventImagesServiceImp implements EventImagesService {
     private final EventImagesRepository eventImagesRepository;
 
-    public EventImagesServiceImp(EventImagesRepository eventImagesRepository) {
+    public  EventImagesServiceImp(EventImagesRepository eventImagesRepository) {
         this.eventImagesRepository = eventImagesRepository;
     }
 
     @Override
     public List<EventImage> getAllEventImages() {
-        return List.of();
+        return (List<EventImage>) eventImagesRepository.findAll();
     }
 }
