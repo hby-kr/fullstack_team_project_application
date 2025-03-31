@@ -15,10 +15,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventImagesServiceImpTest {
 
     @Autowired
-    EventImagesService eventImagesService;
+    private EventImagesService eventImagesService;
 
-    @Autowired
-    EventRepository eventRepository;
     @Autowired
     private EventImagesRepository eventImagesRepository;
 
@@ -30,7 +28,7 @@ class EventImagesServiceImpTest {
         eventImage.setImgUrl("https://dummyimage.com/500x500/808080/fff.jpg");
         eventImagesRepository.save(eventImage);
 
-        List<EventImage> eventImages = eventImagesService.getAllEventImages();
+        List<EventImage> eventImages = eventImagesService.getEventImagesByEventId(1);
         System.out.println(eventImages);
     }
 }

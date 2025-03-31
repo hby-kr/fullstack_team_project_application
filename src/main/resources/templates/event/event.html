@@ -33,12 +33,8 @@
             <td th:text="${event.isApproved}"></td>
             <td th:text="${event.isUsed}"></td>
             <td th:text="${event.userId}"></td>
-            <td><a herf="@('/event/{id}/detail'(id=${event.id})}">상세</a></td>
+            <td><a th:href="@{'/event/{id}/event'(id=${event.id})}">상세</a></td>
         </tr>
     </table>
-    <h2>EventImages</h2>
-    <div th:each="image : ${images}">
-        <img th:src="${image.url}" alt="Event Image" width="200"/>
-    </div>
 </body>
 </html>
