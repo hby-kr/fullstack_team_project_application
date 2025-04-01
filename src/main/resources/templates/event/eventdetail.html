@@ -36,6 +36,11 @@
     <p>
        userId:<span th:text="${event.userId}"></span>
     </p>
+    <h2>Event Images</h2>
+    <div th:each="image : ${event.eventImages}">
+        <img th:src="${image.imgUrl}" alt="Event Image" style="width:300px; height:auto;">
+    </div>
 
+    <a href="/event/event">이벤트로</a>
 </body>
 </html>

@@ -18,7 +18,6 @@ import java.util.Optional;
 public class EventController {
     private final EventServiceImp eventServiceImp;
 
-
     @GetMapping("/event")
     public String event(Model model) {
         List<Event> events = eventServiceImp.getAllEvents();
@@ -41,9 +40,9 @@ public class EventController {
     }
     @GetMapping("/event/{ctgrId}")
     public String eventCategory(Model model, @PathVariable int ctgrId) {
-    List<Event> events = eventServiceImp.getEventsByCategory(ctgrId);
-    model.addAttribute("events", events);
-    return "event/event";
+        List<Event> events = eventServiceImp.getEventsByCategory(ctgrId);
+        model.addAttribute("events", events);
+        return "event/event";
     }
-}
 
+}
