@@ -7,7 +7,7 @@
 <body>
 
 <h2>로그인</h2>
-<form action="/user/signin.do" method="POST">
+<form action="/user/signIn.do" method="POST">
     <label>아이디:
         <input type="text" id="userId" name="userId" required placeholder="아이디를 입력하세요"><br><br>
     </label>
@@ -16,7 +16,19 @@
         <input type="text" id="password" name="password" required placeholder="비밀번호를 입력하세요" value="artuartu"><br><br>
     </label>
     <button type="submit">로그인</button>
+    <p><a href="/user/signUp.do">회원가입</a></p>
 </form>
+
+
+<hr>
+<h3>여기서 더 필요한 작업</h3>
+<ul>
+    <li>쿠키, 세션</li>
+    <li>해더 fragments 만들기</li>
+    <li>소셜 로그인</li>
+
+</ul>
+
 
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 @Service
 @AllArgsConstructor
@@ -29,13 +30,13 @@ public class PostingServiceImp implements PostingService {
         postingRepository.delete(posting);
     }
 
-    @Override
-    public Page<Posting> findAll(Pageable pageable) {
-        return null;
-    }
+//    @Override
+//    public Page<Posting> findAll(Pageable pageable) {
+//        return null;
+//    }
 
     @Override
-    public List<Posting> findByUser_UserId(String userId) {
+    public Set<Posting> findByUserId(String userId) {
         return postingRepository.findByUser_UserId(userId);
     }
 

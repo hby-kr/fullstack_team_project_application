@@ -9,11 +9,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -34,34 +32,33 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User save(User user) {
-        return user;
+        return userRepository.save(user);
     }
 
     @Override
     public void delete(String userId) {
     }
+//
+//    @Override
+//    public List<UserInterest> readInterests(String userId) {
+//        return List.of();
+//    }
+//
+//    @Override
+//    public List<UserInterest> saveInterests(UserInterest userInterest) {
+//        return List.of();
+//    }
 
     @Override
-    public List<UserInterest> readInterests(String userId) {
-        return List.of();
+    public boolean checkUserExists(String userId) {
+        return userRepository.existsByUserId(userId);
     }
 
     @Override
-    public List<UserInterest> saveInterests(UserInterest userInterest) {
-        return List.of();
+    public boolean checkUserEmailExists(String email) {
+        return userRepository.existsByUserEmail(email);
     }
 
-    @Override
-    public List<UserFollow> findByFolloweeId(String userId) {
-        return userFollowRepository.findByFolloweeId(userId);
-    }
-
-    @Override
-    public List<UserFollow> findByFollowerId(String userId) {
-        return userFollowRepository.findByFollowerId(userId);
-    }
-
-    //
     @Override
     public Map<String, Long> getCountFollower(String followeeId) {
         Long countFollower = userFollowRepository.countFolloweeByUserId(followeeId);
@@ -78,26 +75,26 @@ public class UserServiceImp implements UserService {
         return countFolloweeMap;
     }
 
+    @Override
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
+    @Override
+    public Optional<User> findByUserId(String userId) {
+        return userRepository.findById(userId);
+    }
 
-//
-//    public UserService(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-//
-//    public List<User> getAllUsers() {
-//        return userRepository.findAll();
-//    }
-//
-//    public Optional<User> getUserById(String userId) {
-//        return userRepository.findById(userId);
-//    }
-//
-//    public User saveUser(User user) {
-//        return userRepository.save(user);
-//    }
-//
-//    public void deleteUser(String userId) {
-//        userRepository.deleteById(userId);
-//    }
+    @Override
+    @Transactional(readOnly = true)
+    public Set<UserFollow> findByFollowerId(String followerId) {
+        return userFollowRepository.findByFollowerId(followerId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public Set<UserFollow> findByFolloweeId(String followeeId) {
+        return userFollowRepository.findByFolloweeId(followeeId);
+    }
+
 }

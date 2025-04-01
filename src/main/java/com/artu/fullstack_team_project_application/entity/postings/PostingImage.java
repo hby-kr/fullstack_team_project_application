@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.postings;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -25,6 +26,8 @@ public class PostingImage {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "post_id", nullable = false)
+    @JsonBackReference
+    @ToString.Exclude
     private Posting post;
 
     @Column(name = "img_order", nullable = false)

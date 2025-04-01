@@ -1,19 +1,23 @@
 package com.artu.fullstack_team_project_application.controller;
 
+import com.artu.fullstack_team_project_application.entity.postings.Posting;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.service.postings.PostingService;
 import com.artu.fullstack_team_project_application.service.users.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 @Controller
 @RequestMapping("/posting")
@@ -21,6 +25,13 @@ import java.util.Optional;
 public class PostingController {
     private final PostingService postingService;
     private final UserService userService;
+
+    @GetMapping("/findAll.do")
+    public String findAll(Model model) {
+        List<User> userList = userService.findAll();
+        model.addAttribute("users", userList);
+        return "posting/findAll";
+    }
 
     @GetMapping("/{userId}/userpage.do")
     public String userpage(
@@ -52,19 +63,18 @@ public class PostingController {
         // 템플릿에 user, followerCounts, followeeCounts를 전달
         return "posting/userpage";
     }
-//
-//    @GetMapping("/{userId}/follower.do")
-//    public String follower(String followerId, Model model) {
-//        List<UserFollow> findByFollowerId = userService.findByFollowerId(followerId);
-//        model.addAttribute("followerId", findByFollowerId); // 팔로워 리스트를 모델에 추가
-//        return "artu/follower"; // follower.html로 이동
-//    }
-//
-//    @GetMapping("/{userId}/followee.do")
-//    public String followee(String followeeId, Model model) {
-//        List<UserFollow> findByFolloweeId = userService.findByFolloweeId(followeeId);
-//        model.addAttribute("followeeId", findByFolloweeId); // 팔로우된 리스트를 모델에 추가
-//        return "artu/followee"; // followee.html로 이동
-//    }
+
+    // 게시물 비동기식
+    @GetMapping("/{userId}/postpage.do")
+    @ResponseBody
+    public ResponseEntity<Set<Posting>> postpage(
+            @PathVariable String userId) {
+        Set<Posting> postings = postingService.findByUserId(userId);
+        // return ResponseEntity.ok(postings);
+        return ResponseEntity.status(201).body(postings);
+    }
+
+
+
 
 }
