@@ -40,12 +40,13 @@ public interface UserService {
     Map<String, Long> getCountFollower(String followeeId);
     Map<String, Long> getCountFollowee(String followerId);
 
+    // posting 수
+    Map<String, Long> getCountPosting(String userId);
+
     // follow 리스트
     List<User> findAll();
     Set<UserFollow> findByFollowerId(String followerId);
     Set<UserFollow> findByFolloweeId(String followeeId);
-//    List<UserFollow> findByFolloweeId(String userId);
-//    List<UserFollow> findByFollowerId(String userId);
 
     Optional<User> findByUserId(String userId);
 }

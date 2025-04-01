@@ -9,10 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -60,6 +57,12 @@ public class PostingController {
         model.addAttribute("countFollowerMap", countFollowerMap);
         model.addAttribute("countFollowerCount", countFollowerCount);
 
+        // posting 수
+        Map<String, Long> countPostingMap = userService.getCountPosting(userId);
+        Long countPostingCount = countPostingMap.get("countPosting");
+        model.addAttribute("countPostingMap", countPostingMap);
+        model.addAttribute("countPostingCount", countPostingCount);
+
         // 템플릿에 user, followerCounts, followeeCounts를 전달
         return "posting/userpage";
     }
@@ -72,6 +75,13 @@ public class PostingController {
         Set<Posting> postings = postingService.findByUserId(userId);
         // return ResponseEntity.ok(postings);
         return ResponseEntity.status(201).body(postings);
+    }
+
+    @GetMapping("/{userId}/postAdd.do")
+    public String postForm(
+            @ModelAttribute Posting posting
+    ){
+        return "/posting/postAdd";
     }
 
 

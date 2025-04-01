@@ -100,7 +100,7 @@ public class User {
     @ToString.Exclude
     private Set<PasswordChangeHistory> passwordChangeHistories = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")   
+    @OneToMany(mappedBy = "user")
     @JsonBackReference
     @ToString.Exclude
     private Set<PostingComment> postingComments = new LinkedHashSet<>();
@@ -187,14 +187,12 @@ public class User {
     private Set<Widget> widgets = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "followers", fetch = FetchType.LAZY)
-    @JsonBackReference
-    @ToString.Exclude
+    @OneToMany(mappedBy = "followers")
+    @OrderBy("followedAt ASC") // 정렬
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "followees", fetch = FetchType.LAZY)
-    @JsonBackReference
-    @ToString.Exclude
+    @OneToMany(mappedBy = "followees")
+    @OrderBy("followedAt ASC") // 정렬
     private Set<UserFollow> followees = new LinkedHashSet<>();
 }
