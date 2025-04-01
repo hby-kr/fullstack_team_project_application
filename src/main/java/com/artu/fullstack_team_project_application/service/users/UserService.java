@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.Set;
+import java.util.Set;
 
 public interface UserService {
 
@@ -27,9 +28,13 @@ public interface UserService {
 //    public List<UserInterest> readInterests(String userId);
 //    public List<UserInterest> saveInterests(UserInterest userInterest);
 
-//    // follow 리스트
-//    List<UserFollow> findByFolloweeId(String userId);
-//    List<UserFollow> findByFollowerId(String userId);
+    // 아이디, 이메일 중복 여부 확인
+    public boolean checkUserExists(String userId);
+    public boolean checkUserEmailExists(String email);
+
+
+
+
 
     // follow 수
     Map<String, Long> getCountFollower(String followeeId);
@@ -38,6 +43,7 @@ public interface UserService {
     // posting 수
     Map<String, Long> getCountPosting(String userId);
 
+    // follow 리스트
     List<User> findAll();
     Set<UserFollow> findByFollowerId(String followerId);
     Set<UserFollow> findByFolloweeId(String followeeId);

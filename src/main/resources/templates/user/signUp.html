@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 페이지</title>
+</head>
+
+<style>
+    .error-message {
+        color: red;
+        font-size: 12px;
+        /*display: none; !* 처음에는 에러 메시지를 숨김 *!*/
+    }
+</style>
+<body>
+<h1>회원가입 페이지</h1>
+
+<h2>회원가입 폼</h2>
+<form action="/user/signUp.do" method="POST">
+    <label>아이디:
+        <input type="text" id="userId" name="userId" required value="user">
+        <span id="userIdMessage"></span>
+        <span id="userIdError" class="error-message">아이디는 5~15자, 알파벳, 숫자, 밑줄(_)만 포함할 수 있습니다.</span><br><br>
+    </label>
+    <label>이메일:
+        <input type="email" id="userEmail" name="userEmail" required value="user@artu.com">
+        <span id="emailMessage"></span>
+        <span id="userEmailError" class="error-message">유효한 이메일 형식을 입력해 주세요.</span><br><br>
+    </label>
+    <label>비밀번호:
+        <input type="password" id="password" name="password" required value="artuartu">
+        <span id="passwordError"
+              class="error-message">비밀번호는 최소 8자 이상이어야 하며, 대문자, 소문자, 숫자, 특수문자(@, $, !, *) 중 최소 3가지를 포함해야 합니다.</span><br><br>
+    </label>
+    <label>이름:
+        <input type="text" id="userName" name="userName" required value="홍길동">
+        <span id="userNameError" class="error-message">이름은 한글과 알파벳만 사용 가능하며, 2~20자 이내여야 합니다.</span><br><br>
+    </label>
+    <label>생년월일:
+        <input type="date" id="userBirth" name="userBirth" required value="2025-03-01"><br><br>
+    </label>
+    <label for="gender">성별:
+        <select id="gender" name="gender" required>
+            <option value="M">남성</option>
+            <option value="F">여성</option>
+        </select><br><br>
+    </label>
+    <p>
+        <button type="reset">초기화</button>
+        <button type="submit">회원가입</button>
+    </p>
+</form>
+
+<script>
+    const userId = document.getElementById("userId");
+    const userEmail = document.getElementById("userEmail");
+    let debounceTimeout;
+
+    // 디바운싱 함수: 지연 시간 후에만 실제 함수가 실행됨
+    function debounce(func, delay) {
+        return function (args) {
+            clearTimeout(debounceTimeout);  // 이전 타이머를 취소
+            debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+        };
+    }
+
+    async function checkUserId() {
+        if (userId.value.length === 0) return;
+
+        try {
+            const response = await fetch(`/user/api/checkUserId.do?userId=${userId}`);
+            const isDuplicate = await response.json();
+
+            const message = document.getElementById("userIdMessage");
+            if (isDuplicate) {
+                message.style.color = "red";
+                message.textContent = "이미 사용 중인 아이디입니다.";
+            } else {
+                message.style.color = "green";
+                message.textContent = "사용 가능한 아이디입니다.";
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // 디바운싱 적용된 아이디 중복 체크
+    const debouncedCheckUserId = debounce((e) => checkUserId(e.target.value), 500);  // e.target.value를 전달
+    userId.addEventListener("change", debouncedCheckUserId);
+
+
+    // 사용자 이메일 중복 체크 함수
+    async function checkUserEmail() {
+        if (userEmail.value.length === 0) return;
+
+        try {
+            const response = await fetch(`/user/api/checkUserEmail.do?userEmail=${userEmail}`);
+            const isDuplicate = await response.json();
+
+            const message = document.getElementById("emailMessage");
+            if (isDuplicate) {
+                message.style.color = "red";
+                message.textContent = "이미 사용 중인 이메일입니다.";
+            } else {
+                message.style.color = "green";
+                message.textContent = "사용 가능한 이메일입니다.";
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    // 디바운싱 적용된 이메일 중복 체크
+    const debouncedCheckUserEmail = debounce((e) => checkUserEmail(e.target.value), 500);  // e.target.value를 전달
+    userEmail.addEventListener("change", debouncedCheckUserEmail);
+
+
+    // ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    // const userId = document.getElementById('userId').value;
+    // const userEmail = document.getElementById('userEmail').value;
+    const password = document.getElementById('password').value;
+    const userName = document.getElementById('userName').value;
+
+    // console.log(userId, userEmail, userName, userName);
+
+    function validateUserId(userId) {
+        const regex = /^[a-zA-Z0-9_]{5,15}$/;
+        // [a-zA-Z0-9_]: 알파벳 대소문자, 숫자, 밑줄(_)만 허용
+        // {5,15}: 최소 5자, 최대 15자
+        return regex.test(userId);
+    }
+
+    function validateEmail(userEmail) {
+        const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        // [a-zA-Z0-9._%+-]+: 이메일 사용자명 부분, 알파벳 대소문자, 숫자, 특수문자(., -, _) 허용
+        // [a-zA-Z0-9.-]+: 도메인 이름 부분, 알파벳 대소문자, 숫자, 하이픈(-), 점(.) 허용
+        // [a-z]{2,3}: 알파벳 소문자만, 길이는 2~3자
+        return regex.test(userEmail);
+    }
+
+    function validatePassword(password) {
+        let count = 0; // 대소문자, 숫자, 특수문자 종류 개수를 체크하기 위한 변수
+        if (/[a-z]/.test(password)) count++; // 소문자가 하나라도 있으면 count 1 증가
+        if (/[A-Z]/.test(password)) count++; // 대문자가 하나라도 있으면 count 1 증가
+        if (/\d/.test(password)) count++;  // 숫자가 하나라도 있으면 count 1 증가
+        if (/[@$!*]/.test(password)) count++; // 특수문자가 하나라도 있으면 count 1 증가
+        // 최소 3가지 종류가 포함되었는지 체크, 비밀번호 길이는 8~20자
+        return count >= 3 && password.length >= 8 && password.length <= 20;
+    }
+
+    function validateUserName(userName) {
+        const regex = /^[a-zA-Z가-힣]{2,20}$/;
+        // [a-zA-Z가-힣]: 알파벳 대소문자와 한글만 허용
+        // {2,20}: 길이는 2자 이상, 20자 이하
+        return regex.test(userName);
+    }
+
+
+    function validateForm() {
+
+        const userId = document.getElementById('userId').value;
+        const userEmail = document.getElementById('userEmail').value;
+        const password = document.getElementById('password').value;
+        const userName = document.getElementById('userName').value;
+        let valid = true;
+
+        // 아이디 검사
+        if (!validateUserId(userId)) {
+            document.getElementById('userIdError').classList.toggle('error-message');
+            valid = false;
+        }
+
+        // 이메일 검사
+        if (!validateEmail(userEmail)) {
+            document.getElementById('userEmailError').innerHTML = "유효한 이메일 형식을 입력해 주세요.";
+            document.getElementById('userEmailError').classList.toggle('error-message');
+            valid = false;
+        }
+
+        // 비밀번호 검사
+        if (!validatePassword(password)) {
+            document.getElementById('passwordError').innerHTML = "비밀번호는 8~20자, 대문자, 소문자, 숫자, 특수문자 중 최소 3가지를 포함해야 합니다.";
+            document.getElementById('passwordError').classList.toggle('error-message');
+            valid = false;
+        }
+
+        // 이름 검사
+        if (!validateUserName(userName)) {
+            document.getElementById('userNameError').innerHTML = "이름은 한글과 알파벳만 사용 가능하며, 20자 이내여야 합니다.";
+            document.getElementById('userNameError').classList.toggle('error-message');
+            valid = false;
+        }
+        return valid; // 모든 검사 통과 시 폼 제출
+    }
+</script>
+
+<h3>여기서 더 필요한 작업</h3>
+<ul>
+    <li>아이디 중복 체크 -> 서비스, 컨트롤러 만들어서 json반환 완.</li>
+    <li>비번 암호화</li>
+    <li>아이디, 비번 등 정규표현식 검증 -> 정규표현식은 만들었고, 리액트 작업이 필요한 부분.</li>
+    <li>토스같은 ui -> 리액트</li>
+</ul>
+
+
+</body>
+</html>

@@ -7,15 +7,61 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="stylesheet" href="./../css/style.css">
     <title>위젯 테스트 페이지</title>
+    <style>
+        /* 헤더 스타일 */
+        header {
+            background-color: #E6A8D7;  /* 연보라색 배경 */
+            padding: 10px 20px;
+            color: white;  /* 텍스트 색상: 흰색 */
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /* 유저 정보 및 로그아웃 버튼 스타일 */
+        .user-info {
+            font-size: 16px;
+        }
+
+        .user-info a {
+            color: white;  /* 링크 색상: 흰색 */
+            text-decoration: none;
+            padding: 5px 10px;
+            border: 1px solid white;
+            border-radius: 5px;
+            margin-left: 10px;
+        }
+
+        .user-info a:hover {
+            background-color: white;
+            color: #E6A8D7;  /* hover 시 텍스트 색상 변경 */
+        }
+
+        /* 로그인 링크 스타일 */
+        .login-link a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .login-link a:hover {
+            background-color: white;
+            color: #E6A8D7;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
 </head>
 <body>
+<!-- 헤더 포함 (로그인된 유저 정보가 있는 경우) -->
+<div th:replace="~{fragments/user/header :: header}"></div>
+
 
 <h1>홈</h1>
 <h3>임시로 필요하면 링크만들어 넣고 사용하세요</h3>
 
 
-<p><a href="/user/signIn.do">로그인</a></p>
-<p><a href="/user/signUp.do">회원가입</a></p>
+
 
 
 <h2>위젯 테스트 페이지</h2>

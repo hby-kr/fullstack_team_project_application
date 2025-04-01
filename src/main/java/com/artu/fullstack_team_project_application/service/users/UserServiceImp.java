@@ -34,7 +34,7 @@ public class UserServiceImp implements UserService {
 
     @Override
     public User save(User user) {
-        return user;
+        return userRepository.save(user);
     }
 
     @Override
@@ -51,17 +51,16 @@ public class UserServiceImp implements UserService {
 //        return List.of();
 //    }
 
-//    @Override
-//    public List<UserFollow> findByFolloweeId(String userId) {
-//        return userFollowRepository.findByFolloweeId(userId);
-//    }
-//
-//    @Override
-//    public List<UserFollow> findByFollowerId(String userId) {
-//        return userFollowRepository.findByFollowerId(userId);
-//    }
+    @Override
+    public boolean checkUserExists(String userId) {
+        return userRepository.existsByUserId(userId);
+    }
 
-    //
+    @Override
+    public boolean checkUserEmailExists(String email) {
+        return userRepository.existsByUserEmail(email);
+    }
+
     @Override
     public Map<String, Long> getCountFollower(String followeeId) {
         Long countFollower = userFollowRepository.countFolloweeByUserId(followeeId);
@@ -108,24 +107,4 @@ public class UserServiceImp implements UserService {
         return userFollowRepository.findByFolloweeId(followeeId);
     }
 
-    //
-//    public UserService(UserRepository userRepository) {
-//        this.userRepository = userRepository;
-//    }
-//
-//    public List<User> getAllUsers() {
-//        return userRepository.findAll();
-//    }
-//
-//    public Optional<User> getUserById(String userId) {
-//        return userRepository.findById(userId);
-//    }
-//
-//    public User saveUser(User user) {
-//        return userRepository.save(user);
-//    }
-//
-//    public void deleteUser(String userId) {
-//        userRepository.deleteById(userId);
-//    }
 }
