@@ -5,11 +5,12 @@
     <title>Follower</title>
 </head>
 <body>
-<h1><span th:text="${user}">님의 Follower</span></h1>
-<!--<p th:text="${user.followees[0].followers.userName}"></p>-->
-<!--<p th:text="${user.followees[0].followers.userEmail}"></p>-->
+<h1><span th:text="${user.userName}"></span>님의 Follower</h1>
+    <div th:each="followee : ${user.followees}">
+        <p th:text="${followee.followers.userName}"></p>
+        <p th:text="${followee.followers.userEmail}"></p>
+        <button type="button">팔로우</button>
+    </div>
 
-
-</body>
 </body>
 </html>

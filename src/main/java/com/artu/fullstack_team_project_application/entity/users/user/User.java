@@ -70,86 +70,129 @@ public class User {
     private LocalDate dropoutAt;
 
 //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ join 설정 시작
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserEventLike> userEventLikes = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    private Set<EventReviewImage> eventReviewImages = new LinkedHashSet<>();
-
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<EventReview> eventReviews = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "writer")
+    @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<Message> messages = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<PasswordChangeHistory> passwordChangeHistories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    @ToString.Exclude
     private Set<PostingComment> postingComments = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<PostingLike> postingLikes = new LinkedHashSet<>();
 
     // Posting 엔티티와의 관계 설정
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<Posting> postings = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<SearchWord> searchWords = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserCart> userCarts = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserCoupon> userCoupons = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserEnterChatroom> userEnterChatrooms = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserEventBmark> userEventBmarks = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserImg> userImgs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserInquire> userInquires = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserInterest> userInterests = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserPoint> userPoints = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserPurchaseList> userPurchaseLists = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserSetting> userSettings = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<UserloginLog> userloginLogs = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<WidgetDetail> widgetDetails = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @ToString.Exclude
     private Set<Widget> widgets = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followers")
+    @OrderBy("followedAt ASC") // 정렬
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followees")
+    @OrderBy("followedAt ASC") // 정렬
     private Set<UserFollow> followees = new LinkedHashSet<>();
-
 }

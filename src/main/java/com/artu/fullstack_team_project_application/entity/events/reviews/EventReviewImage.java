@@ -26,10 +26,17 @@ public class EventReviewImage {
     @Column(name = "user_id", nullable = false, length = 50)
     private String userId;
 
+<<<<<<< HEAD
     @ManyToOne(fetch = FetchType.LAZY, optional = false) // 이미지는 유저 한명 (N:1 관계)
     @OnDelete(action = OnDeleteAction.CASCADE) // 유저 삭제 시 이미지 삭제
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user; //유저 엔티티와 연관 관계 (userId는 읽기 전용)
+=======
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id", nullable = false,insertable = false, updatable = false)
+    private User user;
+>>>>>>> 04f1bd76182b72c1b76c28d57829d0431553d856
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) //이미지는 공연 한개 (N:1 관계)
     @JoinColumn(name = "event_id", nullable = false, insertable = false, updatable = false)

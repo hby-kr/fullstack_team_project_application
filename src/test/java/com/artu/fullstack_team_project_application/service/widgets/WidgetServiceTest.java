@@ -16,21 +16,21 @@ class WidgetServiceTest {
     @Test
     void createWidgetTest() {
         User user = new User();
-        user.setUserId("user1");
+        user.setUserId("user1001");
 
         // 새 Widget 생성 테스트
-        Widget widget = widgetService.createWidget(100, user, 2, "Dark");
+        Widget widget = widgetService.createWidget(6, user, 2, "Dark");
         assertNotNull(widget);
-        assertEquals(100, widget.getId());
+        assertEquals(6, widget.getId());
         assertEquals("Dark", widget.getWidgetTheme());
         assertEquals(2, widget.getWidgetSize());
-        assertEquals("user1", widget.getUser().getUserId());
+        assertEquals("user1001", widget.getUser().getUserId());
     }
 
     @Test
     void deleteWidgetByIdTest() {
         // 위젯 삭제 테스트 (위젯 ID가 데이터베이스에 존재한다고 가정)
-        Integer widgetId = 100;
+        Integer widgetId = 6;
 
         // 위젯 삭제 시 예외가 발생하지 않아야 함
         assertDoesNotThrow(() -> widgetService.deleteWidgetById(widgetId));
@@ -78,19 +78,19 @@ class WidgetServiceTest {
 
     @Test
     void findWidgetThemeByWidgetIdAndUserId() {
-        String widgetTheme = widgetService.findWidgetThemeByWidgetIdAndUserId(1, "user1");
+        String widgetTheme = widgetService.findWidgetThemeByWidgetIdAndUserId(1, "user1001");
         System.out.println("Widget Theme: " + widgetTheme);
     }
 
     @Test
     void findWidgetSizeByWidgetIdAndUserId() {
-        Integer widgetSize = widgetService.findWidgetSizeByWidgetIdAndUserId(1, "user1");
+        Integer widgetSize = widgetService.findWidgetSizeByWidgetIdAndUserId(1, "user1001");
         System.out.println("Widget Size: " + widgetSize);
     }
 
     @Test
     void findWidgetIdByWidgetSizeAndUserId() {
-        Integer widgetId = widgetService.findWidgetIdByWidgetSizeAndUserId(1, "user1");
+        Integer widgetId = widgetService.findWidgetIdByWidgetSizeAndUserId(1, "user1001");
         System.out.println("Found WidgetId: " + widgetId);
     }
 }

@@ -80,6 +80,7 @@ public class UserController {
     public boolean checkUserId(@RequestParam String userId){
         return userService.checkUserExists(userId);
     }
+
     @GetMapping("/api/checkUserEmail.do")
     @ResponseBody // JSON 형식으로 반환
     public boolean checkUserEmail(@RequestParam String UserEmail){

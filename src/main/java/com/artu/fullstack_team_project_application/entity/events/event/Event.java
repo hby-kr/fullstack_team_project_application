@@ -23,6 +23,7 @@ import java.util.Set;
 public class Event {
     @Id
     @Column(name = "event_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name = "title", nullable = false, length = 100)
@@ -69,11 +70,12 @@ public class Event {
     @JoinColumn(name = "ctgr_id", nullable = false,insertable = false, updatable = false)
     @ToString.Exclude
     @JsonBackReference
-
     private Category ctgr;
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
     private Set<EventDate>eventDates=new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "event")
+    private Set<EventImage> EventImages=new LinkedHashSet<>();
 
 }
