@@ -28,6 +28,8 @@ public class PostingController {
     public String findAll(Model model) {
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
+        model.addAttribute("headerNav", "personal");
+
         return "posting/findAll";
     }
 
