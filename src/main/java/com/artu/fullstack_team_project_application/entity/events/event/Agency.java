@@ -26,6 +26,6 @@ public class Agency {
     private String address;
 
     @OneToMany
-    private Set<com.artu.fullstack_team_project_application.entity.events.event.Actor> actors = new LinkedHashSet<>();
+    private Set<Actor> actors = new LinkedHashSet<>();
 
 }

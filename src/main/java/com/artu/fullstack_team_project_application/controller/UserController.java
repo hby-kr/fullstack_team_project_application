@@ -21,7 +21,8 @@ public class UserController {
     public String signInForm(HttpSession session) {
         User user = (User) session.getAttribute("user");
         if (user != null) { // 세션에 사용자 정보가 있으면 마이페이지로 리다이렉트
-            return "redirect:/user/mypage";  // 마이페이지로 리다이렉트
+            // return "redirect:/user/mypage";  // 마이페이지로 리다이렉트
+            return "redirect:/posting/" + user.getUserId() +"/userpage.do";  // 마이페이지로 리다이렉트
         }
         // 세션에 사용자 정보가 없으면 로그인 페이지로 이동
         return "/user/signIn";  // 로그인 페이지
