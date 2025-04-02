@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.service.users;
 
+import com.artu.fullstack_team_project_application.dto.UserPageDto;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.user.UserInterest;
@@ -32,16 +33,11 @@ public interface UserService {
     public boolean checkUserExists(String userId);
     public boolean checkUserEmailExists(String email);
 
-
+    UserPageDto readUserPage(String userId);
 
 
 
     // follow 수
-    Map<String, Long> getCountFollower(String followeeId);
-    Map<String, Long> getCountFollowee(String followerId);
-
-    // posting 수
-    Map<String, Long> getCountPosting(String userId);
 
     // follow 리스트
     List<User> findAll();

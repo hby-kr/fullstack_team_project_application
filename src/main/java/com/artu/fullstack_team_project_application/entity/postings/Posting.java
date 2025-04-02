@@ -63,11 +63,11 @@ public class Posting {
 
     // 게시물 이미지 조인
     @OneToMany(mappedBy = "post")
-    @OrderBy("imgOrder ASC") // 정렬
+     @OrderBy("imgOrder ASC") // 정렬
     private Set<PostingImage> postingImages = new LinkedHashSet<>();
 
     // 게시물 댓글 조인
-    @OneToMany(mappedBy = "post")
+     @OneToMany(mappedBy = "post")
     private Set<PostingComment> postingComments = new LinkedHashSet<>();
 
 }
