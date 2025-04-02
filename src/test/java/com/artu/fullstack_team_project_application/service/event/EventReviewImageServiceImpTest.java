@@ -13,12 +13,6 @@ class EventReviewImageServiceImpTest {
 
     @Test
     @Transactional
-    void getImagesByUserId() {
-        System.out.println(eventReviewImageService.getImagesByUserId("user1"));
-    }
-
-    @Test
-    @Transactional
     void getImageById() {
         System.out.println(eventReviewImageService.getImageById(1));
     }

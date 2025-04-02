@@ -13,22 +13,20 @@
 
 <h2>리뷰</h2>
 
-<h3>사진 & 동영상</h3>
-<div class="review-images">
+<!--<h3>사진 & 동영상</h3>-->
+<!--<div class="review-images">-->
 <!--<ul>-->
 <!--    <li th:each="image : ${reviewImages}">-->
 <!--        <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">-->
 <!--    </li>-->
 <!--</ul>-->
-<!--<button id="load-more-images" data-event-id="${event.id}">more ></button>-->
-<!--=======-->
 <!--    <ul>-->
 <!--        <li th:each="image : ${reviewImages}">-->
 <!--            <img th:src="${image.imgUrl}" alt="리뷰 이미지">-->
 <!--        </li>-->
 <!--    </ul>-->
 <!--    <button id="load-more-images" data-event-id="${event.id}">more ></button>-->
-</div>
+<!--</div>-->
 
 <div id="review-list">
     <h3>리뷰 리스트</h3>
@@ -47,7 +45,7 @@
         </li>
     </ul>
 </div>
-<a id="write-review" href="/reviews/form?eventId=1">
+<a id="write-review" th:href="@{/reviews/form(eventId=${event.id})}">
 리뷰 작성하기
 </a>
 

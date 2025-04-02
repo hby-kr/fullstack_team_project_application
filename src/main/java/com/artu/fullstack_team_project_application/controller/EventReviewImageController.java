@@ -28,8 +28,8 @@ public class EventReviewImageController {
     // 특정 유저가 업로드한 리뷰 이미지 조회 (JSON 반환)
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<EventReviewImage>> getImagesByUser(@PathVariable String userId) {
-        List<EventReviewImage> images = eventReviewImageService.getImagesByUserId(userId);
-        return ResponseEntity.ok(images);
+//        List<EventReviewImage> images = eventReviewImageService.getImagesByUserId(userId);
+        return ResponseEntity.ok(null);
     }
 
     // 특정 이미지 ID로 조회 (JSON 반환)
@@ -70,8 +70,8 @@ public class EventReviewImageController {
     // 리뷰 이미지 페이지 렌더링 (Thymeleaf 를 활용한 HTML 렌더링)
     @GetMapping("/page")//웹 페이지를 열어서 리뷰 사진들 보여주기
     public String getReviewImagesPage(Model model) {
-        List<EventReviewImage> images = eventReviewImageService.getImagesByUserId("user1");
-        model.addAttribute("images", images); //웹 페이지에서 images 라는 이름으로 사진 데이터를 넘겨줌
+//        List<EventReviewImage> images = eventReviewImageService.getImagesByUserId("user1001");
+        model.addAttribute("images", null); //웹 페이지에서 images 라는 이름으로 사진 데이터를 넘겨줌
         return "event/eventReview"; // templates/event/eventReview.html 페이지로 이동
     }
 

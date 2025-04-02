@@ -2,6 +2,7 @@ package com.artu.fullstack_team_project_application.entity.events.reviews;
 
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,22 +20,11 @@ import java.time.Instant;
 @Table(name = "event_review_images") //DB에 매핑될 테이블 이름
 public class EventReviewImage {
     @Id //기본 키
+    @GeneratedValue(strategy = GenerationType.IDENTITY)//이미지 ID 자동 증가 생성
     @Column(name = "image_id", nullable = false)
     private Integer id;
-    @Column(name = "event_id", nullable = false)
-    private int eventId;
-    @Column(name = "user_id", nullable = false, length = 50)
-    private String userId;
-
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) // 이미지는 유저 한명 (N:1 관계)
-    @OnDelete(action = OnDeleteAction.CASCADE) // 유저 삭제 시 이미지 삭제
-    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    private User user; //유저 엔티티와 연관 관계 (userId는 읽기 전용)
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) //이미지는 공연 한개 (N:1 관계)
-    @JoinColumn(name = "event_id", nullable = false, insertable = false, updatable = false)
-    private Event event; //공연 엔티티와 연관 관계 (eventId는 읽기 전용)
+    @Column(name = "review_id", nullable = false)
+    private Integer reviewId;
 
     @Column(name = "img_url", nullable = false)
     private String imgUrl; // 저장된 이미지 URL
@@ -44,7 +34,9 @@ public class EventReviewImage {
     private Instant createAt; // 이미지 업로드 시각
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) // 이미지는 리뷰 하나 (N:1)
-    @JoinColumn(name="review_id", nullable = false)
+    @JoinColumn(name="review_id", nullable = false, insertable = false, updatable = false)
+    @ToString.Exclude
+    @JsonBackReference
     private EventReview eventReview; // 어떤 리뷰에 속한 이미지 인지
 
 

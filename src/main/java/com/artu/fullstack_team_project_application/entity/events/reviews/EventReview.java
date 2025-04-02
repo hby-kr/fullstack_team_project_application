@@ -23,6 +23,7 @@ import java.util.Set;
 @Table(name = "event_reviews") //DB에 매핑될 테이블 이름
 public class EventReview {
     @Id //기본 키
+    @GeneratedValue(strategy = GenerationType.IDENTITY) //리뷰 ID가 자동 증가하면서 생성
     @Column(name = "review_id", nullable = false)
     private Integer id; //리뷰 고유 번호
 

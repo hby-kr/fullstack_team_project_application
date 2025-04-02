@@ -129,8 +129,6 @@ public class EventReviewController {
 
                 EventReviewImage image = new EventReviewImage();
                 image.setEventReview(savedReview);
-                image.setUserId(userId);
-                image.setEventId(eventId);
                 image.setImgUrl(imgUrl);
 
                 // 이미지 저장 서비스 호출

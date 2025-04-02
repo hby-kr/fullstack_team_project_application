@@ -19,13 +19,13 @@ public class EventReviewImageServiceImp implements EventReviewImageService { //E
 
     @Override
     public List<EventReviewImage> getImagesByEventId(Integer eventId) {
-        return eventReviewImageRepository.findByEventId(eventId);
-    } // 공연 ID 로 조회
+        return eventReviewImageRepository.findByReviewId(eventId);
+    } // 리뷰 ID 로 조회
 
-    @Override
-    public List<EventReviewImage> getImagesByUserId(String userId) {
-        return eventReviewImageRepository.findByUser_UserId(userId);
-    } // 유저 ID 로 조회
+//    @Override
+//    public List<EventReviewImage> getImagesByUserId(String userId) {
+//        return eventReviewImageRepository.findByUser_UserId(userId);
+//    } // 유저 ID 로 조회
 
     @Override
     public Optional<EventReviewImage> getImageById(Integer imageId) {

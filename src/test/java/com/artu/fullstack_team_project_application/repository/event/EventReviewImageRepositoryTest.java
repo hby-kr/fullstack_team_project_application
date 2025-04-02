@@ -10,9 +10,9 @@ import static org.junit.jupiter.api.Assertions.*;
 class EventReviewImageRepositoryTest {
     @Autowired
     EventReviewImageRepository eventReviewImageRepository;
-    @Test
-    @Transactional
-    void findByUserId() {
-        System.out.println(eventReviewImageRepository.findByUser_UserId("user1"));
-    }
+//    @Test
+//    @Transactional
+//    void findByUserId() {
+//        System.out.println(eventReviewImageRepository.findByUser_UserId("user1"));
+//    }
 }

@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
+import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.base.Category;
 import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
@@ -77,5 +78,8 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private Set<EventImage> EventImages=new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "event")
+    private Set<EventReview> EventReview=new LinkedHashSet<>();
 
 }
