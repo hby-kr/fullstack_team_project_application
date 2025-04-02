@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.entity.postings;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -35,6 +36,8 @@ public class UserFollow {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "follower_id", nullable = false)
+    @ToString.Exclude
+    @JsonBackReference
     private User followers;
 
     // follower 팔로원한 user
@@ -42,6 +45,8 @@ public class UserFollow {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "followee_id", nullable = false)
+    @ToString.Exclude
+    @JsonBackReference
     private User followees;
 
     @ColumnDefault("CURRENT_TIMESTAMP")

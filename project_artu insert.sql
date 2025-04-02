@@ -571,29 +571,6 @@ VALUES
 (5, 'https://picsum.photos/id/9/200', 0),
 (5, 'https://picsum.photos/id/10/200', 1),
 
--- event_id 6
-(6, 'https://picsum.photos/id/11/200', 0),
-(6, 'https://picsum.photos/id/12/200', 1),
-
--- event_id 7
-(7, 'https://picsum.photos/id/13/200', 0),
-(7, 'https://picsum.photos/id/14/200', 1),
-
--- event_id 8
-(8, 'https://picsum.photos/id/15/200', 0),
-(8, 'https://picsum.photos/id/16/200', 1),
-
--- event_id 9
-(9, 'https://picsum.photos/id/17/200', 0),
-(9, 'https://picsum.photos/id/18/200', 1),
-
--- event_id 10
-(10, 'https://picsum.photos/id/19/200', 0),
-(10, 'https://picsum.photos/id/20/200', 1),
-
--- event_id 11
-(11, 'https://picsum.photos/id/21/200', 0),
-(11, 'https://picsum.photos/id/22/200', 1),
 
 -- event_id 12
 (12, 'https://picsum.photos/id/23/200', 0),
@@ -611,10 +588,6 @@ VALUES
 (15, 'https://picsum.photos/id/29/200', 0),
 (15, 'https://picsum.photos/id/30/200', 1),
 
--- event_id 16
-(16, 'https://picsum.photos/id/31/200', 0),
-(16, 'https://picsum.photos/id/32/200', 1),
-
 -- event_id 17
 (17, 'https://picsum.photos/id/33/200', 0),
 (17, 'https://picsum.photos/id/34/200', 1),
@@ -630,10 +603,6 @@ VALUES
 -- event_id 20
 (20, 'https://picsum.photos/id/39/200', 0),
 (20, 'https://picsum.photos/id/40/200', 1),
-
--- event_id 21
-(21, 'https://picsum.photos/id/41/200', 0),
-(21, 'https://picsum.photos/id/42/200', 1),
 
 -- event_id 22
 (22, 'https://picsum.photos/id/43/200', 0),
@@ -651,10 +620,6 @@ VALUES
 (25, 'https://picsum.photos/id/49/200', 0),
 (25, 'https://picsum.photos/id/50/200', 1),
 
--- event_id 26
-(26, 'https://picsum.photos/id/51/200', 0),
-(26, 'https://picsum.photos/id/52/200', 1),
-
 -- event_id 27
 (27, 'https://picsum.photos/id/53/200', 0),
 (27, 'https://picsum.photos/id/54/200', 1),
@@ -670,10 +635,6 @@ VALUES
 -- event_id 30
 (30, 'https://picsum.photos/id/59/200', 0),
 (30, 'https://picsum.photos/id/60/200', 1),
-
--- event_id 31
-(31, 'https://picsum.photos/id/61/200', 0),
-(31, 'https://picsum.photos/id/62/200', 1),
 
 -- event_id 32
 (32, 'https://picsum.photos/id/63/200', 0),
@@ -691,10 +652,6 @@ VALUES
 (35, 'https://picsum.photos/id/69/200', 0),
 (35, 'https://picsum.photos/id/70/200', 1),
 
--- event_id 36
-(36, 'https://picsum.photos/id/71/200', 0),
-(36, 'https://picsum.photos/id/72/200', 1),
-
 -- event_id 37
 (37, 'https://picsum.photos/id/73/200', 0),
 (37, 'https://picsum.photos/id/74/200', 1),
@@ -710,10 +667,6 @@ VALUES
 -- event_id 40
 (40, 'https://picsum.photos/id/79/200', 0),
 (40, 'https://picsum.photos/id/80/200', 1),
-
--- event_id 41
-(41, 'https://picsum.photos/id/81/200', 0),
-(41, 'https://picsum.photos/id/82/200', 1),
 
 -- event_id 42
 (42, 'https://picsum.photos/id/83/200', 0),
@@ -731,10 +684,6 @@ VALUES
 (45, 'https://picsum.photos/id/89/200', 0),
 (45, 'https://picsum.photos/id/90/200', 1),
 
--- event_id 46
-(46, 'https://picsum.photos/id/91/200', 0),
-(46, 'https://picsum.photos/id/92/200', 1),
-
 -- event_id 47
 (47, 'https://picsum.photos/id/93/200', 0),
 (47, 'https://picsum.photos/id/94/200', 1),
@@ -751,10 +700,6 @@ VALUES
 (50, 'https://picsum.photos/id/99/200', 0),
 (50, 'https://picsum.photos/id/100/200', 1),
 
--- event_id 51
-(51, 'https://picsum.photos/id/101/200', 0),
-(51, 'https://picsum.photos/id/102/200', 1),
-
 -- event_id 52
 (52, 'https://picsum.photos/id/103/200', 0),
 (52, 'https://picsum.photos/id/104/200', 1),
@@ -769,63 +714,8 @@ VALUES
 
 -- event_id 55
 (55, 'https://picsum.photos/id/109/200', 0),
-(55, 'https://picsum.photos/id/110/200', 1),
 
--- event_id 56
-(56, 'https://picsum.photos/id/111/200', 0),
-(56, 'https://picsum.photos/id/112/200', 1),
 
--- event_id 57
-(57, 'https://picsum.photos/id/113/200', 0),
-(57, 'https://picsum.photos/id/114/200', 1),
-
--- event_id 58
-(58, 'https://picsum.photos/id/115/200', 0),
-(58, 'https://picsum.photos/id/116/200', 1),
-
--- event_id 59
-(59, 'https://picsum.photos/id/117/200', 0),
-(59, 'https://picsum.photos/id/118/200', 1),
-
--- event_id 60
-(60, 'https://picsum.photos/id/119/200', 0),
-(60, 'https://picsum.photos/id/120/200', 1),
-
--- event_id 61
-(61, 'https://picsum.photos/id/121/200', 0),
-(61, 'https://picsum.photos/id/122/200', 1),
-
--- event_id 62
-(62, 'https://picsum.photos/id/123/200', 0),
-(62, 'https://picsum.photos/id/124/200', 1),
-
--- event_id 63
-(63, 'https://picsum.photos/id/125/200', 0),
-(63, 'https://picsum.photos/id/126/200', 1),
-
--- event_id 64
-(64, 'https://picsum.photos/id/127/200', 0),
-(64, 'https://picsum.photos/id/128/200', 1),
-
--- event_id 65
-(65, 'https://picsum.photos/id/129/200', 0),
-(65, 'https://picsum.photos/id/130/200', 1),
-
--- event_id 66
-(66, 'https://picsum.photos/id/131/200', 0),
-(66, 'https://picsum.photos/id/132/200', 1),
-
--- event_id 67
-(67, 'https://picsum.photos/id/133/200', 0),
-(67, 'https://picsum.photos/id/134/200', 1),
-
--- event_id 68
-(68, 'https://picsum.photos/id/135/200', 0),
-(68, 'https://picsum.photos/id/136/200', 1),
-
--- event_id 69
-(69, 'https://picsum.photos/id/137/200', 0),
-(69, 'https://picsum.photos/id/138/200', 1);
 
 INSERT INTO event_detail_images (event_id, img_url, img_order) VALUES
 (1, 'https://dummyimage.com/500x1000/808080/fff.jpg', 0),

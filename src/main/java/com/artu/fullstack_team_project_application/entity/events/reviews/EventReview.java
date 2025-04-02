@@ -29,7 +29,7 @@ public class EventReview {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 유저 한 명 (N:1 관계)
     @JoinColumn(name = "user_id", nullable = false) // 외래 키 설정
-    @ToString.Exclude // 순환 참조 방지 (ToString에서 제외)
+    @ToString.Exclude // 순환 참조 방지 (ToString 에서 제외)
     @JsonBackReference // JSON 직렬화 시 순환참조 방지
     private User user;
 
@@ -57,6 +57,4 @@ public class EventReview {
     @OneToMany(mappedBy = "eventReview", fetch = FetchType.LAZY) //여러 이미지 연결(1:N)
     private Set<EventReviewImage> eventReviewImages = new HashSet<>(); // 리뷰 이미지 목록
 
-//    @Column(name="img_url", nullable = false)
-//    private String imgUrl;
 }

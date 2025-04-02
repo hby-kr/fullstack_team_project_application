@@ -27,7 +27,7 @@ public class ActorsImage {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "actor_id", nullable = false)
-    private com.artu.fullstack_team_project_application.entity.events.event.Actor actor;
+    private Actor actor;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "created_at", nullable = false)

@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.service.users;
 
+import com.artu.fullstack_team_project_application.dto.UserPageDto;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.user.UserInterest;
@@ -62,28 +63,24 @@ public class UserServiceImp implements UserService {
     }
 
     @Override
-    public Map<String, Long> getCountFollower(String followeeId) {
-        Long countFollower = userFollowRepository.countFolloweeByUserId(followeeId);
-        Map<String, Long> countFollowerMap = new HashMap<>();
-        countFollowerMap.put("countFollower", countFollower);
-        return countFollowerMap;
+    @Transactional(readOnly = true)
+    public UserPageDto readUserPage(String userId) {
+        Optional<User> userOptional = userRepository.findById(userId);
+        UserPageDto userPageDto = new UserPageDto();
+        if (userOptional.isPresent()) {
+            Long countFollower = userFollowRepository.countFolloweeByUserId(userId);
+            Long countFollowee = userFollowRepository.countFollowerByUserId(userId);
+            Long countPosting = postingRepository.countpostingByUserId(userId);
+            userPageDto.setUser(userOptional.get());
+            userPageDto.setCountFollower(countFollower);
+            userPageDto.setCountFollowee(countFollowee);
+            userPageDto.setCountPosting(countPosting);
+            return userPageDto;
+        }
+
+        return null;
     }
 
-    @Override
-    public Map<String, Long> getCountFollowee(String followerId) {
-        Long countFollowee = userFollowRepository.countFollowerByUserId(followerId);
-        Map<String, Long> countFolloweeMap = new HashMap<>();
-        countFolloweeMap.put("countFollowee", countFollowee);
-        return countFolloweeMap;
-    }
-
-    @Override
-    public Map<String, Long> getCountPosting(String userId) {
-        Long countPosting = postingRepository.countpostingByUserId(userId);
-        Map<String, Long> countPostingMap = new HashMap<>();
-        countPostingMap.put("countPosting", countPosting);
-        return countPostingMap;
-    }
 
     @Override
     public List<User> findAll() {

@@ -19,6 +19,7 @@ import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
@@ -34,7 +35,8 @@ import java.util.UUID;
 @Where(clause = "is_used = true") // 특정 조건을 만족하는 데이터를 조회할 때 추가적인 필터를 적용하는 데 사용
 // is_used = true 라는 조건을 추가하여, is_used가 true 인 항목만 조회되도록 설정
 @Table(name = "users")
-public class User {
+public class User implements Serializable {
+    private static final long serialVersionUID = 1L;
 
 
     public enum Gender {M, F}
@@ -70,9 +72,9 @@ public class User {
     private LocalDate dropoutAt;
 
 //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ join 설정 시작
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @OneToMany(mappedBy = "user")
     @ToString.Exclude
+    @JsonBackReference
     private Set<UserEventLike> userEventLikes = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -189,10 +191,15 @@ public class User {
     // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followers")
     @OrderBy("followedAt ASC") // 정렬
+    @ToString.Exclude
+    @JsonBackReference
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followees")
     @OrderBy("followedAt ASC") // 정렬
+    @ToString.Exclude
+    @JsonBackReference
     private Set<UserFollow> followees = new LinkedHashSet<>();
+
 }

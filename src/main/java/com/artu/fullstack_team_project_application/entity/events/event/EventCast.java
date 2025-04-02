@@ -37,6 +37,6 @@ public class EventCast {
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "actor_id")
-    private com.artu.fullstack_team_project_application.entity.events.event.Actor actor;
+    private Actor actor;
 
 }
