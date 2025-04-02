@@ -17,7 +17,7 @@ import java.time.Instant;
 @Setter
 @ToString
 @Entity // JPA 에서 엔티티로 인식
-@Table(name = "event_review_images") //DB에 매핑될 테이블 이름
+@Table(name = "event_review_images") //DB에 매핑 될 테이블 이름
 public class EventReviewImage {
     @Id //기본 키
     @GeneratedValue(strategy = GenerationType.IDENTITY)//이미지 ID 자동 증가 생성
