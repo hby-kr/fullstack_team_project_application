@@ -27,7 +27,7 @@ public class EventReview {
     @Column(name = "review_id", nullable = false)
     private Integer id; //리뷰 고유 번호
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 유저 한 명 (N:1 관계)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 유저 한명 (N:1 관계)
     @JoinColumn(name = "user_id", nullable = false) // 외래 키 설정
     @ToString.Exclude // 순환 참조 방지 (ToString 에서 제외)
     @JsonBackReference // JSON 직렬화 시 순환참조 방지
