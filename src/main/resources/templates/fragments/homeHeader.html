@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="homeHeader">
+        <style>
+            #homeHeaderNav{
+            }
+            #homeHeaderNav .link-list{
+                display: flex;
+                justify-content: center;
+                list-style: none;
+            }
+            #homeHeaderNav .link-list li{
+                padding: 0.5rem 1rem; /* px-4 py-2 */
+                margin: 0 0.25rem; /* mx-1 */
+                font-size: 1rem; /* text-base */
+                font-weight: 500; /* font-medium */
+                border-radius: 9999px; /* rounded-full */
+                color: #FFFFFF; /* text-gray-700 (회색 텍스트 색상) */
+                background-color: transparent; /* 기본 배경은 투명 */
+                transition: background-color 0.3s, color 0.3s; /* transition-colors */
+
+            }
+
+            #homeHeaderNav .link-list li.active{
+                background-color: #5400A8;
+            }
+            #homeHeaderNav .link-list li a{
+                text-decoration: none;
+            } #homeHeaderNav .link-list li.active a{
+                color: #FFFFFF; /* text-primary-foreground (배경 위의 텍스트 색상) */
+                text-decoration: none;
+            }
+        </style>
+        <nav id="homeHeaderNav">
+            <!-- 섹션 1: 위젯 테스트 페이지 -->
+            <h2 th:text="${headerNav}"></h2>
+            <div class="section">
+                <ul class="link-list">
+                    <li th:classappend="${headerNav=='widget' ? 'active':''}"><a href="/fragments/widget/widget.do">Widget</a></li>
+                    <li th:classappend="${headerNav=='personal' ? 'active':''}"><a href="/posting/findAll.do">개인페이지</a></li>
+                    <li th:classappend="${headerNav=='events' ? 'active':''}"><a href="/event/event">Events</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</body>
+</html>

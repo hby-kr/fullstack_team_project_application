@@ -24,7 +24,7 @@ public class MainController {
         }
 
         model.addAttribute("user", user); // 사용자 정보를 모델에 추가
-        return "/index"; // 홈 화면
+        return "fragments/widget/widget"; // 홈 화면
     }
 
 
