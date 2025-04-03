@@ -110,6 +110,23 @@
             line-height: 1.5;
         }
 
+        .review-body {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+        }
+
+        .review-right {
+            width:200px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .review-right img {
+            max-width:200px;
+            height: 200px;
+        }
+
         /* 리뷰 작성 버튼 */
         .write-review-btn {
             padding: 12px 25px;
@@ -153,14 +170,18 @@
                 <strong th:text="${review.user.userId}" class="review-username"></strong>
                 <span th:text="${review.createdAt}" class="review-date"></span>
             </div>
-            <div class="review-rating">
-                <p>⭐ <span th:text="${review.rate}"></span>/5</p>
-            </div>
-            <p th:text="${review.contents}" class="review-content"></p>
-            <div class="review-img">
-                <p th:each="image : ${review.eventReviewImages}">
-                    <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">
-                </p>
+            <div class="review-body">
+                <div class="review-left">
+                    <div class="review-rating">
+                        <p>⭐ <span th:text="${review.rate}"></span>/5</p>
+                    </div>
+                        <p th:text="${review.contents}" class="review-content"></p>
+                </div>
+                <div class="review-right">
+                    <p th:each="image : ${review.eventReviewImages}">
+                        <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">
+                    </p>
+                </div>
             </div>
         </li>
     </ul>
