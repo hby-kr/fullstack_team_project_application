@@ -1,8 +1,6 @@
 package com.artu.fullstack_team_project_application.controller;
 
-import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
-import com.artu.fullstack_team_project_application.repository.event.EventReviewImageRepository;
 import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -78,7 +76,7 @@ public class EventReviewImageController {
     // 공연 이미지에 대한 리뷰 사진을 가져오기
     @GetMapping("/event/{eventId}")
     public ResponseEntity<List<EventReviewImage>> getImagesByEventId(@PathVariable Integer eventId) {
-        List<EventReviewImage> images = eventReviewImageService.getImagesByEventId(eventId);
+        List<EventReviewImage> images = eventReviewImageService.getImagesByReviewId(eventId);
         return ResponseEntity.ok(images);
     }
 }

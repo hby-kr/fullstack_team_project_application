@@ -18,14 +18,15 @@ public class EventReviewImageServiceImp implements EventReviewImageService { //E
     } // 스프링이 이걸 통해 eventReviewImageRepository 를 자동으로 주입
 
     @Override
-    public List<EventReviewImage> getImagesByEventId(Integer eventId) {
-        return eventReviewImageRepository.findByReviewId(eventId);
+    public List<EventReviewImage> getImagesByReviewId(Integer reviewId) {
+        return eventReviewImageRepository.findByReviewId(reviewId);
     } // 리뷰 ID 로 조회
 
-//    @Override
-//    public List<EventReviewImage> getImagesByUserId(String userId) {
-//        return eventReviewImageRepository.findByUser_UserId(userId);
-//    } // 유저 ID 로 조회
+    @Override
+    public List<EventReviewImage> getImagesByEvent_EventId(Integer eventId) {
+        return eventReviewImageRepository.findByEvent_EventId(eventId);
+    }// 공연 ID 로 조회
+
 
     @Override
     public Optional<EventReviewImage> getImageById(Integer imageId) {

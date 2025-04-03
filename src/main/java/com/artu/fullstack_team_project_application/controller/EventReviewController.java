@@ -39,9 +39,10 @@ public class EventReviewController {
         User user = (User) session.getAttribute("user");
         model.addAttribute("user", user); // 세션관리
 
-
         List<EventReview> reviews = eventReviewService.getReviewsByEventId(eventId);
+        List<EventReviewImage> images = eventReviewImageService.getImagesByEvent_EventId(eventId);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("images", images);
 
         Optional<Event> eventOpt=eventService.get(eventId);
         if (eventOpt.isPresent()) {
