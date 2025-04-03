@@ -3,9 +3,11 @@ package com.artu.fullstack_team_project_application.service.users;
 import com.artu.fullstack_team_project_application.dto.UserPageDto;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.artu.fullstack_team_project_application.entity.users.user.UserImg;
 import com.artu.fullstack_team_project_application.entity.users.user.UserInterest;
 import com.artu.fullstack_team_project_application.repository.postings.PostingRepository;
 import com.artu.fullstack_team_project_application.repository.postings.UserFollowRepository;
+import com.artu.fullstack_team_project_application.repository.users.UserImgRepository;
 import com.artu.fullstack_team_project_application.repository.users.UserRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -22,6 +24,8 @@ public class UserServiceImp implements UserService {
     private final UserRepository userRepository;
     private final UserFollowRepository userFollowRepository;
     private final PostingRepository postingRepository;
+    private final UserImgRepository userImgRepository;
+
 
     @Override
     public Page<User> readAll(Pageable pageable) {
@@ -71,10 +75,12 @@ public class UserServiceImp implements UserService {
             Long countFollower = userFollowRepository.countFolloweeByUserId(userId);
             Long countFollowee = userFollowRepository.countFollowerByUserId(userId);
             Long countPosting = postingRepository.countpostingByUserId(userId);
+            Set<UserImg> userImg = userImgRepository.findUserImgByUser_UserId(userId);
             userPageDto.setUser(userOptional.get());
             userPageDto.setCountFollower(countFollower);
             userPageDto.setCountFollowee(countFollowee);
             userPageDto.setCountPosting(countPosting);
+            userPageDto.setUserImg(userImg);
             return userPageDto;
         }
 

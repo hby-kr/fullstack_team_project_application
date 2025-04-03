@@ -15,6 +15,7 @@ import java.time.Instant;
 @Table(name = "user_img")
 public class UserImg {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "prf_img_id", nullable = false)
     private Integer prfImgId;
 
