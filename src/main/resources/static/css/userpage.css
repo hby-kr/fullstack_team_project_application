@@ -1,4 +1,4 @@
-/* 전체 페이지 스타일 */
+/* 기본 스타일 */
 body {
     font-family: Arial, sans-serif;
     background-color: #fafafa;
@@ -6,83 +6,88 @@ body {
     padding: 0;
 }
 
-/* 컨테이너 스타일 */
-.container {
+/* 프로필 컨테이너 */
+.profile-container {
     width: 100%;
-    max-width: 1000px;
+    max-width: 900px;
     margin: 0 auto;
     padding: 20px;
-    box-sizing: border-box;
 }
 
-/* 헤더 스타일 */
-.header {
+/* 프로필 헤더 */
+.profile-header {
     display: flex;
     align-items: center;
-    border-bottom: 2px solid #ddd;
+    margin-bottom: 40px;
+    border-bottom: 1px solid #ddd;
     padding-bottom: 20px;
-    margin-bottom: 30px;
 }
 
-.profile-info {
-    display: flex;
-    align-items: center;
-    flex-grow: 1;
-}
-
-.profile-pic {
-    margin-right: 20px;
+.profile-image-wrapper {
+    margin-right: 30px;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08); /* 이미지에 음영 효과 */
 }
 
 .profile-image {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
 }
 
-.profile-details {
+.profile-info {
     flex-grow: 1;
 }
 
-.profile-details h1 {
-    font-size: 24px;
+.profile-info h1 {
+    font-size: 26px;
     font-weight: bold;
-    margin-bottom: 10px;
+    margin: 5px 0;
 }
 
-.profile-details .username {
+.user-name {
     font-size: 18px;
     color: #333;
-    font-weight: 500;
 }
 
-.profile-details .email {
+.user-email {
     font-size: 14px;
     color: #888;
-    margin: 5px 0;
 }
 
-.follow-info {
-    margin-top: 10px;
+.follow-stats {
+    margin-top: 20px;
+}
+
+.follow-stats p {
+    margin: 5px 0;
     font-size: 16px;
-    color: #555;
 }
 
-.follow-info p {
-    margin: 5px 0;
+.follow-stats strong {
+    color: #333;
 }
 
-.follow-info a {
+.follow-link {
     color: #0095f6;
     text-decoration: none;
+    font-weight: bold;
 }
 
-.follow-info a:hover {
+.follow-link:hover {
     text-decoration: underline;
 }
 
-/* 포스트 버튼 스타일 */
+/* 포스트 섹션 */
+.post-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 .post-btn {
     background-color: #0095f6;
     color: white;
@@ -90,16 +95,16 @@ body {
     padding: 10px 20px;
     border-radius: 5px;
     font-size: 14px;
-    cursor: pointer;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 
 .post-btn:hover {
     background-color: #0078cc;
 }
 
-/* 게시물 추가 버튼 스타일 */
-.add-post {
+/* 게시물 추가 버튼 */
+.post-add-btn-container {
     margin-bottom: 30px;
 }
 
@@ -117,8 +122,9 @@ body {
     background-color: #0078cc;
 }
 
-/* 게시물 갤러리 스타일 */
+/* 게시물 갤러리 */
 .post-gallery {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 15px;
@@ -127,7 +133,6 @@ body {
 table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 30px;
 }
 
 th {

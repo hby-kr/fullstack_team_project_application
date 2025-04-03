@@ -27,28 +27,29 @@
 </style>
 
 <body>
-<div class="container">
-    <header class="header">
-        <div class="profile-info">
-            <div class="profile-pic">
+<div class="profile-container">
+    <div class="profile-header">
+            <div class="profile-image-wrapper">
                 <img src="profile-image.jpg" alt="프로필 이미지" class="profile-image">
             </div>
-            <div class="profile-details">
+            <div class="profile-info">
                 <h1><span th:text="${userPage.user.userId}"></span>님의 페이지</h1>
                 <p th:text="${userPage.user.userName}"></p>
                 <p th:text="${userPage.user.userEmail}"></p>
                 <p>게시물</p>
-                <p th:text="${userPage.countPosting}">게시물 수</p>
-                <p><a th:href="@{'/posting/{userId}/follower.do'(userId=${userPage.user.userId})}">팔로워</a></p>
-                <p th:text="${userPage.countFollowee}">팔로워 수</p>
-                <p><a th:href="@{'/posting/{userId}/followee.do'(userId=${userPage.user.userId})}">팔로우</a></p>
-                <p th:text="${userPage.countFollower}">팔로우 수</p>
+                <div class="follow-stats">
+                    <p th:text="${userPage.countPosting}">게시물 수</p>
+                    <p><a th:href="@{'/posting/{userId}/follower.do'(userId=${userPage.user.userId})}">팔로워</a></p>
+                    <p th:text="${userPage.countFollowee}">팔로워 수</p>
+                    <p><a th:href="@{'/posting/{userId}/followee.do'(userId=${userPage.user.userId})}">팔로우</a></p>
+                    <p th:text="${userPage.countFollower}">팔로우 수</p>
+                </div>
             </div>
-        </div>
-</header>
+    </div>
+
 <div class="post-section">
     <button id="postingBtn" class="post-btn">포스트</button>
-    <div class="add-post">
+    <div class="post-add-btn-container">
             <a href="/posting/${USER_ID}/postAdd.do"><button id="postAddBtn">게시물 추가</button></a>
     </div>
     <div class="post-gallery">
@@ -67,6 +68,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 </div>
 
