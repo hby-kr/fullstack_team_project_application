@@ -26,7 +26,7 @@ class EventServiceImpTest {
     void get() {
         Optional<Event> eventOpt = eventServiceImp.get(1);
         Event event = eventOpt.get();
-        System.out.println(event);
+        System.out.println("jjjjjjjjjjjjjjjjjjjjjjj"+ event);
 
     }
 

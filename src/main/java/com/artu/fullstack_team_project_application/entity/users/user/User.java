@@ -199,4 +199,10 @@ public class User implements Serializable {
     @JsonBackReference
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
+    @OneToMany(mappedBy = "user")
+    @JsonBackReference
+    @ToString.Exclude
+    private Set<EventCast> EventCast  = new LinkedHashSet<>();
+
+
 }
