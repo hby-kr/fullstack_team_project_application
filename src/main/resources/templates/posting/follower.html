@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/follower.css">
     <title>Follower</title>
 </head>
+
 <body>
 <h1><span th:text="${user.userName}"></span>님의 Follower</h1>
-    <div th:each="followee : ${user.followees}">
-        <p th:text="${followee.followers.userName}"></p>
-        <p th:text="${followee.followers.userEmail}"></p>
-        <button type="button">팔로우</button>
+    <div class="follower-list" th:each="followee : ${user.followees}">
+        <div class="follower-card">
+            <img src="/img/10cm.jpg" alt="Profile Image" class="follower-image">
+            <div class="follower-info">
+                <p th:text="${followee.followers.userName}"></p>
+                <p th:text="${followee.followers.userEmail}"></p>
+            </div>
+            <button type="button">팔로우</button>
+        </div>
     </div>
-
 </body>
 </html>

@@ -2,10 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/eventdetail.css">
     <title>Event Detail</title>
 </head>
 <body>
     <h1>Event Detail</h1>
+    <div class="event-detail">
     <p>
        id:<span th:text="${event.id}"></span>
     </p>
@@ -37,10 +39,12 @@
        userId:<span th:text="${event.userId}"></span>
     </p>
     <h2>Event Images</h2>
-    <div th:each="image : ${event.eventImages}">
-        <img th:src="${image.imgUrl}" alt="Event Image" style="width:300px; height:auto;">
+    <div class="event-images" th:each="image : ${event.eventImages}">
+        <img th:src="${image.imgUrl}" alt="Event Image">
     </div>
-
+    <div div class="event-link">
     <a href="/event/event">이벤트로</a>
+    </div>
+    </div>
 </body>
 </html>

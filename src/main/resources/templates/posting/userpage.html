@@ -7,20 +7,7 @@
 </head>
 
 <style>
-    #postTbody {
-        display: flex;
-        flex-wrap: wrap;
-    }
-    #postTbody tr {
-        display: flex;
-        flex-direction: row;
-        margin: 10px;
-    }
-    #postTbody td {
-        padding: 5px;
-    }
     #postTbody img {
-        width: 330px;
         height: auto;
         margin-right: 10px;
     }
@@ -30,44 +17,47 @@
 <div class="profile-container">
     <div class="profile-header">
         <div class="profile-image-wrapper">
-            <img src="profile-image.jpg" alt="프로필 이미지" class="profile-image">
+            <img src="/img/10cm.jpg" alt="프로필 이미지" class="profile-image">
         </div>
-        <div class="profile-info">
+        <div class="profile-info" style="width: 50px">
             <h1><span th:text="${userPage.user.userId}"></span>님의 페이지</h1>
-            <p th:text="${userPage.user.userName}"></p>
-            <p th:text="${userPage.user.userEmail}"></p>
-            <p>게시물</p>
-            <div class="follow-stats">
-                <p th:text="${userPage.countPosting}">게시물 수</p>
-                <p><a th:href="@{'/posting/{userId}/follower.do'(userId=${userPage.user.userId})}">팔로워</a></p>
-                <p th:text="${userPage.countFollowee}">팔로워 수</p>
-                <p><a th:href="@{'/posting/{userId}/followee.do'(userId=${userPage.user.userId})}">팔로우</a></p>
-                <p th:text="${userPage.countFollower}">팔로우 수</p>
+            <div class="post-section">
+                <div>
+                    <p th:text="${userPage.user.userName}"></p>
+                    <p th:text="${userPage.user.userEmail}"></p>
+                </div>
+                <div class="post-add-btn-container">
+                    <button id="postingBtn" class="post-btn">포스트</button>
+                    <a href="/posting/${USER_ID}/postAdd.do"><button class="postAddBtn">게시물 추가</button></a>
+                </div>
+            </div>
+                <div class="follow-stats" style="display: flex; justify-content: space-between; width: auto;">
+                    <p>게시물</p>
+                    <p th:text="${userPage.countPosting}">게시물 수</p>
+                    <p><a th:href="@{'/posting/{userId}/follower.do'(userId=${userPage.user.userId})}">팔로워</a></p>
+                    <p th:text="${userPage.countFollowee}">팔로워 수</p>
+                    <p><a th:href="@{'/posting/{userId}/followee.do'(userId=${userPage.user.userId})}">팔로우</a></p>
+                    <p th:text="${userPage.countFollower}">팔로우 수</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="post-section">
-        <button id="postingBtn" class="post-btn">포스트</button>
-        <div class="post-add-btn-container">
-            <a href="/posting/${USER_ID}/postAdd.do"><button id="postAddBtn">게시물 추가</button></a>
-        </div>
-        <div class="post-gallery">
-            <table id="postTable">
-                <thead>
-                <tr>
-                    <th>이미지</th>
-                    <!--                <th>내용</th>-->
-                    <!--                <th>장소태그</th>-->
-                    <!--                <th>사람태그</th>-->
-                    <!--                <th>댓글</th>-->
-                </tr>
-                </thead>
-                <tbody id="postTbody">
+        <div >
+<!--            <table id="postTable">-->
+<!--                <thead>-->
+<!--                <tr>-->
+<!--                    <th>이미지</th>-->
+<!--                    &lt;!&ndash;                <th>내용</th>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                <th>장소태그</th>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                <th>사람태그</th>&ndash;&gt;-->
+<!--                    &lt;!&ndash;                <th>댓글</th>&ndash;&gt;-->
+<!--                </tr>-->
+<!--                </thead>-->
+                <div id="postTbody" class="post-gallery">
 
-                </tbody>
-            </table>
-        </div>
+                </div>
+<!--            </table>-->
+
     </div>
 </div>
 </div>
@@ -91,7 +81,7 @@
             html+=`
                     <tr>
                         <td>
-                            <img src="${firstImage}" alt="포스팅 대표 이미지" width="330" class="clickable-image" data-post-id="${p.post_id}">
+                            <img src="${firstImage}" alt="포스팅 대표 이미지"  class="clickable-image" data-post-id="${p.post_id}">
                         </td>
                     </tr>`;
         }

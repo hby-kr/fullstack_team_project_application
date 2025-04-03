@@ -84,12 +84,12 @@ body {
 /* 포스트 섹션 */
 .post-section {
     display: flex;
-    flex-direction: column;
-    align-items: center;
+    justify-content: space-between;
 }
 
+/*포스트 버튼*/
 .post-btn {
-    background-color: #0095f6;
+    background-color: #5400A8;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -99,17 +99,9 @@ body {
     cursor: pointer;
 }
 
-.post-btn:hover {
-    background-color: #0078cc;
-}
-
-/* 게시물 추가 버튼 */
-.post-add-btn-container {
-    margin-bottom: 30px;
-}
-
-.post-add-btn {
-    background-color: #0095f6;
+/* 포스트 추가 버튼 */
+.postAddBtn {
+    background-color: #5400A8;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -118,8 +110,19 @@ body {
     cursor: pointer;
 }
 
+.postAddBtn:hover {
+    background-color: #7b4ce4;
+}
+
+/*게시물 추가 버튼*/
+.post-add-btn-container {
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
 .post-add-btn:hover {
-    background-color: #0078cc;
+    background-color: #7b4ce4;
 }
 
 /* 게시물 갤러리 */
