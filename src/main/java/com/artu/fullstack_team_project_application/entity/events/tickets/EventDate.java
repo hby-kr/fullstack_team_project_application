@@ -24,6 +24,8 @@ public class EventDate {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "date_id", nullable = false)
     private Integer dateId;
+    @Column(name = "event_id", nullable = false)
+    private Integer eventId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)

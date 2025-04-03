@@ -40,7 +40,10 @@
     <div th:each="image : ${event.eventImages}">
         <img th:src="${image.imgUrl}" alt="Event Image" style="width:300px; height:auto;">
     </div>
-
+    <h3>Event Detail Images</h3>
+    <div th:each="image : ${event.eventDetailImages}">
+        <img th:src="${image.imgUrl}" alt="Event Detail Image" style="width:300px; height:auto;">
+    </div>
     <a href="/event/event">이벤트로</a>
 </body>
 </html>

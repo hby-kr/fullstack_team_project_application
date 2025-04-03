@@ -1,6 +1,8 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
+import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
+import com.artu.fullstack_team_project_application.entity.events.tickets.EventDetailImage;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.base.Category;
 import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
@@ -19,6 +21,7 @@ import java.util.Set;
 
 @Getter
 @Setter
+@ToString
 @Entity
 @Table(name = "events")
 public class Event {
@@ -81,5 +84,11 @@ public class Event {
 
     @OneToMany(mappedBy = "event")
     private Set<EventReview> EventReview=new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "event" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private Set<EventDetailImage> EventDetailImages=new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "event")
+    private Set<EventCast> EventCast=new LinkedHashSet<>();
 
 }
