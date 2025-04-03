@@ -1,0 +1,149 @@
+/* 전체 페이지 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fafafa;
+    margin: 0;
+    padding: 0;
+}
+
+/* 컨테이너 스타일 */
+.container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* 헤더 스타일 */
+.header {
+    display: flex;
+    align-items: center;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.profile-pic {
+    margin-right: 20px;
+}
+
+.profile-image {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.profile-details {
+    flex-grow: 1;
+}
+
+.profile-details h1 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.profile-details .username {
+    font-size: 18px;
+    color: #333;
+    font-weight: 500;
+}
+
+.profile-details .email {
+    font-size: 14px;
+    color: #888;
+    margin: 5px 0;
+}
+
+.follow-info {
+    margin-top: 10px;
+    font-size: 16px;
+    color: #555;
+}
+
+.follow-info p {
+    margin: 5px 0;
+}
+
+.follow-info a {
+    color: #0095f6;
+    text-decoration: none;
+}
+
+.follow-info a:hover {
+    text-decoration: underline;
+}
+
+/* 포스트 버튼 스타일 */
+.post-btn {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.post-btn:hover {
+    background-color: #0078cc;
+}
+
+/* 게시물 추가 버튼 스타일 */
+.add-post {
+    margin-bottom: 30px;
+}
+
+.post-add-btn {
+    background-color: #0095f6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.post-add-btn:hover {
+    background-color: #0078cc;
+}
+
+/* 게시물 갤러리 스타일 */
+.post-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+th {
+    font-size: 16px;
+    padding: 10px;
+    text-align: left;
+    background-color: #f1f1f1;
+}
+
+td {
+    padding: 10px;
+}
+
+.post-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    object-fit: cover;
+}

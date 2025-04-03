@@ -78,6 +78,7 @@ public class EventReviewController {
     public String getAllReviews(Model model) {
         List<EventReview> reviews = eventReviewService.getAllEventReviews();
         model.addAttribute("reviews", reviews);
+        model.addAttribute("headerNav", "reviews");
         return "event/eventReview";
     }
 
