@@ -6,6 +6,7 @@ import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.service.postings.PostingService;
 import com.artu.fullstack_team_project_application.service.users.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,10 @@ public class PostingController {
     private final UserService userService;
 
     @GetMapping("/findAll.do")
-    public String findAll(Model model) {
+    public String findAll(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user); // 세션관리
+
         List<User> userList = userService.findAll();
         model.addAttribute("users", userList);
         model.addAttribute("headerNav", "personal");

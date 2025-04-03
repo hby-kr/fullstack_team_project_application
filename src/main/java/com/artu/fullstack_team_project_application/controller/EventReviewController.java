@@ -8,6 +8,7 @@ import com.artu.fullstack_team_project_application.repository.event.EventReviewR
 import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
 import com.artu.fullstack_team_project_application.service.event.EventReviewService;
 import com.artu.fullstack_team_project_application.service.event.EventService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,7 +35,11 @@ public class EventReviewController {
     }
 
     @GetMapping("/{eventId}")
-    public String getReviewsByEvent(@PathVariable Integer eventId, Model model) {
+    public String getReviewsByEvent(@PathVariable Integer eventId, Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user); // 세션관리
+
+
         List<EventReview> reviews = eventReviewService.getReviewsByEventId(eventId);
         model.addAttribute("reviews", reviews);
 

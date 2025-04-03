@@ -2,7 +2,6 @@ package com.artu.fullstack_team_project_application.entity.users.user;
 
 import com.artu.fullstack_team_project_application.entity.events.event.*;
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
-import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
 import com.artu.fullstack_team_project_application.entity.postings.Posting;
 import com.artu.fullstack_team_project_application.entity.postings.PostingComment;
 import com.artu.fullstack_team_project_application.entity.postings.PostingLike;
@@ -20,11 +19,9 @@ import org.hibernate.annotations.SQLDelete;
 import org.hibernate.annotations.Where;
 
 import java.io.Serializable;
-import java.time.Instant;
 import java.time.LocalDate;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Getter
 @Setter
@@ -176,7 +173,7 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonBackReference
     @ToString.Exclude
-    private Set<UserloginLog> userloginLogs = new LinkedHashSet<>();
+    private Set<UserloginLogs> userloginLogs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonBackReference

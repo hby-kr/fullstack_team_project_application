@@ -8,6 +8,7 @@ header {
 .container {
     margin: 0 auto;
     padding: 16px;
+    background: #f4ebff;
 }
 
 /* Flexbox 설정 - 로고 및 링크들을 정렬 */

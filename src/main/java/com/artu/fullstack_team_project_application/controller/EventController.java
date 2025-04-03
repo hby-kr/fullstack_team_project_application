@@ -1,7 +1,9 @@
 package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
+import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.service.event.EventServiceImp;
+import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +21,10 @@ public class EventController {
     private final EventServiceImp eventServiceImp;
 
     @GetMapping("/event")
-    public String event(Model model) {
+    public String event(Model model, HttpSession session) {
+        User user = (User) session.getAttribute("user");
+        model.addAttribute("user", user); // 세션관리
+
         List<Event> events = eventServiceImp.getAllEvents();
         model.addAttribute("events", events);
         model.addAttribute("headerNav", "events");

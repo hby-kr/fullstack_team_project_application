@@ -1,13 +1,19 @@
 package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.artu.fullstack_team_project_application.entity.users.user.UserloginLogs;
+import com.artu.fullstack_team_project_application.service.users.UserLoginLogService;
 import com.artu.fullstack_team_project_application.service.users.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.net.http.HttpRequest;
+import java.time.LocalDate;
 import java.util.Optional;
 
 @Controller
@@ -16,6 +22,7 @@ import java.util.Optional;
 public class UserController {
 
     private final UserService userService;
+    private final UserLoginLogService userLoginLogService;
 
     @GetMapping("/signIn.do")
     public String signInForm(HttpSession session) {
@@ -32,12 +39,24 @@ public class UserController {
     public String signIn(
             @RequestParam("userId") String username,
             @RequestParam("password") String password,
+            HttpServletRequest request,
             HttpSession session) {
 
         Optional<User> userOptional = userService.readOne(username);
 
         if (userOptional.isPresent() && userOptional.get().getPassword().equals(password)) {
             session.setAttribute("user", userOptional.get()); // 로그인 성공 시 세션에 사용자 정보 저장
+
+            String userAgent = request.getHeader("User-Agent");  // user-agent 가져오기
+            String ipAddress = request.getRemoteAddr();  // 클라이언트 IP 주소 가져오기
+            // 정보 가져와서 객체 생성
+            UserloginLogs userloginLogs = new UserloginLogs();
+            userloginLogs.setUserId(userOptional.get().getUserId());
+            userloginLogs.setUserAgent(userAgent);
+            userloginLogs.setIpAddress(ipAddress);
+            userloginLogs.setLoginAt(LocalDate.now());
+            userLoginLogService.save(userloginLogs); // 로그인 기록
+
             return "redirect:/";  // 로그인 후 홈 화면으로 리다이렉트
         } else {
             return "redirect:/user/signIn";
@@ -60,6 +79,9 @@ public class UserController {
             RedirectAttributes redirectAttributes
     ) throws Exception {
         System.out.println(user);
+        String pwBcrypt = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt());
+        user.setPassword(pwBcrypt);
+        user.setCreatedAt(LocalDate.now());
         User result = userService.save(user);
         // user가 null이 아니면 성공
         if (result != null) { // 성공하면, 리다이렉트 하고 user 아이디 같이 보내기
