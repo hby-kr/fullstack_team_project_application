@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -22,7 +23,7 @@ class UserLoginLogRepositoryTest {
         userloginLogs.setUserId("user1001");
         userloginLogs.setIpAddress("192.168.1.1");
         userloginLogs.setUserAgent("Mozilla/5.0");
-        userloginLogs.setLoginAt(LocalDate.now());
+        userloginLogs.setLoginAt(LocalDateTime.now());
         userloginLogs = userLoginLogRepository.save(userloginLogs);
     }
 }

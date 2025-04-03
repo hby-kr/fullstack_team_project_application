@@ -14,6 +14,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.http.HttpRequest;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Controller
@@ -54,7 +55,7 @@ public class UserController {
             userloginLogs.setUserId(userOptional.get().getUserId());
             userloginLogs.setUserAgent(userAgent);
             userloginLogs.setIpAddress(ipAddress);
-            userloginLogs.setLoginAt(LocalDate.now());
+            userloginLogs.setLoginAt(LocalDateTime.now());
             userLoginLogService.save(userloginLogs); // 로그인 기록
 
             return "redirect:/";  // 로그인 후 홈 화면으로 리다이렉트

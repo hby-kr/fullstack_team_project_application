@@ -2,45 +2,53 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/eventdetail.css">
     <title>Event Detail</title>
 </head>
 <body>
-    <h1>Event Detail</h1>
+<h1>Event Detail</h1>
+<div class="event-detail">
     <p>
-       id:<span th:text="${event.id}"></span>
+        id:<span th:text="${event.id}"></span>
     </p>
     <p>
-       ctgrId:<span th:text="${event.ctgrId}"></span>
+        ctgrId:<span th:text="${event.ctgrId}"></span>
     </p>
     <p>
-       title:<span th:text="${event.title}"></span>
+        title:<span th:text="${event.title}"></span>
     </p>
     <p>
-       location:<span th:text="${event.location}"></span>
+        location:<span th:text="${event.location}"></span>
     </p>
     <p>
-       address:<span th:text="${event.address}"></span>
+        address:<span th:text="${event.address}"></span>
     </p>
     <p>
-       ageLimit:<span th:text="${event.ageLimit}"></span>
+        ageLimit:<span th:text="${event.ageLimit}"></span>
     </p>
     <p>
-       howLong:<span th:text="${event.howLong}"></span>
+        howLong:<span th:text="${event.howLong}"></span>
     </p>
     <p>
-       isApproved:<span th:text="${event.isApproved}"></span>
+        isApproved:<span th:text="${event.isApproved}"></span>
     </p>
     <p>
-       isUsed:<span th:text="${event.isUsed}"></span>
+        isUsed:<span th:text="${event.isUsed}"></span>
     </p>
     <p>
-       userId:<span th:text="${event.userId}"></span>
+        userId:<span th:text="${event.userId}"></span>
     </p>
+
+
     <h2>Event Images</h2>
-    <div th:each="image : ${event.eventImages}">
-        <img th:src="${image.imgUrl}" alt="Event Image" style="width:300px; height:auto;">
+    <div class="event-images" th:each="image : ${event.eventImages}">
+        <img th:src="${image.imgUrl}" alt="Event Image">
     </div>
 
-    <a href="/event/event">이벤트로</a>
+
+    <div div class="event-link">
+        <a href="/event/event">이벤트로</a>
+    </div>
+</div>
 </body>
 </html>

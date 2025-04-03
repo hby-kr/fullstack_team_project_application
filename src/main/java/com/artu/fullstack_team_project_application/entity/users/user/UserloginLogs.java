@@ -11,6 +11,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -29,7 +30,7 @@ public class UserloginLogs {
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "login_at")
-    private LocalDate loginAt;
+    private LocalDateTime loginAt;
 
     @Column(name = "ip_address", length = 45)
     private String ipAddress;
