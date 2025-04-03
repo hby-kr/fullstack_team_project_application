@@ -36,7 +36,9 @@ public class EventReviewController {
     @GetMapping("/{eventId}")
     public String getReviewsByEvent(@PathVariable Integer eventId, Model model) {
         List<EventReview> reviews = eventReviewService.getReviewsByEventId(eventId);
+        List<EventReviewImage> images = eventReviewImageService.getImagesByEvent_EventId(eventId);
         model.addAttribute("reviews", reviews);
+        model.addAttribute("images", images);
 
         Optional<Event> eventOpt=eventService.get(eventId);
         if (eventOpt.isPresent()) {

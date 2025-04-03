@@ -16,7 +16,7 @@
         }
 
         /* 리뷰 이미지 스타일 */
-        .review-images>ul {
+        #review-images>ul {
             display: flex;
             gap: 50px;
             margin: 20px;
@@ -27,6 +27,10 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        #review-images>ul>li {
+            list-style: none;
         }
 
         .review-image-item {
@@ -160,7 +164,17 @@
 
 <h2>리뷰</h2>
 
-<h3>사진 & 동영상</h3>
+<div id="review-images">
+    <h3>사진 & 동영상</h3>
+    <ul>
+        <li class="review-image-item" th:each="image : ${images}">
+            <img th:src="@{${image.imgUrl}}" alt="공연 ID 에 따른 이미지">
+        </li>
+        <li>
+            <button class="load-more-btn">더보기</button>
+        </li>
+    </ul>
+</div>
 
 <div id="review-list">
     <h3>리뷰 리스트</h3>

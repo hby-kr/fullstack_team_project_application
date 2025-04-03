@@ -22,6 +22,11 @@ public class EventReviewImageServiceImp implements EventReviewImageService { //E
         return eventReviewImageRepository.findByReviewId(reviewId);
     } // 리뷰 ID 로 조회
 
+    @Override
+    public List<EventReviewImage> getImagesByEvent_EventId(Integer eventId) {
+        return eventReviewImageRepository.findByEvent_EventId(eventId);
+    }// 공연 ID 로 조회
+
 
     @Override
     public Optional<EventReviewImage> getImageById(Integer imageId) {

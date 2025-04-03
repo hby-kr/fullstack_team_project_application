@@ -12,7 +12,7 @@ public interface EventReviewImageRepository extends JpaRepository<EventReviewIma
 
     List<EventReviewImage> findByReviewId(Integer reviewId);
 
-    @Query("SELECT eri FROM EventReviewImage eri WHERE eri.id IN (SELECT er.id FROM EventReview er WHERE er.eventId=:eventId)")
+    @Query("SELECT eri FROM EventReviewImage eri WHERE eri.reviewId IN (SELECT er.id FROM EventReview er WHERE er.eventId=:eventId)")
     List<EventReviewImage> findByEvent_EventId(Integer eventId);
 
 }
