@@ -3,14 +3,117 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Widget List</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f7fc;
+        }
+
+
+        /* 테이블 스타일 */
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            color: white;
+            font-weight: bold;
+        }
+
+        tr>th{
+            background-color: #5400A8;
+        }
+
+        td button {
+            margin: 5px;
+            padding: 8px 15px;
+            font-size: 14px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        /* 등록 버튼 스타일 */
+        button {
+            padding: 12px 30px;
+            background-color: #5400A8;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            display: block;
+            margin: 20px auto;
+        }
+
+        button:hover {
+            background-color: #7b4ce4;
+        }
+
+        /* 수정, 삭제 버튼 스타일 */
+        td button.edit {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        td button.edit:hover {
+            background-color: #45a049;
+        }
+
+        td button.delete {
+            background-color: #f44336;
+            color: white;
+        }
+
+        td button.delete:hover {
+            background-color: #e53935;
+        }
+
+        /* 반응형 디자인 */
+        @media (max-width: 768px) {
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+
+            td button {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
+
+            button {
+                padding: 10px 20px;
+            }
+        }
+    </style>
+
     <link rel="stylesheet" href="/css/style.css">
-    <link rel="stylesheet" href="/css/headerStyle.css">
+    <link rel="stylesheet" href="/css/headerStyleSj.css">
 </head>
 <body>
-<div th:replace="~{fragments/user/header :: header}"></div>
+<div th:replace="~{fragments/user/headerSj :: headerSj}"></div>
+<div th:replace="~{fragments/homeHeader :: #homeHeader}"></div>
 
-<h1>Available Widgets</h1>
 <table>
     <thead>
     <tr>
@@ -21,6 +124,7 @@
         <th>Theme</th>
         <th>Info Name</th>
         <th>Details (JSON)</th>
+        <th>Edit/Delete</th>
     </tr>
     </thead>
     <tbody id="widget-table-body">
@@ -48,8 +152,10 @@
                     <td>${widget.widget_theme}</td>
                     <td>${widget.info_name || 'N/A'}</td>
                     <td>${JSON.stringify(widget.widget_json) || 'N/A'}</td>
-                    <button>수정</button>
-                    <button>삭제</button>
+                    <td>
+                    <button class="edit">수정</button>
+                    <button class="delete">삭제</button>
+                    </td>
                 `;
                 tableBody.appendChild(row);
             });

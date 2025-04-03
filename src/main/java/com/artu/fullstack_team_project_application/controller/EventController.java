@@ -22,6 +22,7 @@ public class EventController {
     public String event(Model model) {
         List<Event> events = eventServiceImp.getAllEvents();
         model.addAttribute("events", events);
+        model.addAttribute("headerNav", "events");
         return "event/event";
     }
     @GetMapping("/{eventId}/event")
