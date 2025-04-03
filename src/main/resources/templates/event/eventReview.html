@@ -13,20 +13,15 @@
 
 <h2>리뷰</h2>
 
-<!--<h3>사진 & 동영상</h3>-->
-<!--<div class="review-images">-->
-<!--<ul>-->
-<!--    <li th:each="image : ${reviewImages}">-->
-<!--        <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">-->
-<!--    </li>-->
-<!--</ul>-->
-<!--    <ul>-->
-<!--        <li th:each="image : ${reviewImages}">-->
-<!--            <img th:src="${image.imgUrl}" alt="리뷰 이미지">-->
-<!--        </li>-->
-<!--    </ul>-->
-<!--    <button id="load-more-images" data-event-id="${event.id}">more ></button>-->
-<!--</div>-->
+<h3>사진 & 동영상</h3>
+<div class="review-images">
+    <ul>
+        <li th:each="image : ${reviewImages}">
+            <img th:src="${image.imgUrl}" alt="리뷰 이미지">
+        </li>
+    </ul>
+    <button id="load-more-images" th:data-event-id="${event.id}">more ></button>
+</div>
 
 <div id="review-list">
     <h3>리뷰 리스트</h3>

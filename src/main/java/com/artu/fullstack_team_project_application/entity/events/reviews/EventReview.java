@@ -33,8 +33,11 @@ public class EventReview {
     @JsonBackReference // JSON 직렬화 시 순환참조 방지
     private User user;
 
+    @Column(name ="event_id")
+    private Integer eventId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 공연 한개에 속함(N:1 관계)
-    @JoinColumn(name = "event_id", nullable = false) // 외래 키 설정
+    @JoinColumn(name = "event_id", nullable = false, insertable = false, updatable = false) // 외래 키 설정
     @ToString.Exclude
     @JsonBackReference
     private Event event;
