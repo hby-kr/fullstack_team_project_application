@@ -19,6 +19,6 @@ public class EventImagesServiceImp implements EventImagesService {
     }
 
     public List<EventImage> getEventImagesByEventId(int eventId) {
-        return eventImagesRepository.findByEventId();
+        return eventImagesRepository.findByEventId(eventId);
     }
 }
