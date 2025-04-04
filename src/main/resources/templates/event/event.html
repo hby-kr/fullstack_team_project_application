@@ -63,7 +63,6 @@
             <th>is used</th>
             <th>유저 ID</th>
             <th>상세</th>
-            <th>리뷰</th>
 
         </tr>
         <tr th:each="event : ${events}">
@@ -79,7 +78,6 @@
             <td th:text="${event.isUsed}"></td>
             <td th:text="${event.userId}"></td>
             <td><a th:href="@{'/event/{id}/event'(id=${event.id})}">상세</a></td>
-            <td><a th:href="@{'/reviews/{id}'(id=${event.id})}">리뷰</a></td>
         </tr>
     </table>
 </body>
