@@ -19,7 +19,7 @@
     <h1>회원가입 페이지</h1>
     <h2>계정을 만들고 artU에 가입하세요.</h2>
 
-    <form action="/user/signUp.do" method="POST"  onsubmit="return validateForm()">
+    <form action="/user/signUp.do" method="POST"  >
         <label for="userId">아이디:
             <input type="text" id="userId" name="userId" required value="user">
             <span id="userIdMessage"></span>
@@ -201,15 +201,5 @@
         return valid; // 모든 검사 통과 시 폼 제출
     }
 </script>
-
-<!--<h3>여기서 더 필요한 작업</h3>-->
-<!--<ul>-->
-<!--    <li>아이디 중복 체크 -> 서비스, 컨트롤러 만들어서 json반환 완.</li>-->
-<!--    <li>비번 암호화</li>-->
-<!--    <li>아이디, 비번 등 정규표현식 검증 -> 정규표현식은 만들었고, 리액트 작업이 필요한 부분.</li>-->
-<!--    <li>토스같은 ui -> 리액트</li>-->
-<!--</ul>-->
-
-
 </body>
 </html>

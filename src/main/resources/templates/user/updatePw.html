@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>비밀번호 변경 - 새 비밀번호 입력</title>
+
+</head>
+<body>
+<h2>새 비밀번호를 입력하세요</h2>
+
+<form action="#"  method="post">
+    <label for="newPassword">새 비밀번호:</label>
+    <input type="password" id="newPassword" name="newPassword" required onkeyup="checkPasswords()">
+    <br><br>
+
+    <label for="confirmPassword">새 비밀번호 확인:</label>
+    <input type="password" id="confirmPassword" name="confirmPassword" required onkeyup="checkPasswords()">
+    <br><br>
+
+    <!-- 비밀번호 일치 여부 메시지 표시 -->
+    <span id="message"></span>
+    <br><br>
+
+    <button type="submit">비밀번호 변경</button>
+</form>
+
+<script>
+    // 비밀번호가 일치하는지 확인하는 함수
+    function checkPasswords() {
+        const newPassword = document.getElementById("newPassword").value;
+        const confirmPassword = document.getElementById("confirmPassword").value;
+        const message = document.getElementById("message");
+
+        // 비밀번호가 일치하면 "일치합니다" 메시지, 아니면 "일치하지 않습니다" 메시지 표시
+        if (newPassword === confirmPassword) {
+            message.style.color = "green";
+            message.textContent = "비밀번호가 일치합니다.";
+        } else {
+            message.style.color = "red";
+            message.textContent = "비밀번호가 일치하지 않습니다.";
+        }
+    }
+</script>
+
+</body>
+
+
+</html>
+

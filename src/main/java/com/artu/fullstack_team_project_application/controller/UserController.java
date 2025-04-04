@@ -12,7 +12,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.net.http.HttpRequest;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -39,13 +38,14 @@ public class UserController {
     @PostMapping("/signIn.do")
     public String signIn(
             @RequestParam("userId") String username,
-            @RequestParam("password") String password,
+            @RequestParam("typedPw") String typedPw,
             HttpServletRequest request,
             HttpSession session) {
 
         Optional<User> userOptional = userService.readOne(username);
+        String UserPw = userOptional.get().getPassword();
 
-        if (userOptional.isPresent() && userOptional.get().getPassword().equals(password)) {
+        if (userOptional.isPresent() && BCrypt.checkpw(typedPw, UserPw)) {
             session.setAttribute("user", userOptional.get()); // 로그인 성공 시 세션에 사용자 정보 저장
 
             String userAgent = request.getHeader("User-Agent");  // user-agent 가져오기
@@ -110,6 +110,9 @@ public class UserController {
     public boolean checkUserEmail(@RequestParam String UserEmail){
         return userService.checkUserEmailExists(UserEmail);
     }
+
+
+//    @PostMapping("pw/check")
 
 
 }
