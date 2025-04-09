@@ -36,8 +36,8 @@ public class EventReviewController {
 
     @GetMapping("/{eventId}")
     public String getReviewsByEvent(@PathVariable Integer eventId, Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user); // 세션관리
+        User user = (User) session.getAttribute("user"); // 브라우저가 계속 요청해도 서버에서 이 사용자가 누군지 기억 (세션관리)
+        model.addAttribute("user", user);
 
         List<EventReview> reviews = eventReviewService.getReviewsByEventId(eventId);
         List<EventReviewImage> images = eventReviewImageService.getImagesByEvent_EventId(eventId);
