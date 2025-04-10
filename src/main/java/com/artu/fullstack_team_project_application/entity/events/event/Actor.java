@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
 import com.artu.fullstack_team_project_application.entity.users.user.UserImg;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,13 +23,14 @@ public class Actor {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id", nullable = false)
     private Integer id;
-
+    @Column(name ="prf_img_id",nullable = false)
+    private Integer prfImgId;
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "prf_img_id", nullable = false)
+    @JoinColumn(name = "prf_img_id", insertable = false, updatable = false)
     private UserImg prfImg;
 
     @Column(name = "bday", nullable = false)
@@ -43,9 +45,13 @@ public class Actor {
     private Integer isJoined;
 
     @OneToMany(mappedBy = "actor")
-    private Set<ActorsImage> actorsImages = new LinkedHashSet<>();
+    //@ToString.Exclude
+    //@JsonBackReference
+    private Set<ActorsImage> actorsImage = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "actor")
+    //@ToString.Exclude
+    //@JsonBackReference
     private Set<EventCast> eventCasts = new LinkedHashSet<>();
 
 }

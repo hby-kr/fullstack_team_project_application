@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,13 +21,17 @@ public class ActorsImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "img_id", nullable = false)
     private Integer id;
+    @Column(name = "actor_id", nullable = false)
+    private Integer actor_id;
 
     @Column(name = "img_url", nullable = false)
     private String imgUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "actor_id", nullable = false)
+    @JoinColumn(name = "actor_id", insertable = false, updatable = false)
+    @ToString.Exclude
+    @JsonBackReference
     private Actor actor;
 
     @ColumnDefault("CURRENT_TIMESTAMP")

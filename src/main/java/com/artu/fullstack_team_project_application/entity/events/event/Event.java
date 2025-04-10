@@ -66,13 +66,13 @@ public class Event {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false,insertable = false, updatable = false)
-    @ToString.Exclude
+    //@ToString.Exclude
     @JsonBackReference
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ctgr_id", nullable = false,insertable = false, updatable = false)
-    @ToString.Exclude
+    //@ToString.Exclude
     @JsonBackReference
     private Category ctgr;
 

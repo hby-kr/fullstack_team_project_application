@@ -10,7 +10,6 @@ import java.util.List;
 
 @Service
 public class EventDetailImageServiceImp implements EventDetailImageService {
-    @Autowired
     private final EventDetailImageRepository eventDetailImageRepository;
 
     public EventDetailImageServiceImp(EventDetailImageRepository eventDetailImageRepository) {

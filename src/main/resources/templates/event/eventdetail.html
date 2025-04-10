@@ -45,8 +45,19 @@
         <img th:src="${image.imgUrl}" alt="Event Image">
     </div>
 
+    <h3>Event Detail Image</h3>
+    <div class="event-detail-images" th:each="image : ${event.eventDetailImages}">
+        <img th:src="${image.imgUrl}" alt="Event Detail Image">
+    </div>
 
-    <div div class="event-link">
+    <h4>Actors Images</h4>
+    <div class="actors-images" th:each="image : ${actors.actorsImages}">
+        <img th:src="${image.imgUrl}" alt="Actor Image">
+    </div>
+
+
+
+    <div class="event-link">
         <a href="/event/event">이벤트로</a>
     </div>
 </div>

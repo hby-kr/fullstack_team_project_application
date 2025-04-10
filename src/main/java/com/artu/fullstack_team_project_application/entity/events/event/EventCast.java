@@ -22,21 +22,22 @@ public class EventCast {
     private Integer user_id;
     @Column(name = "event_id", nullable = false)
     private Integer event_id;
-
+    @Column(name = "actor_id",nullable = false)
+    private Integer actor_id;
     @Column(name = "is_joined", nullable = false)
     private Boolean isJoined = false;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @JoinColumn(name = "event_id", insertable = false, updatable = false)
-    @ToString.Exclude
+    //@ToString.Exclude
     @JsonBackReference
     private Event event;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.SET_NULL)
     @JoinColumn(name = "user_id",insertable = false, updatable = false)
-    @ToString.Exclude
+    //@ToString.Exclude
     @JsonBackReference
     private User user;
 
@@ -50,10 +51,9 @@ public class EventCast {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "actor_id")
-    @ToString.Exclude
-    @JsonBackReference
-
+    @JoinColumn(name = "actor_id", insertable = false, updatable = false)
+    //@ToString.Exclude
+    //@JsonBackReference
     private Actor actor;
 
 

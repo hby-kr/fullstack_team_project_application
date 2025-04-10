@@ -21,9 +21,12 @@ public class UserImg {
     @Column(name = "prf_img_url", nullable = false)
     private String prfImgUrl;
 
+    @Column(name = "user_id" , nullable = false)
+    private Integer userId;
+
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     private User user;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
