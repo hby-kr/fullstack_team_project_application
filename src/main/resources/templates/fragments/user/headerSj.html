@@ -15,12 +15,12 @@
 
             <div class="flex">
                 <!-- 로그인된 유저 정보가 있을 때만 유저명과 로그아웃 버튼 표시 -->
-                <div class="user-info" th:if="${user != null}">
-                    <span th:text="'안녕하세요, ' + ${user.userName} + '님!'"></span>
+                <div class="user-info" th:if="${session.user != null}">
+                    <span th:text="'안녕하세요, ' + ${session.user?.userName} + '님!'"></span>
                     <a href="/user/signOut.do">로그아웃</a>
                 </div>
                 <!-- 로그인되지 않은 경우에는 로그인 링크 표시 -->
-                <div class="login-link" th:if="${user == null}">
+                <div class="login-link" th:if="${session.user == null}">
                     <a href="/user/signIn.do">로그인</a>
                 </div>
             </div>

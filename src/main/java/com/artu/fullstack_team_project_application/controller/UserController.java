@@ -25,15 +25,13 @@ public class UserController {
     private final UserLoginLogService userLoginLogService;
 
     @GetMapping("/signIn.do")
-    public String signInForm(HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) { // 세션에 사용자 정보가 있으면 마이페이지로 리다이렉트
-            // return "redirect:/user/mypage";  // 마이페이지로 리다이렉트
-            return "redirect:/posting/" + user.getUserId() +"/userpage.do";  // 마이페이지로 리다이렉트
+    public String signInForm( @SessionAttribute(required = false) User user) {
+        if (user != null) { // 세션에 사용자 정보가 있으면, 마이페이지로 리다이렉트
+            return "redirect:/posting/" + user.getUserId() +"/userpage.do";
         }
-        // 세션에 사용자 정보가 없으면 로그인 페이지로 이동
-        return "/user/signIn";  // 로그인 페이지
+        return "/user/signIn";  // 세션에 사용자 정보가 없어야지 로그인 페이지로 이동
     }
+
 
     @PostMapping("/signIn.do")
     public String signIn(
@@ -45,18 +43,19 @@ public class UserController {
         Optional<User> userOptional = userService.readOne(username);
         String UserPw = userOptional.get().getPassword();
 
-        if (userOptional.isPresent() && BCrypt.checkpw(typedPw, UserPw)) {
-            session.setAttribute("user", userOptional.get()); // 로그인 성공 시 세션에 사용자 정보 저장
+        if (userOptional.isPresent() && BCrypt.checkpw(typedPw, UserPw)) { // 사용자 확인 성공하면,
+            // 세션에 사용자 정보 저장
+            session.setAttribute("user", userOptional.get());
 
+            // 로그인 로그 기록 저장
             String userAgent = request.getHeader("User-Agent");  // user-agent 가져오기
             String ipAddress = request.getRemoteAddr();  // 클라이언트 IP 주소 가져오기
-            // 정보 가져와서 객체 생성
-            UserloginLogs userloginLogs = new UserloginLogs();
+            UserloginLogs userloginLogs = new UserloginLogs(); // 정보 넣을 객체 생성
             userloginLogs.setUserId(userOptional.get().getUserId());
             userloginLogs.setUserAgent(userAgent);
             userloginLogs.setIpAddress(ipAddress);
             userloginLogs.setLoginAt(LocalDateTime.now());
-            userLoginLogService.save(userloginLogs); // 로그인 기록
+            userLoginLogService.save(userloginLogs); // 로그인 로그 기록
 
             return "redirect:/";  // 로그인 후 홈 화면으로 리다이렉트
         } else {
@@ -65,8 +64,7 @@ public class UserController {
     }
 
     @GetMapping("/signUp.do")
-    public String signUpForm(HttpSession session) {
-        User user = (User) session.getAttribute("user");
+    public String signUpForm( @SessionAttribute(required = false) User user) {
         if (user != null) { // 세션에 사용자 정보가 있으면 마이페이지로 리다이렉트
             return "redirect:/user/mypage";  // 마이페이지로 리다이렉트
         }
