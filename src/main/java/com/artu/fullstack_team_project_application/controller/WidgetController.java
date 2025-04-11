@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.service.widgets.WidgetService;
+import lombok.ToString;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +11,8 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/widgets")
+@ToString
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class WidgetController {
 
     private final WidgetService widgetService;
