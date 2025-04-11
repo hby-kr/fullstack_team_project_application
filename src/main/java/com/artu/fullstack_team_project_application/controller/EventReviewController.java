@@ -105,19 +105,20 @@ public class EventReviewController {
             @RequestParam("rate") Integer rate,
             @RequestParam("contents") String contents,
             @RequestParam(value = "file", required = false) MultipartFile file,
-            Principal principal
+            HttpSession session
     ) {
         try {
-            String userId = principal.getName(); // 로그인된 사용자 ID
+            User user = (User) session.getAttribute("user"); // 로그인된 사용자 ID
+            if (user == null) {
+                return ResponseEntity.status(401).body("로그인이 필요합니다.");
+            }
 
             // 1. 리뷰 저장
             EventReview review = new EventReview();
             review.setEvent(new Event() {{
                 setId(eventId);
             }});
-            review.setUser(new User() {{
-                setUserId(userId);
-            }});
+            review.setUser(user);
             review.setRate(rate);
             review.setContents(contents);
             review.setCreatedAt(java.time.LocalDateTime.now());
@@ -142,7 +143,7 @@ public class EventReviewController {
                 eventReviewImageService.saveImage(image);
             }
 
-            return ResponseEntity.ok("리뷰+이미지 등록 완료");
+            return ResponseEntity.ok("리뷰 등록 완료");
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(500).body("등록 실패");
