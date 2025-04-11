@@ -1,7 +1,7 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
 import com.artu.fullstack_team_project_application.entity.users.user.UserImg;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,39 +19,34 @@ import java.util.Set;
 @Entity
 @Table(name = "actors")
 public class Actor {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "actor_id", nullable = false)
     private Integer id;
-    @Column(name ="prf_img_id",nullable = false)
-    private Integer prfImgId;
+
     @Column(name = "name", nullable = false, length = 50)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "prf_img_id", insertable = false, updatable = false)
+    @JoinColumn(name = "prf_img_id", nullable = false)
+    @ToString.Exclude
     private UserImg prfImg;
 
     @Column(name = "bday", nullable = false)
     private LocalDate bday;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "agency_id", nullable = false)
+    @ToString.Exclude
     private Agency agency;
 
     @Column(name = "is_joined", nullable = false)
     private Integer isJoined;
 
-    @OneToMany(mappedBy = "actor")
-    //@ToString.Exclude
-    //@JsonBackReference
+    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
     private Set<ActorsImage> actorsImage = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "actor")
-    //@ToString.Exclude
-    //@JsonBackReference
+    @OneToMany(mappedBy = "actor", fetch = FetchType.LAZY)
     private Set<EventCast> eventCasts = new LinkedHashSet<>();
-
 }

@@ -15,47 +15,35 @@ import org.hibernate.annotations.OnDeleteAction;
 @Entity
 @Table(name = "event_cast")
 public class EventCast {
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cast_id", nullable = false)
     private Integer id;
-    @Column(name = "user_id", nullable = false)
-    private Integer user_id;
-    @Column(name = "event_id", nullable = false)
-    private Integer event_id;
-    @Column(name = "actor_id",nullable = false)
-    private Integer actor_id;
+
     @Column(name = "is_joined", nullable = false)
     private Boolean isJoined = false;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-    @JoinColumn(name = "event_id", insertable = false, updatable = false)
-    //@ToString.Exclude
-    @JsonBackReference
-    private Event event;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @OnDelete(action = OnDeleteAction.SET_NULL)
-    @JoinColumn(name = "user_id",insertable = false, updatable = false)
-    //@ToString.Exclude
-    @JsonBackReference
-    private User user;
-
-    
     @Column(name = "actor_role", nullable = false)
     private String actorRole;
 
-    
     @Column(name = "gender", nullable = false)
     private String gender;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "event_id", nullable = false)
+    @ToString.Exclude
+    private Event event;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    @ToString.Exclude
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "actor_id", insertable = false, updatable = false)
-    //@ToString.Exclude
-    //@JsonBackReference
+    @JoinColumn(name = "actor_id", nullable = false)
+    @JsonBackReference
+    @ToString.Exclude
     private Actor actor;
-
-
-
 }
