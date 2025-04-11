@@ -110,17 +110,37 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    gap: 30px;
 }
 
-.review-right {
-    width:200px;
+.review-left {
+    flex: 1;
+}
+
+.review-right-wrap {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 15px;
+    min-width: 300px;
+}
+
+.review-image-box img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.review-actions {
     display: flex;
     flex-direction: column;
+    justify-content: flex-start;
 }
 
-.review-right img {
-    max-width:200px;
-    height: 200px;
+.review-actions a {
+    display: inline-block;
+    text-align: center;
 }
 
 /* 리뷰 작성 버튼 */

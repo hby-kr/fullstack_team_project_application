@@ -5,6 +5,7 @@ import com.artu.fullstack_team_project_application.entity.events.reviews.EventRe
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.repository.event.EventReviewRepository;
+import com.artu.fullstack_team_project_application.repository.users.UserRepository;
 import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
 import com.artu.fullstack_team_project_application.service.event.EventReviewService;
 import com.artu.fullstack_team_project_application.service.event.EventService;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.security.Principal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,11 +29,13 @@ public class EventReviewController {
     private final EventService eventService;
     private final EventReviewService eventReviewService;
     private final EventReviewImageService eventReviewImageService;
+    private final UserRepository userRepository;
 
-    public EventReviewController(EventService eventService, EventReviewService eventReviewService, EventReviewImageService eventReviewImageService) {
+    public EventReviewController(EventService eventService, EventReviewService eventReviewService, EventReviewImageService eventReviewImageService, UserRepository userRepository) {
         this.eventService = eventService;
         this.eventReviewService = eventReviewService;
         this.eventReviewImageService = eventReviewImageService;
+        this.userRepository = userRepository;
     }
 
     @GetMapping("/{eventId}")
@@ -104,50 +108,49 @@ public class EventReviewController {
             @RequestParam("eventId") Integer eventId,
             @RequestParam("rate") Integer rate,
             @RequestParam("contents") String contents,
-            @RequestParam(value = "file", required = false) MultipartFile file,
-            HttpSession session
-    ) {
-        try {
-            User user = (User) session.getAttribute("user"); // 로그인된 사용자 ID
-            if (user == null) {
-                return ResponseEntity.status(401).body("로그인이 필요합니다.");
-            }
+            @RequestParam(value = "file", required = false) MultipartFile file) {
 
-            // 1. 리뷰 저장
+        try {
+            // 로그인 유저 가져오기 (세션 or Principal에서)
+            String userId = "user2001"; // 예시
+            User user = userRepository.findById(userId).orElseThrow();
+            Event event = eventService.get(eventId).orElseThrow();
+
             EventReview review = new EventReview();
-            review.setEvent(new Event() {{
-                setId(eventId);
-            }});
             review.setUser(user);
+            review.setEvent(event);
+            review.setEventId(event.getId());
             review.setRate(rate);
             review.setContents(contents);
-            review.setCreatedAt(java.time.LocalDateTime.now());
+            review.setCreatedAt(LocalDateTime.now());
             review.setIsUsed(true);
-
             EventReview savedReview = eventReviewService.registerReview(review);
 
-            // 2. 이미지 저장
-            if (file != null && !file.isEmpty()) {
-                String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-                String uploadPath = "src/main/resources/static/img/";
-                File dest = new File(uploadPath + fileName);
-                file.transferTo(dest);
+//            // 이미지 저장
+//            if (file != null && !file.isEmpty()) {
+//                String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
+//                String uploadPath = "src/main/resources/static/img/";
+//
+//                File uploadDir = new File(uploadPath);
+//                if (!uploadDir.exists()) {
+//                    uploadDir.mkdirs();
+//                }
+//
+//                file.transferTo(new File(uploadPath + fileName));
+//
+//                EventReviewImage img = new EventReviewImage();
+//                img.setEventReview(savedReview);
+//                img.setImgUrl("/img/" + fileName);
+//                eventReviewImageService.saveImage(img);
+//            }
 
-                String imgUrl = "/img/" + fileName;
-
-                EventReviewImage image = new EventReviewImage();
-                image.setEventReview(savedReview);
-                image.setImgUrl(imgUrl);
-
-                // 이미지 저장 서비스 호출
-                eventReviewImageService.saveImage(image);
-            }
-
-            return ResponseEntity.ok("리뷰 등록 완료");
+            return ResponseEntity.ok("리뷰 등록 성공");
         } catch (Exception e) {
             e.printStackTrace();
-            return ResponseEntity.status(500).body("등록 실패");
+            return ResponseEntity.status(500).body("리뷰 등록 실패");
         }
     }
+
 }
+
 

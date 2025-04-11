@@ -9,36 +9,35 @@
 <h3>공연리뷰 등록 양식</h3>
 
 <form id="registerReviewForm">
-    <p><label>공연번호<input type="text" name="eventId" th:value="${event.id}"></label></p>
-    <p><label>별점:<input type="number" name="rate" min="1" max="5" required/></label></p>
-    <br>
-    <p><label>내용:<textarea name="contents" required></textarea></label></p>
-    <br>
-    <p><label>이미지: <input type="file" name="file" accept="image/*"/></label></p>
-    <button type="submit">리뷰 등록</button>
+    <input type="text" name="eventId" value="1" />
+    <p><label>별점: <input type="number" name="rate" min="1" max="5"></label></p>
+    <p><label>내용: <textarea name="contents"></textarea></label></p>
+    <p><label>이미지: <input type="file" name="file"></label></p>
+    <button type="submit">등록</button>
 </form>
 
 <script>
-    document.getElementById("registerReviewForm").addEventListener("submit", async function (e) {
+    document.getElementById("registerReviewForm").addEventListener("submit", async function(e) {
         e.preventDefault();
+        const form = e.target;
+        const formData = new FormData(form); // 멀티파트 전송
 
-        const formData = new FormData(this);
+        const response = await fetch("/reviews/with-image", {
+            method: "POST",
+            body: formData // 주의: Content-Type 생략해야 브라우저가 자동 세팅
+        });
 
-        try {
-            const res = await fetch("/reviews/with-image", {
-                method: "POST",
-                body: formData
-            });
-
-            if (res.ok) {
-                alert("리뷰가 등록되었습니다.");
-                location.href = "/reviews/" + formData.get("eventId");
-            } else {
-                alert("리뷰 등록을 실패했습니다.");
-            }
-        } catch (err) {
-            console.error("리뷰 등록 중 오류:", err);
-            alert("에러가 발생했습니다.");
+        const msgMap = {
+            200: "리뷰 등록 성공",
+            400: "잘못된 요청",
+            500: "서버 오류"
+        };
+        if (response.status === 200) {
+            alert("리뷰 등록 성공");
+            const eventId = form.eventId.value;
+            location.href = `/reviews/${eventId}`;
+        }else{
+            alert(msgMap[response.status] || "알 수 없는 오류");
         }
     });
 </script>

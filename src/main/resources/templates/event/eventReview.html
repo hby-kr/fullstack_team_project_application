@@ -44,10 +44,17 @@
                     </div>
                         <p th:text="${review.contents}" class="review-content"></p>
                 </div>
-                <div class="review-right">
-                    <p th:each="image : ${review.eventReviewImages}">
-                        <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">
-                    </p>
+                <div class="review-right-wrap">
+                    <div class="review-image-box">
+                        <p th:each="image : ${review.eventReviewImages}">
+                            <img th:src="@{${image.imgUrl}}" alt="리뷰 이미지">
+                        </p>
+                    </div>
+                    <div class="review-actions">
+                        <a href="#" class="review-edit">수정</a>
+                        <a href="#" class="review-delete">삭제</a>
+                        <a href="#" class="review-report">신고</a>
+                    </div>
                 </div>
             </div>
         </li>
