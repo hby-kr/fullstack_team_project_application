@@ -23,7 +23,7 @@ public class Widget {
     private Integer widgetSize;
 
     @Column(name = "widget_is_used", nullable = false)
-    private Boolean widgetIsUsed = false;
+    private Boolean widgetIsUsed;
 
     @ColumnDefault("'Light'")
     @Column(name = "widget_theme", nullable = false)

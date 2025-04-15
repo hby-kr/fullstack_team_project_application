@@ -19,24 +19,23 @@ class WidgetServiceTest {
         user.setUserId("user1001");
 
         // 새 Widget 생성 테스트
-        Widget widget = widgetService.createWidget(6, user, 2, "Dark");
+        Widget widget = widgetService.createWidget(6, user, 3, true, "Light");
         assertNotNull(widget);
         assertEquals(6, widget.getId());
-        assertEquals("Dark", widget.getWidgetTheme());
-        assertEquals(2, widget.getWidgetSize());
+        assertEquals("Light", widget.getWidgetTheme());
+        assertEquals(3, widget.getWidgetSize());
         assertEquals("user1001", widget.getUser().getUserId());
     }
 
     @Test
     void deleteWidgetByIdTest() {
-        // 위젯 삭제 테스트 (위젯 ID가 데이터베이스에 존재한다고 가정)
-        Integer widgetId = 6;
+        User user = new User();
+        user.setUserId("user1001");
 
-        // 위젯 삭제 시 예외가 발생하지 않아야 함
-        assertDoesNotThrow(() -> widgetService.deleteWidgetById(widgetId));
+        Widget widget = widgetService.createWidget(100, user, 1, true, "Light");
+        widgetService.deleteWidgetById(widget.getId());
 
-        // 삭제 후 존재 여부 검증
-        assertThrows(IllegalArgumentException.class, () -> widgetService.deleteWidgetById(widgetId));
+        assertThrows(IllegalArgumentException.class, () -> widgetService.findWidgetById(widget.getId()));
     }
 
 
@@ -51,7 +50,7 @@ class WidgetServiceTest {
 
     @Test
     void findWidgetsByUserIdAndUsed() {
-        List<Widget> widgets = widgetService.findWidgetsByUserIdAndUsed("user1");
+        List<Widget> widgets = widgetService.findWidgetsByUserIdAndUsed("user1001");
         System.out.println("Widgets: " + widgets);
     }
 
@@ -90,7 +89,12 @@ class WidgetServiceTest {
 
     @Test
     void findWidgetIdByWidgetSizeAndUserId() {
-        Integer widgetId = widgetService.findWidgetIdByWidgetSizeAndUserId(1, "user1001");
-        System.out.println("Found WidgetId: " + widgetId);
+        User user = new User();
+        user.setUserId("user1001");
+
+        Widget widget = widgetService.createWidget(101, user, 1, true, "Dark");
+        List<Integer> widgetId = widgetService.findWidgetIdByWidgetSizeAndUserId(1, "user1001");
+
+        assertTrue(widgetId.contains(101));
     }
 }

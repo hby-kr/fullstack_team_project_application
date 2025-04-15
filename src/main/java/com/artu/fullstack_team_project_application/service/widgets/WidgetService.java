@@ -46,11 +46,12 @@ public class WidgetService {
     }
 
     // 위젯 새로 생성
-    public Widget createWidget(Integer id, User user, Integer widgetSize, String widgetTheme) {
+    public Widget createWidget(Integer id, User user, Integer widgetSize, Boolean widgetIsUsed, String widgetTheme) {
         Widget widget = new Widget();
         widget.setId(id);
         widget.setUser(user);
         widget.setWidgetSize(widgetSize);
+        widget.setWidgetIsUsed(widgetIsUsed);
         widget.setWidgetTheme(widgetTheme);
         widget.setWidgetIsUsed(false); // 기본값 설정
         return widgetRepository.save(widget); // 저장 후 반환
@@ -111,7 +112,11 @@ public class WidgetService {
     }
 
     // 특정 userId와 widgetSize 로 관련된 widgetId 값을 모두 반환
-    public Integer findWidgetIdByWidgetSizeAndUserId(Integer widgetSize, String userId) {
-        return widgetRepository.findWidgetIdByWidgetSizeAndUserId(widgetSize, userId);
+    public List<Integer> findWidgetIdByWidgetSizeAndUserId(Integer widgetSize, String userId) {
+        List<Integer> widgetId = widgetRepository.findWidgetIdByWidgetSizeAndUserId(widgetSize, userId);
+        if (widgetId == null) {
+            throw new IllegalArgumentException("Widget not found with the given widgetSize");
+        }
+        return widgetId;
     }
 }

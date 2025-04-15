@@ -38,7 +38,7 @@ public interface WidgetRepository extends JpaRepository<Widget, Integer> {
     Integer findWidgetSizeByWidgetIdAndUserId(@Param("widgetId") Integer widgetId, @Param("userId") String userId);
 
     @Query("SELECT w.id FROM Widget w WHERE w.widgetSize = :widgetSize AND w.user.userId = :userId")
-    Integer findWidgetIdByWidgetSizeAndUserId(@Param("widgetSize") Integer widgetSize, @Param("userId") String userId);
+    List<Integer> findWidgetIdByWidgetSizeAndUserId(@Param("widgetSize") Integer widgetSize, @Param("userId") String userId);
 }
 
 
