@@ -23,16 +23,12 @@ public class WidgetDetailService {
         return widgetDetailRepository.findWidgetJsonByUserIdAndWidgetId(userId, widgetId);
     }
 
-    public Integer findWidgetIdByInfoName(String infoName) {
-        return widgetDetailRepository.findWidgetIdByInfoName(infoName);
-    }
-
     public Map<String, Object> getDetailsForWidget(Integer widgetId) {
         Map<String, Object> detailsMap = new HashMap<>();
         List<WidgetDetail> widgetDetails = widgetDetailRepository.findByWidgetId(widgetId);
 
         for (WidgetDetail detail : widgetDetails) {
-            detailsMap.put("info_name", detail.getInfoName());
+            detailsMap.put("info_name", detail.getWidgetContent());
             detailsMap.put("widget_json", detail.getWidgetJson());
         }
 

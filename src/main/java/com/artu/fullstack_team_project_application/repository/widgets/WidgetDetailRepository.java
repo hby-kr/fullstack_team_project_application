@@ -14,8 +14,4 @@ public interface WidgetDetailRepository extends JpaRepository<WidgetDetail, Inte
 
     @Query("SELECT wd.widgetJson FROM WidgetDetail wd WHERE wd.user.userId = :userId AND wd.widgetId.id = :widgetId")
     Map<String, Object> findWidgetJsonByUserIdAndWidgetId(@Param("userId") String userId, @Param("widgetId") Integer widgetId);
-
-    @Query("SELECT wd.widgetId.id FROM WidgetDetail wd WHERE wd.infoName = :infoName")
-    Integer findWidgetIdByInfoName(@Param("infoName") String infoName);
-
 }

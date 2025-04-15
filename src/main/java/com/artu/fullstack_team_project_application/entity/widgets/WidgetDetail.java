@@ -26,14 +26,10 @@ public class WidgetDetail {
     @JoinColumn(name = "widget_id", nullable = false)
     private Widget widgetId;
 
-    @Column(name = "info_name", nullable = false, length = 50)
-    private String infoName;
+    @Column(name = "widget_content", nullable = false, length = 50)
+    private String widgetContent;
 
     @Column(name = "widget_json")
     @JdbcTypeCode(SqlTypes.JSON)
     private Map<String, Object> widgetJson;
-
-    @Column(name = "is_used")
-    @JoinColumn(name = "is_used")
-    private Boolean isUsed;
 }

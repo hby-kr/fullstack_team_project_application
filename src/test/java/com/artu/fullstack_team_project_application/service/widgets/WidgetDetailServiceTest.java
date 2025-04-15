@@ -21,11 +21,4 @@ class WidgetDetailServiceTest {
         assertNotNull(widgetJson);
         System.out.println("Widget JSON: " + widgetJson);
     }
-
-    @Test
-    void findWidgetIdByInfoName() {
-        Integer widgetId = widgetDetailService.findWidgetIdByInfoName("Calendar Info");
-        System.out.println("Found widget_id: " + widgetId);
-    }
-
 }
