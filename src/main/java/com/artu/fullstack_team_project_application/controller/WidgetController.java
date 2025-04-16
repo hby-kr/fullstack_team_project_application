@@ -1,7 +1,6 @@
 package com.artu.fullstack_team_project_application.controller;
 
-import com.artu.fullstack_team_project_application.service.widgets.WidgetService;
-import lombok.ToString;
+import com.artu.fullstack_team_project_application.service.widgets.WidgetDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -11,66 +10,62 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("/api/widgets")
-@ToString
 @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
 public class WidgetController {
 
-    private final WidgetService widgetService;
+    private final WidgetDetailService widgetDetailService;
 
     @Autowired
-    public WidgetController(WidgetService widgetService) {
-        this.widgetService = widgetService;
+    public WidgetController(WidgetDetailService widgetDetailService) {
+        this.widgetDetailService = widgetDetailService;
     }
 
-    @PutMapping("/{widgetId}/used")
-    public ResponseEntity<String> markWidgetAsUsed(@PathVariable Integer widgetId, @RequestParam String userId) {
-        boolean isUpdated = widgetService.setWidgetUsedTrue(widgetId, userId);
-        if (isUpdated) {
-            return ResponseEntity.ok("위젯 등록 성공");
-        } else {
-            return ResponseEntity.badRequest().body("위젯 등록 실패");
-        }
+    // 사용자별 위젯 조회
+    @GetMapping("/used")
+    public ResponseEntity<List<Map<String, Object>>> getUsedWidgetsByUserId(@RequestParam String userId) {
+        List<Map<String, Object>> results = widgetDetailService.getUserWidgets(userId);
+        return ResponseEntity.ok(results);
     }
 
-    @PutMapping("/{widgetId}/unused")
-    public ResponseEntity<String> markWidgetAsUnused(@PathVariable Integer widgetId, @RequestParam String userId) {
-        boolean isUpdated = widgetService.setWidgetUsedFalse(widgetId, userId);
-        if (isUpdated) {
-            return ResponseEntity.ok("위젯 비등록 성공");
-        } else {
-            return ResponseEntity.badRequest().body("위젯 비등록 실패");
-        }
-    }
-
-    @GetMapping("/by-theme")
-    public ResponseEntity<List<Integer>> getWidgetIdsByTheme(@RequestParam String theme) {
-        List<Integer> widgetIds = widgetService.getWidgetIdsByTheme(theme);
-        return ResponseEntity.ok(widgetIds);
-    }
-
-    @GetMapping("/{widgetId}/theme")
-    public ResponseEntity<String> getWidgetTheme(@PathVariable Integer widgetId, @RequestParam String userId) {
+    // 위젯 삭제
+    @DeleteMapping("/delete/{widgetId}")
+    public ResponseEntity<String> deleteWidget(@PathVariable Integer widgetId, @RequestParam String userId) {
         try {
-            String widgetTheme = widgetService.findWidgetThemeByWidgetIdAndUserId(widgetId, userId);
-            return ResponseEntity.ok(widgetTheme);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+            widgetDetailService.deleteWidget(userId, widgetId);
+            return ResponseEntity.ok("삭제 완료");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("삭제 실패: " + e.getMessage());
         }
     }
 
-    @GetMapping("/{widgetId}/size")
-    public ResponseEntity<Integer> getWidgetSize(@PathVariable Integer widgetId, @RequestParam String userId) {
+    // 위젯 순서 업데이트
+    @PostMapping("/order")
+    public ResponseEntity<String> updateWidgetOrder(@RequestBody List<Map<String, Object>> widgetOrders) {
+        for (Map<String, Object> entry : widgetOrders) {
+            Integer widgetId = (Integer) entry.get("widget_id");
+            String userId = (String) entry.get("user_id");
+            Integer order = (Integer) entry.get("order");
+            widgetDetailService.updateWidgetOrder(userId, widgetId, order);
+        }
+        return ResponseEntity.ok("위젯 순서 저장 완료");
+    }
+
+    // 위젯 추가
+    @PostMapping("/add")
+    public ResponseEntity<String> addWidgetToUser(@RequestBody Map<String, Object> payload) {
         try {
-            Integer widgetSize = widgetService.findWidgetSizeByWidgetIdAndUserId(widgetId, userId);
-            return ResponseEntity.ok(widgetSize);
-        } catch (IllegalArgumentException e) {
-            return ResponseEntity.badRequest().body(null);
+            String userId = (String) payload.get("user_id");
+            Integer widgetId = (Integer) payload.get("widget_id");
+            widgetDetailService.addWidgetToUser(userId, widgetId);
+            return ResponseEntity.ok("위젯 추가 완료");
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body("위젯 추가 실패: " + e.getMessage());
         }
     }
 
     @GetMapping("/all")
-    public ResponseEntity<List<Map<String, Object>>> getAllWidgetsWithDetails() {
-        List<Map<String, Object>> widgetDetails = widgetService.getAllWidgetsWithDetails();
-        return ResponseEntity.ok(widgetDetails);
+    public ResponseEntity<List<Map<String, Object>>> getAllWidgets() {
+        List<Map<String, Object>> widgets = widgetDetailService.getAllWidgets();
+        return ResponseEntity.ok(widgets);
     }
 }

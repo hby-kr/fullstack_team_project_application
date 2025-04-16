@@ -6,26 +6,19 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 
-@Getter
-@Setter
+import java.util.List;
+
 @Entity
 @Table(name = "widgets")
+@Getter @Setter
 public class Widget {
     @Id
-    @Column(name = "widget_id", nullable = false)
+    @Column(name = "widget_id")
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @Column(name = "widget_size", nullable = false)
     private Integer widgetSize;
 
-    @Column(name = "widget_is_used", nullable = false)
-    private Boolean widgetIsUsed;
-
-    @ColumnDefault("'Light'")
     @Column(name = "widget_theme", nullable = false)
-    private String widgetTheme = "Light";
+    private String widgetTheme;
 }

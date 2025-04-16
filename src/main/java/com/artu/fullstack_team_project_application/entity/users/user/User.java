@@ -180,10 +180,10 @@ public class User implements Serializable {
     @ToString.Exclude
     private Set<WidgetDetail> widgetDetails = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
-    @ToString.Exclude
-    private Set<Widget> widgets = new LinkedHashSet<>();
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+//    @JsonBackReference
+//    @ToString.Exclude
+//    private Set<Widget> widgets = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followers")

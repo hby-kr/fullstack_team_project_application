@@ -9,27 +9,29 @@ import org.hibernate.type.SqlTypes;
 
 import java.util.Map;
 
-@Getter
-@Setter
 @Entity
-@IdClass(WidgetDetail.class)
+@IdClass(WidgetDetailId.class)
 @Table(name = "widget_details")
+@Getter @Setter
 public class WidgetDetail {
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Id
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "widget_id", nullable = false)
-    private Widget widgetId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "widget_id")
+    private Widget widget;
 
-    @Column(name = "widget_content", nullable = false, length = 50)
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "widget_json")
+    private Map<String, Object> widgetJson;
+
+    @Column(name = "widget_content")
     private String widgetContent;
 
-    @Column(name = "widget_json")
-    @JdbcTypeCode(SqlTypes.JSON)
-    private Map<String, Object> widgetJson;
+    @Column(name = "widget_order")
+    private Integer widgetOrder = 0;
 }
