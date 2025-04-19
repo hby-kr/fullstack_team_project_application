@@ -44,6 +44,6 @@ public class UserInterest {
     @JoinColumn(name = "ctgr_id", nullable = false)
     @ToString.Exclude
     @JsonBackReference
-    private Category ctgr;
+    private Category category;
 
 }

@@ -7,10 +7,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface EventService {
-    List<Event> getAllEvents();
-    Optional<Event> get(int id);
-    List<Event> getEventsByCategory(int categoryId);
-    EventImage getEventWithImages(int eventId);
-    List<EventImage> getAllEventWithImages();
-    Event createEvent(Event event);
+
+    List<Event> getEventsByCategory(byte ctgrId);
+
 }

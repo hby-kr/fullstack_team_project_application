@@ -1,20 +1,24 @@
 package com.artu.fullstack_team_project_application.repository.event;
 
+import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
-class EventCastRepositoryTest {
+class EventReviewRepositoryTest {
 
     @Autowired
-    private EventCastRepository eventCastRepository;
+    EventReviewRepository eventReviewRepository;
 
     @Test
-    @Transactional
     void findByEventId() {
-        System.out.println(eventCastRepository.findByEventId(1));
+        List<EventReview> eventReview = eventReviewRepository.findByEventId(1);
+        System.out.println(eventReview);
     }
 }

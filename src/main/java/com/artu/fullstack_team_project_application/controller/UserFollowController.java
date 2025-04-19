@@ -30,7 +30,7 @@ public class UserFollowController {
     ) {
         Set<UserFollow> findByFollowerId = userService.findByFollowerId(followerId);
         Set<UserFollow> findByFolloweeId = userService.findByFolloweeId(followeeId);
-        Optional<User> userOptional = userService.findByUserId(userId);
+        Optional<User> userOptional = userService.readOne(userId); // 동일한 기능의 메서드가 있어서 하나로 통일하였습니다(by. hby)
 
 
         User user = userOptional.get();
@@ -50,7 +50,7 @@ public class UserFollowController {
     ) {
         Set<UserFollow> findByFollowerId = userService.findByFollowerId(followerId);
         Set<UserFollow> findByFolloweeId = userService.findByFolloweeId(followeeId);
-        Optional<User> userOptional = userService.findByUserId(userId);
+        Optional<User> userOptional = userService.readOne(userId);
 
 
         User user = userOptional.get();

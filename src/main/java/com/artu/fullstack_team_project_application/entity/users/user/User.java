@@ -10,6 +10,7 @@ import com.artu.fullstack_team_project_application.entity.users.base.*;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -54,6 +55,7 @@ public class User implements Serializable {
     @Column(name = "user_birth", nullable = false)
     private LocalDate userBirth;
 
+    @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -80,7 +82,7 @@ public class User implements Serializable {
     private Set<EventReview> eventReviews = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonManagedReference
     @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
@@ -199,10 +201,6 @@ public class User implements Serializable {
     @JsonBackReference
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    @JsonBackReference
-    @ToString.Exclude
-    private Set<EventCast> EventCast  = new LinkedHashSet<>();
 
 
 }

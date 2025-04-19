@@ -26,23 +26,22 @@ public interface UserService {
 
     public void delete(String userId);
 
-//    public List<UserInterest> readInterests(String userId);
-//    public List<UserInterest> saveInterests(UserInterest userInterest);
-
     // 아이디, 이메일 중복 여부 확인
     public boolean checkUserExists(String userId);
     public boolean checkUserEmailExists(String email);
 
+    public void updatePassword(String userId, String newPw);
+
+//    public List<UserInterest> readInterests(String userId);
+//    public List<UserInterest> saveInterests(UserInterest userInterest);
+
+    // ㅡㅡㅡㅡ 포스팅 관련
     UserPageDto readUserPage(String userId);
-
-
 
     // follow 수
 
     // follow 리스트
-    List<User> findAll();
+    List<User> findAll(); // 이거 약간 수정 필요해요. 유저 100만명이면 100만명 다불러 오게 될 것
     Set<UserFollow> findByFollowerId(String followerId);
     Set<UserFollow> findByFolloweeId(String followeeId);
-
-    Optional<User> findByUserId(String userId);
 }

@@ -7,14 +7,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
 class UserServiceImpTest {
     @Autowired
     UserService userService;
+
     @Test
     @Transactional
     void readUserPage() {
         UserPageDto userPageDto = new UserPageDto();
         System.out.println(userService.readUserPage("user1001"));
+    }
+
+    @Test
+    void updatePassword() {
+        userService.updatePassword("user1001", "1234");
+
     }
 }
