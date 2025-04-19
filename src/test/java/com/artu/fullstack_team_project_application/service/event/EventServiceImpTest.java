@@ -4,8 +4,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 @SpringBootTest
 class EventServiceImpTest {
 
@@ -13,7 +11,12 @@ class EventServiceImpTest {
     EventService eventService;
 
     @Test
-    void getEventsByCategory() {
-        System.out.println(eventService.getEventsByCategory((byte) 4));
+    void getEventsAllByCategory() {
+        System.out.println(eventService.getEventsAllByCategory((byte) 4));
+    }
+
+    @Test
+    void getEventById() {
+        System.out.println(eventService.getEventById(99));
     }
 }
