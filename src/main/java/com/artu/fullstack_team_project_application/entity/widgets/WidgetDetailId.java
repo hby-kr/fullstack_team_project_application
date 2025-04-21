@@ -1,12 +1,18 @@
 package com.artu.fullstack_team_project_application.entity.widgets;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.io.Serializable;
 import java.util.Objects;
 
+@Getter
+@Setter
 public class WidgetDetailId implements Serializable {
 
-    private String user;      // User 엔티티의 @Id 필드 타입과 이름에 맞게!
-    private Integer widget;   // Widget 엔티티의 @Id 필드 타입과 이름에 맞게!
+    private String user;
+    private Integer widget;
 
     public WidgetDetailId() {}
 

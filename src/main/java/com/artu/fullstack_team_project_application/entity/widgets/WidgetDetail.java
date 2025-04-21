@@ -25,13 +25,9 @@ public class WidgetDetail {
     @JoinColumn(name = "widget_id")
     private Widget widget;
 
-    @JdbcTypeCode(SqlTypes.JSON)
-    @Column(name = "widget_json")
-    private Map<String, Object> widgetJson;
-
     @Column(name = "widget_content")
     private String widgetContent;
 
     @Column(name = "widget_order")
-    private Integer widgetOrder = 0;
+    private Integer widgetOrder;
 }
