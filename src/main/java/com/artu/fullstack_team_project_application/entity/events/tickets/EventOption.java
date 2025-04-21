@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.entity.events.tickets;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,8 +21,8 @@ public class EventOption {
     private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "date_id", nullable = false)
+    @JsonBackReference
     private EventDate date;
 
     @Column(name = "opt_name", nullable = false, length = 50)
