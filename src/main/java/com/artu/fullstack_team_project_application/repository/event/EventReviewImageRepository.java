@@ -11,4 +11,6 @@ public interface EventReviewImageRepository extends JpaRepository<EventReviewIma
 
     List<EventReviewImage> findByReviewId(int reviewId);
 
+    List<EventReviewImage>findByEvent_EventId(Integer eventId);
+
 }

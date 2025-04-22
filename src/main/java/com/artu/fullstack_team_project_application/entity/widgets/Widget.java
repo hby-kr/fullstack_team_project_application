@@ -4,28 +4,26 @@ import com.artu.fullstack_team_project_application.entity.users.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
-@Getter
-@Setter
+import java.util.Map;
+
 @Entity
 @Table(name = "widgets")
+@Getter @Setter
 public class Widget {
     @Id
-    @Column(name = "widget_id", nullable = false)
+    @Column(name = "widget_id")
     private Integer id;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
 
     @Column(name = "widget_size", nullable = false)
     private Integer widgetSize;
 
-    @Column(name = "widget_is_used", nullable = false)
-    private Boolean widgetIsUsed = false;
-
-    @ColumnDefault("'Light'")
     @Column(name = "widget_theme", nullable = false)
-    private String widgetTheme = "Light";
+    private String widgetTheme;
+
+    @JdbcTypeCode(SqlTypes.JSON)
+    @Column(name = "widget_json")
+    private Map<String, Object> widgetJson;
 }

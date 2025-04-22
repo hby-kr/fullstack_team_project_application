@@ -1,62 +1,55 @@
 package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
-import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
+import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
+import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
+import com.artu.fullstack_team_project_application.entity.events.event.EventDetailImage;
+import com.artu.fullstack_team_project_application.entity.events.tickets.EventOption;
 import com.artu.fullstack_team_project_application.service.event.EventService;
-import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
-@Controller
-@RequestMapping("/event")
-@AllArgsConstructor
+@RestController
+@RequiredArgsConstructor
+@CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
+@RequestMapping("/api/events")
 public class EventController {
 
     private final EventService eventService;
 
-//
-//    @GetMapping("/event")
-//    public String event(Model model, HttpSession session) {
-//        User user = (User) session.getAttribute("user");
-//        model.addAttribute("user", user); // 세션관리
-//
-//        List<Event> events = eventService.getAllEvents();
-//        model.addAttribute("events", events);
-//        model.addAttribute("headerNav", "events");
-//        return "event/event";
-//    }
-//
-//
-//
-//    @GetMapping("/{eventId}/event")
-//    public String eventDetail(
-//            @PathVariable int eventId,
-//            Model model
-//    ) {
-//        Optional<Event> eventOpt = eventService.get(eventId);
-//        Event event = eventOpt.get();
-//        if (event == null) {
-//            return "redirect:/event/event";
-//        } else {
-//            model.addAttribute("event", event);
-//            return "event/eventdetail";
-//        }
-//    }
-//
-//
-//
-//    @GetMapping("/event/{ctgrId}")
-//    public String eventCategory(Model model, @PathVariable int ctgrId) {
-//        List<Event> events = eventService.getEventsByCategory(ctgrId);
-//        model.addAttribute("events", events);
-//        return "event/event";
-//    }
+    @GetMapping("/{eventId}")
+    public ResponseEntity<Event> getEvent(@PathVariable Integer eventId) {
+        return eventService.getEventById(eventId)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
 
+    @GetMapping("/{eventId}/dates")
+    public List<EventDate> getEventDates(@PathVariable Integer eventId) {
+        return eventService.getEventDates(eventId);
+    }
+
+    @GetMapping("/dates/{dateId}/options")
+    public List<EventOption> getOptions(@PathVariable Integer dateId) {
+        return eventService.getOptionsByDateId(dateId);
+    }
+
+    @GetMapping("/{eventId}/images")
+    public List<EventDetailImage> getEventDetailImages(@PathVariable Integer eventId) {
+        return eventService.getEventDetailImages(eventId);
+    }
+
+    @GetMapping("/{eventId}/reviews")
+    public List<EventReview> getReviews(@PathVariable Integer eventId) {
+        return eventService.getReviewsByEventId(eventId);
+    }
+
+    @GetMapping("/{eventId}/review-images")
+    public List<EventReviewImage> getReviewImages(@PathVariable Integer eventId) {
+        return eventService.getReviewImagesByEventId(eventId);
+    }
 }

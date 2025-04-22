@@ -1,35 +1,38 @@
 package com.artu.fullstack_team_project_application.controller;
-
-import com.artu.fullstack_team_project_application.entity.events.event.Event;
-import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
-import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
-import com.artu.fullstack_team_project_application.entity.users.user.User;
-import com.artu.fullstack_team_project_application.repository.event.EventReviewRepository;
-import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
-import com.artu.fullstack_team_project_application.service.event.EventReviewService;
-import com.artu.fullstack_team_project_application.service.event.EventService;
-import jakarta.servlet.http.HttpSession;
-import lombok.AllArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.security.Principal;
-import java.util.List;
-import java.util.Optional;
-
-@Controller
-@RequestMapping("/reviews")
-@AllArgsConstructor
-public class EventReviewController {
-
-    private final EventService eventService;
-    private final EventReviewService eventReviewService;
-    private final EventReviewImageService eventReviewImageService;
-
+//
+//import com.artu.fullstack_team_project_application.entity.events.event.Event;
+//import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
+//import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
+//import com.artu.fullstack_team_project_application.entity.users.user.User;
+//import com.artu.fullstack_team_project_application.repository.event.EventReviewRepository;
+//import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
+//import com.artu.fullstack_team_project_application.service.event.EventReviewService;
+//import com.artu.fullstack_team_project_application.service.event.EventService;
+//import jakarta.servlet.http.HttpSession;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.multipart.MultipartFile;
+//
+//import java.io.File;
+//import java.security.Principal;
+//import java.util.List;
+//import java.util.Optional;
+//
+//@Controller
+//@RequestMapping("/reviews")
+//public class EventReviewController {
+//
+//    private final EventService eventService;
+//    private final EventReviewService eventReviewService;
+//    private final EventReviewImageService eventReviewImageService;
+//
+//    public EventReviewController(EventService eventService, EventReviewService eventReviewService, EventReviewImageService eventReviewImageService) {
+//        this.eventService = eventService;
+//        this.eventReviewService = eventReviewService;
+//        this.eventReviewImageService = eventReviewImageService;
+//    }
 //
 //    @GetMapping("/{eventId}")
 //    public String getReviewsByEvent(@PathVariable Integer eventId, Model model, HttpSession session) {
@@ -145,5 +148,5 @@ public class EventReviewController {
 //            return ResponseEntity.status(500).body("등록 실패");
 //        }
 //    }
-}
-
+//}
+//

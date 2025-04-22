@@ -1,31 +1,28 @@
 package com.artu.fullstack_team_project_application.service.widgets;
 
+import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.artu.fullstack_team_project_application.entity.widgets.Widget;
+import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
+import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetailId;
+import com.artu.fullstack_team_project_application.repository.widgets.WidgetDetailRepository;
+import com.artu.fullstack_team_project_application.repository.widgets.WidgetRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.Map;
+import java.util.*;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class WidgetDetailServiceTest {
 
     @Autowired
+    private WidgetRepository widgetRepository;
+
+    @Autowired
+    private WidgetDetailRepository widgetDetailRepository;
+
+    @Autowired
     private WidgetDetailService widgetDetailService;
-
-    @Test
-    void testGetWidgetJsonByUserIdAndWidgetId() {
-        Map<String, Object> widgetJson = widgetDetailService.getWidgetJsonByUserIdAndWidgetId("user1", 1);
-
-        assertNotNull(widgetJson);
-        System.out.println("Widget JSON: " + widgetJson);
-    }
-
-    @Test
-    void findWidgetIdByInfoName() {
-        Integer widgetId = widgetDetailService.findWidgetIdByInfoName("Calendar Info");
-        System.out.println("Found widget_id: " + widgetId);
-    }
-
 }

@@ -1,26 +1,27 @@
-package com.artu.fullstack_team_project_application.controller;
-
-import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
-import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
-import lombok.AllArgsConstructor;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
-
-import java.io.File;
-import java.util.List;
-import java.util.Optional;
-
-@Controller
-@RequestMapping("/review-images")
-@AllArgsConstructor
-public class EventReviewImageController {
-
-    private final EventReviewImageService eventReviewImageService;
-
+//package com.artu.fullstack_team_project_application.controller;
+//
+//import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
+//import com.artu.fullstack_team_project_application.service.event.EventReviewImageService;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
+//import org.springframework.stereotype.Controller;
+//import org.springframework.ui.Model;
+//import org.springframework.web.bind.annotation.*;
+//import org.springframework.web.multipart.MultipartFile;
+//
+//import java.io.File;
+//import java.util.List;
+//import java.util.Optional;
+//
+//@Controller
+//@RequestMapping("/review-images")
+//public class EventReviewImageController {
+//
+//    private final EventReviewImageService eventReviewImageService;
+//
+//    public EventReviewImageController(EventReviewImageService eventReviewImageService) {
+//        this.eventReviewImageService = eventReviewImageService;
+//    }
 //
 //    // 특정 유저가 업로드한 리뷰 이미지 조회 (JSON 반환)
 //    @GetMapping("/user/{userId}")
@@ -78,4 +79,4 @@ public class EventReviewImageController {
 //        List<EventReviewImage> images = eventReviewImageService.getImagesByReviewId(eventId);
 //        return ResponseEntity.ok(images);
 //    }
-}
+//}

@@ -1,6 +1,8 @@
 package com.artu.fullstack_team_project_application.service.widgets;
 
+import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
+import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetailId;
 import com.artu.fullstack_team_project_application.repository.widgets.WidgetDetailRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 public class WidgetDetailService {
@@ -19,23 +22,35 @@ public class WidgetDetailService {
         this.widgetDetailRepository = widgetDetailRepository;
     }
 
-    public Map<String, Object> getWidgetJsonByUserIdAndWidgetId(String userId, Integer widgetId) {
-        return widgetDetailRepository.findWidgetJsonByUserIdAndWidgetId(userId, widgetId);
+    public List<Map<String, Object>> getUserWidgets(String userId) {
+        return widgetDetailRepository.findAllByUserIdOrderByOrder(userId).stream().map(wd -> {
+            Widget w = wd.getWidget();
+            Map<String, Object> m = new HashMap<>();
+            m.put("widget_id", w.getId());
+            m.put("widget_size", w.getWidgetSize());
+            m.put("widget_theme", w.getWidgetTheme());
+            m.put("widget_json", w.getWidgetJson());
+            return m;
+        }).collect(Collectors.toList());
     }
 
-    public Integer findWidgetIdByInfoName(String infoName) {
-        return widgetDetailRepository.findWidgetIdByInfoName(infoName);
+    public void deleteWidget(String userId, Integer widgetId) {
+        widgetDetailRepository.deleteByUserIdAndWidgetId(userId, widgetId);
     }
 
-    public Map<String, Object> getDetailsForWidget(Integer widgetId) {
-        Map<String, Object> detailsMap = new HashMap<>();
-        List<WidgetDetail> widgetDetails = widgetDetailRepository.findByWidgetId(widgetId);
+    public void updateWidgetOrder(List<Map<String, Object>> orders) {
+        orders.forEach(entry -> {
+            String userId = (String) entry.get("user_id");
+            Integer widgetId = (Integer) entry.get("widget_id");
+            Integer order = (Integer) entry.get("order");
 
-        for (WidgetDetail detail : widgetDetails) {
-            detailsMap.put("info_name", detail.getInfoName());
-            detailsMap.put("widget_json", detail.getWidgetJson());
-        }
-
-        return detailsMap;
+            WidgetDetailId id = new WidgetDetailId(userId, widgetId);
+            widgetDetailRepository.findById(id).ifPresent(wd -> {
+                wd.setWidgetOrder(order);
+                widgetDetailRepository.save(wd);
+            });
+        });
     }
 }
+
+
