@@ -3,6 +3,7 @@ package com.artu.fullstack_team_project_application.service.users;
 import com.artu.fullstack_team_project_application.dto.UserPageDto;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.artu.fullstack_team_project_application.entity.users.user.UserImg;
 import com.artu.fullstack_team_project_application.entity.users.user.UserInterest;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -35,14 +36,16 @@ public interface UserService {
 
     UserPageDto readUserPage(String userId);
 
-
-
-    // follow 수
-
     // follow 리스트
     List<User> findAll();
     Set<UserFollow> findByFollowerId(String followerId);
     Set<UserFollow> findByFolloweeId(String followeeId);
 
     Optional<User> findByUserId(String userId);
+
+    // follow 추가/삭제
+    void registerFollow(String followerId, String followeeId);
+    void removeFollow(String followerId, String followeeId);
+
+    Set<UserImg> findUserImgByUserId(String userId);
 }

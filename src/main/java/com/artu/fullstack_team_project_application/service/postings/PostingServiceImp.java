@@ -1,5 +1,6 @@
 package com.artu.fullstack_team_project_application.service.postings;
 
+import com.artu.fullstack_team_project_application.dto.PostingCommentsDto;
 import com.artu.fullstack_team_project_application.entity.postings.Posting;
 import com.artu.fullstack_team_project_application.entity.postings.PostingImage;
 import com.artu.fullstack_team_project_application.entity.postings.PostingLike;
@@ -10,9 +11,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 @Service
 @AllArgsConstructor
@@ -21,13 +20,27 @@ public class PostingServiceImp implements PostingService {
     private final PostingImageRepository postingImageRepository;
 
     @Override
-    public Posting save(Posting posting) {
-        return postingRepository.save(posting);
+    public Posting save(Posting posting)
+    {
+        Posting postingSave = new Posting();
+        postingSave.setContents(posting.getContents());
+//        postingSave.setUser(user);
+        postingSave.setPostingImages(posting.getPostingImages());
+        postingSave.setLocationTag(posting.getLocationTag());
+        postingSave.setPersonTagId(posting.getPersonTagId());
+        postingSave.setVisibilityType(posting.getVisibilityType());
+        postingSave.setCreatedAt(posting.getCreatedAt());
+
+        return postingRepository.save(postingSave);
     }
 
     @Override
-    public void remove(Posting posting) {
-        postingRepository.delete(posting);
+    public Posting delete(Posting posting){
+        Posting postingDelete = postingRepository.findById(posting.getPostId())
+                .orElseThrow(() -> new NoSuchElementException("게시글 없음"));
+
+        postingRepository.delete(postingDelete);
+        return postingDelete;
     }
 
 //    @Override
@@ -55,5 +68,11 @@ public class PostingServiceImp implements PostingService {
 //        return List.of();
 //    }
 
+    @Override
+    public Posting findByPostId(Integer postId) {
+        Posting posting = postingRepository.findByPostId(postId);
+        Set<PostingCommentsDto> postingCommentsDto = new HashSet<>();
+        return posting;
+    }
 
 }

@@ -2,16 +2,16 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/css/userpage.css">
+<!--    <link rel="stylesheet" href="/css/userpage.css">-->
     <title>개인페이지</title>
 </head>
 
-<style>
-    #postTbody img {
-        height: auto;
-        margin-right: 10px;
-    }
-</style>
+<!--<style>-->
+<!--    #postTbody img {-->
+<!--        height: auto;-->
+<!--        margin-right: 10px;-->
+<!--    }-->
+<!--</style>-->
 
 <body>
 <div class="profile-container">
@@ -19,8 +19,8 @@
         <div class="profile-image-wrapper">
             <img src="/img/10cm.jpg" alt="프로필 이미지" class="profile-image">
         </div>
-        <div class="profile-info" style="width: 50px">
-            <h1><span th:text="${userPage.user.userId}"></span>님의 페이지</h1>
+<!--        <div class="profile-info" style="width: 50px">-->
+            <h1><span th:text="${userPage.user.userName}"></span>님의 페이지</h1>
             <div class="post-section">
                 <div>
                     <p th:text="${userPage.user.userName}"></p>
@@ -31,7 +31,7 @@
                     <a href="/posting/${USER_ID}/postAdd.do"><button class="postAddBtn">게시물 추가</button></a>
                 </div>
             </div>
-                <div class="follow-stats" style="display: flex; justify-content: space-between; width: auto;">
+<!--                <div class="follow-stats" style="display: flex; justify-content: space-between; width: auto;">-->
                     <p>게시물</p>
                     <p th:text="${userPage.countPosting}">게시물 수</p>
                     <p><a th:href="@{'/posting/{userId}/follower.do'(userId=${userPage.user.userId})}">팔로워</a></p>

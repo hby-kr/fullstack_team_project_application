@@ -11,4 +11,5 @@ public class UserPageDto {
     private Long countFollowee;
     private Long countFollower;
     private Long countPosting;
+    private Long countLike;
 }

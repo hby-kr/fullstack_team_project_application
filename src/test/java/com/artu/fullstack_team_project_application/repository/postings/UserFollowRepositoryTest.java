@@ -16,13 +16,13 @@ class UserFollowRepositoryTest {
     @Test
     @Transactional
     void findByFollowerId() {
-        System.out.println(userFollowRepository.findByFollowerId("user1001"));
+        System.out.println(userFollowRepository.findByFollowerIdAndIsUsedTrue("user1001"));
     }
 
     @Test
     @Transactional
     void findByFolloweeId() {
-        System.out.println(userFollowRepository.findByFolloweeId("user1001"));
+        System.out.println(userFollowRepository.findByFolloweeIdAndIsUsedTrue("user1001"));
     }
 
     @Test
