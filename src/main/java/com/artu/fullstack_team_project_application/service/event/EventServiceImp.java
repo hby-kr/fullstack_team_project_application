@@ -69,6 +69,6 @@ public class EventServiceImp implements EventService {
     }
     @Override
     public List<EventReviewImage> getReviewImagesByEventId(Integer eventId) {
-        return eventReviewImageRepository.findByEvent_EventId(eventId);
+        return null;
     }
 }
