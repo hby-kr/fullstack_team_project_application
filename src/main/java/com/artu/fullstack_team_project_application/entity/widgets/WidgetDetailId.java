@@ -24,8 +24,7 @@ public class WidgetDetailId implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof WidgetDetailId)) return false;
-        WidgetDetailId that = (WidgetDetailId) o;
+        if (!(o instanceof WidgetDetailId that)) return false;
         return Objects.equals(user, that.user) && Objects.equals(widget, that.widget);
     }
 
