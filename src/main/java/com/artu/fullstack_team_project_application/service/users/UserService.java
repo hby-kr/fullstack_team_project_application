@@ -27,13 +27,16 @@ public interface UserService {
 
     public void delete(String userId);
 
-//    public List<UserInterest> readInterests(String userId);
-//    public List<UserInterest> saveInterests(UserInterest userInterest);
-
     // 아이디, 이메일 중복 여부 확인
     public boolean checkUserExists(String userId);
     public boolean checkUserEmailExists(String email);
 
+    public void updatePassword(String userId, String newPw);
+
+//    public List<UserInterest> readInterests(String userId);
+//    public List<UserInterest> saveInterests(UserInterest userInterest);
+
+    // ㅡㅡㅡㅡ 포스팅 관련
     UserPageDto readUserPage(String userId);
 
     // follow 리스트

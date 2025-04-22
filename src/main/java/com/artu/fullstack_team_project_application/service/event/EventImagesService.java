@@ -5,5 +5,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 public interface EventImagesService {
-    List<EventImage> getEventImagesByEventId(int eventId);
+
+
 }

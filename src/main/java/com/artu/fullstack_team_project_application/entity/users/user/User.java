@@ -12,6 +12,7 @@ import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -57,6 +58,7 @@ public class User implements Serializable {
     @Column(name = "user_birth", nullable = false)
     private LocalDate userBirth;
 
+    @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
@@ -74,31 +76,31 @@ public class User implements Serializable {
 //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ join 설정 시작
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
-    @JsonIgnore
+    @JsonBackReference
     private Set<UserEventLike> userEventLikes = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<EventReview> eventReviews = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonManagedReference
     @ToString.Exclude
     private Set<Event> events = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<Hashtag> hashtags = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "writer", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<Message> messages = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<PasswordChangeHistory> passwordChangeHistories = new LinkedHashSet<>();
 
@@ -119,27 +121,27 @@ public class User implements Serializable {
     private Set<Posting> postings = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<SearchWord> searchWords = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserCart> userCarts = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserCoupon> userCoupons = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserEnterChatroom> userEnterChatrooms = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserEventBmark> userEventBmarks = new LinkedHashSet<>();
 
@@ -154,17 +156,17 @@ public class User implements Serializable {
     private Set<UserInquire> userInquires = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserInterest> userInterests = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserPoint> userPoints = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserPurchaseList> userPurchaseLists = new LinkedHashSet<>();
 
@@ -174,17 +176,17 @@ public class User implements Serializable {
     private Set<UserSetting> userSettings = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<UserloginLogs> userloginLogs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<WidgetDetail> widgetDetails = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonIgnore
+    @JsonBackReference
     @ToString.Exclude
     private Set<Widget> widgets = new LinkedHashSet<>();
 
@@ -202,10 +204,6 @@ public class User implements Serializable {
     @JsonIgnore
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "user")
-    @JsonIgnore
-    @ToString.Exclude
-    private Set<EventCast> EventCast  = new LinkedHashSet<>();
 
 
 }

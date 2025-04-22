@@ -2,7 +2,7 @@ package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
-import com.artu.fullstack_team_project_application.service.event.EventServiceImp;
+import com.artu.fullstack_team_project_application.service.event.EventService;
 import jakarta.servlet.http.HttpSession;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,37 +18,45 @@ import java.util.Optional;
 @RequestMapping("/event")
 @AllArgsConstructor
 public class EventController {
-    private final EventServiceImp eventServiceImp;
 
-    @GetMapping("/event")
-    public String event(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user); // 세션관리
+    private final EventService eventService;
 
-        List<Event> events = eventServiceImp.getAllEvents();
-        model.addAttribute("events", events);
-        model.addAttribute("headerNav", "events");
-        return "event/event";
-    }
-    @GetMapping("/{eventId}/event")
-    public String eventDetail(
-            @PathVariable int eventId,
-            Model model
-    ){
-        Optional<Event> eventOpt= eventServiceImp.get(eventId);
-        Event event = eventOpt.get();
-        if(event==null){
-            return "redirect:/event/event";
-        }else{
-            model.addAttribute("event", event);
-            return "event/eventdetail";
-        }
-    }
-    @GetMapping("/event/{ctgrId}")
-    public String eventCategory(Model model, @PathVariable int ctgrId) {
-        List<Event> events = eventServiceImp.getEventsByCategory(ctgrId);
-        model.addAttribute("events", events);
-        return "event/event";
-    }
+//
+//    @GetMapping("/event")
+//    public String event(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        model.addAttribute("user", user); // 세션관리
+//
+//        List<Event> events = eventService.getAllEvents();
+//        model.addAttribute("events", events);
+//        model.addAttribute("headerNav", "events");
+//        return "event/event";
+//    }
+//
+//
+//
+//    @GetMapping("/{eventId}/event")
+//    public String eventDetail(
+//            @PathVariable int eventId,
+//            Model model
+//    ) {
+//        Optional<Event> eventOpt = eventService.get(eventId);
+//        Event event = eventOpt.get();
+//        if (event == null) {
+//            return "redirect:/event/event";
+//        } else {
+//            model.addAttribute("event", event);
+//            return "event/eventdetail";
+//        }
+//    }
+//
+//
+//
+//    @GetMapping("/event/{ctgrId}")
+//    public String eventCategory(Model model, @PathVariable int ctgrId) {
+//        List<Event> events = eventService.getEventsByCategory(ctgrId);
+//        model.addAttribute("events", events);
+//        return "event/event";
+//    }
 
 }

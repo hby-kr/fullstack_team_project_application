@@ -9,16 +9,12 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
+@AllArgsConstructor
 public class EventImagesServiceImp implements EventImagesService {
 
     @Autowired
     private final EventImagesRepository eventImagesRepository;
 
-    public  EventImagesServiceImp(EventImagesRepository eventImagesRepository) {
-        this.eventImagesRepository = eventImagesRepository;
-    }
 
-    public List<EventImage> getEventImagesByEventId(int eventId) {
-        return eventImagesRepository.findByEventId(eventId);
-    }
+
 }

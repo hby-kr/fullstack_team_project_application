@@ -1,20 +1,18 @@
 package com.artu.fullstack_team_project_application.entity.events.event;
 
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
-import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
-import com.artu.fullstack_team_project_application.entity.events.tickets.EventDetailImage;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.base.Category;
 import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.hibernate.annotations.ColumnDefault;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.LinkedHashSet;
 import java.util.Set;
@@ -25,6 +23,7 @@ import java.util.Set;
 @Entity
 @Table(name = "events")
 public class Event {
+
     @Id
     @Column(name = "event_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,14 +42,13 @@ public class Event {
     private String address;
 
     @Column(name = "how_long", nullable = false)
-    private Integer howLong;
+    private int howLong;
 
     @Column(name = "ctgr_id", nullable = false)
-    private Byte ctgrId;
-
+    private byte ctgrId;
 
     @Column(name = "age_limit", nullable = false)
-    private String ageLimit;
+    private int ageLimit;
 
     @Column(name = "user_id", nullable = false)
     private String userId;
@@ -63,32 +61,54 @@ public class Event {
     @Column(name = "is_used", nullable = false)
     private Boolean isUsed = false;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "user_id", nullable = false,insertable = false, updatable = false)
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
     @ToString.Exclude
     @JsonBackReference
+    @JsonIgnore
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "ctgr_id", nullable = false,insertable = false, updatable = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @JoinColumn(name = "ctgr_id", insertable = false, updatable = false)
     @ToString.Exclude
-    @JsonBackReference
-    private Category ctgr;
+    @JsonBackReference // 자식의 엔터에서 부모와 관계를 적은 필드에 @JsonBackReference를 사용함.
+    // @JsonIgnore
+    private Category category;
+
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
     @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
-    private Set<EventDate>eventDates=new LinkedHashSet<>();
+    @ToString.Exclude
+    @JsonManagedReference // 부모 엔터티에서 자식 엔티티를 담는 필드에 @JsonManagedReference를 사용함.
+    // 부모와 자식관계는 일대다의 관계로 만들어질 수 있다. 여기서도 일대다의 관계의 관계이고.
+    private Set<EventImage> eventImages = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "event")
-    private Set<EventImage> EventImages=new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "event")
-    private Set<EventReview> EventReview=new LinkedHashSet<>();
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonManagedReference
+    private Set<EventDetailImage> eventDetailImages = new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "event" ,cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<EventDetailImage> EventDetailImages=new LinkedHashSet<>();
 
-    @OneToMany(mappedBy = "event")
-    private Set<EventCast> EventCast=new LinkedHashSet<>();
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonManagedReference
+    private Set<EventReview> eventReview = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonManagedReference
+    private Set<EventCast> eventCast = new LinkedHashSet<>();
+
+
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    @OneToMany(mappedBy = "event", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    @JsonManagedReference
+    @JsonIgnore
+    private Set<EventDate> eventDates = new LinkedHashSet<>();
+
 
 }

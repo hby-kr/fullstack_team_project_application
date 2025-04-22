@@ -11,7 +11,10 @@ import com.artu.fullstack_team_project_application.repository.postings.PostingRe
 import com.artu.fullstack_team_project_application.repository.postings.UserFollowRepository;
 import com.artu.fullstack_team_project_application.repository.users.UserImageRepository;
 import com.artu.fullstack_team_project_application.repository.users.UserRepository;
+import com.artu.fullstack_team_project_application.service.postings.PostingService;
+import jakarta.persistence.EntityManager;
 import lombok.AllArgsConstructor;
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -30,6 +33,7 @@ public class UserServiceImp implements UserService {
     private final PostingRepository postingRepository;
     private final PostingLikeRepository postingLikeRepository;
     private final UserImageRepository userImageRepository;
+    private final EntityManager entityManager;
 
     @Override
     public Page<User> readAll(Pageable pageable) {
@@ -49,16 +53,6 @@ public class UserServiceImp implements UserService {
     @Override
     public void delete(String userId) {
     }
-//
-//    @Override
-//    public List<UserInterest> readInterests(String userId) {
-//        return List.of();
-//    }
-//
-//    @Override
-//    public List<UserInterest> saveInterests(UserInterest userInterest) {
-//        return List.of();
-//    }
 
     @Override
     public boolean checkUserExists(String userId) {
@@ -68,6 +62,20 @@ public class UserServiceImp implements UserService {
     @Override
     public boolean checkUserEmailExists(String email) {
         return userRepository.existsByUserEmail(email);
+    }
+
+    @Override
+    @Transactional
+    public void updatePassword(String userId, String newPw) {
+
+        // 영속성 컨텍스트에서 해당 사용자 찾기
+        User existingUser = entityManager.find(User.class, userId);
+        if (existingUser == null) {
+            throw new IllegalArgumentException("사용자가 존재하지 않음");
+        }
+
+        existingUser.setPassword(BCrypt.hashpw(newPw, BCrypt.gensalt()));  // 새로운 비밀번호로 변경
+        entityManager.merge(existingUser);         // 엔티티 업데이트 (merge)
     }
 
     @Override
@@ -91,6 +99,18 @@ public class UserServiceImp implements UserService {
         return null;
     }
 
+
+
+//
+//    @Override
+//    public List<UserInterest> readInterests(String userId) {
+//        return List.of();
+//    }
+//
+//    @Override
+//    public List<UserInterest> saveInterests(UserInterest userInterest) {
+//        return List.of();
+//    }
 
     @Override
     public List<User> findAll() {
