@@ -13,13 +13,13 @@ import java.util.Optional;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/event")
-@CrossOrigin(value = "http://localhost:5713") // 리소스 쉐어를 허용하는 서버를 추가
+@CrossOrigin(value = "http://localhost:5173") // 리소스 쉐어를 허용하는 서버를 추가
 public class EventRestController {
 
     private final EventService eventService;
 
-    @GetMapping("/main/cate/{ctgrId}/{pageSize}")
-    public ResponseEntity<List<Event>> getEventsTop4ByctgrId(
+    @GetMapping("/cate/{ctgrId}/{pageSize}")
+    public ResponseEntity<List<Event>> getEventsByctgrId(
             @PathVariable("ctgrId") byte ctgrId,
             @PathVariable("pageSize") int size
     ) {
@@ -34,7 +34,7 @@ public class EventRestController {
 
 
     @GetMapping("/cate/{ctgrId}")
-    public ResponseEntity<List<Event>> category(@PathVariable byte ctgrId) {
+    public ResponseEntity<List<Event>> categoryAll(@PathVariable byte ctgrId) {
         List<Event> events = eventService.getEventsAllByCategory(ctgrId);
         //System.out.println(events);
         if (events.isEmpty()) {
