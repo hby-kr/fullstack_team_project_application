@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.entity.postings;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Getter;
@@ -28,23 +29,29 @@ public class PostingLike {
 
     @Id
     @Column(name = "post_id", nullable = false)
-    private String postId;
+    private Integer postId;
 
 
     // @MapsId("userId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonBackReference
     private User user;
 
     // @MapsId("postId")
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "post_id", nullable = false)
+    @JsonBackReference
     private Posting post;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
     @Column(name = "liked_at")
     private Instant likedAt;
+
+    @ColumnDefault("1")
+    @Column(name = "is_used")
+    private Boolean isUsed;
 
 }

@@ -2,6 +2,7 @@ package com.artu.fullstack_team_project_application.entity.postings;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.OrderBy;
 import jakarta.persistence.Table;
@@ -64,10 +65,12 @@ public class Posting {
     // 게시물 이미지 조인
     @OneToMany(mappedBy = "post")
      @OrderBy("imgOrder ASC") // 정렬
+    @JsonManagedReference
     private Set<PostingImage> postingImages = new LinkedHashSet<>();
 
     // 게시물 댓글 조인
      @OneToMany(mappedBy = "post")
+     @JsonManagedReference
     private Set<PostingComment> postingComments = new LinkedHashSet<>();
 
 }

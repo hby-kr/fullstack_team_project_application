@@ -10,6 +10,8 @@ import com.artu.fullstack_team_project_application.entity.users.base.*;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,6 +31,7 @@ import java.util.Set;
 @ToString
 @Entity
 @SQLDelete(sql = "UPDATE users SET is_used = false WHERE post_id = ?")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 // @SQLDelete 는 실제로 DELETE 명령어를 사용하지 않고, 대신 UPDATE 명령어를 사용하여 is_used 필드를 false로 변경.
 @Where(clause = "is_used = true") // 특정 조건을 만족하는 데이터를 조회할 때 추가적인 필터를 적용하는 데 사용
 // is_used = true 라는 조건을 추가하여, is_used가 true 인 항목만 조회되도록 설정
@@ -102,18 +105,18 @@ public class User implements Serializable {
     private Set<PasswordChangeHistory> passwordChangeHistories = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user")
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private Set<PostingComment> postingComments = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private Set<PostingLike> postingLikes = new LinkedHashSet<>();
 
     // Posting 엔티티와의 관계 설정
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private Set<Posting> postings = new LinkedHashSet<>();
 
@@ -143,12 +146,12 @@ public class User implements Serializable {
     private Set<UserEventBmark> userEventBmarks = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private Set<UserImg> userImgs = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private Set<UserInquire> userInquires = new LinkedHashSet<>();
 
@@ -168,7 +171,7 @@ public class User implements Serializable {
     private Set<UserPurchaseList> userPurchaseLists = new LinkedHashSet<>();
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-    @JsonBackReference
+    @JsonIgnore
     @ToString.Exclude
     private Set<UserSetting> userSettings = new LinkedHashSet<>();
 
@@ -191,14 +194,14 @@ public class User implements Serializable {
     @OneToMany(mappedBy = "followers")
     @OrderBy("followedAt ASC") // 정렬
     @ToString.Exclude
-    @JsonBackReference
+    @JsonIgnore
     private Set<UserFollow> followers = new LinkedHashSet<>();
 
     // UserFollow 엔티티와의 관계 설정
     @OneToMany(mappedBy = "followees")
     @OrderBy("followedAt ASC") // 정렬
     @ToString.Exclude
-    @JsonBackReference
+    @JsonIgnore
     private Set<UserFollow> followees = new LinkedHashSet<>();
 
 

@@ -1,5 +1,7 @@
 package com.artu.fullstack_team_project_application.entity.users.user;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,16 +28,20 @@ public class UserSetting {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
+//    @JsonBackReference
+    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt"})
     private User user;
 
     @ColumnDefault("'Light'")
-    @Lob
+//    @Lob
     @Column(name = "display_color")
+    @Enumerated(EnumType.STRING)
     private DisplayColor displayColor;
 
     @ColumnDefault("'System'")
-    @Lob
+//    @Lob
     @Column(name = "language")
+    @Enumerated(EnumType.STRING)
     private Language language;
 
     @ColumnDefault("CURRENT_TIMESTAMP")
