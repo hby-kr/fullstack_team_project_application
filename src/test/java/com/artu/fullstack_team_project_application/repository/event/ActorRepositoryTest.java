@@ -1,18 +1,23 @@
 package com.artu.fullstack_team_project_application.repository.event;
 
+import com.artu.fullstack_team_project_application.entity.events.event.Actor;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.transaction.annotation.Transactional;
+
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+
 @SpringBootTest
-class EventDetailImageRepositoryTest {
+class ActorRepositoryTest {
+
     @Autowired
-    EventDetailImageRepository eventDetailImageRepository;
+    ActorRepository actorRepository;
+
     @Test
-    @Transactional
-    void findByEventId() {
-        System.out.println(eventDetailImageRepository.findByEventId(1));
+    void findById() {
+        Optional<Actor> actor = actorRepository.findById(1);
+        System.out.println(actor.get());
     }
 }

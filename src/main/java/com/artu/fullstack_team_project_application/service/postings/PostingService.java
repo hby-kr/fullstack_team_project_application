@@ -17,7 +17,7 @@ public interface PostingService {
     Posting save(Posting posting);
 
     // posting 삭제
-    void remove(Posting posting);
+    Posting delete(Posting posting);
 
     // posting 리스트
 //    Page<Posting> findAll(Pageable pageable);
@@ -33,5 +33,8 @@ public interface PostingService {
 
     // post_like 리스트
     // List<PostingLike> readAllLikes();
+
+    // post_Id
+    Posting findByPostId(Integer postId);
 
 }

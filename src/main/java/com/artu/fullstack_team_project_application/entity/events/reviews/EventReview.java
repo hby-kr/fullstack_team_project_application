@@ -3,6 +3,7 @@ package com.artu.fullstack_team_project_application.entity.events.reviews;
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,25 +23,14 @@ import java.util.Set;
 @ToString
 @Table(name = "event_reviews") //DB에 매핑될 테이블 이름
 public class EventReview {
+
     @Id //기본 키
     @GeneratedValue(strategy = GenerationType.IDENTITY) //리뷰 ID가 자동 증가하면서 생성
     @Column(name = "review_id", nullable = false)
     private Integer id; //리뷰 고유 번호
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 유저 한명 (N:1 관계)
-    @JoinColumn(name = "user_id", nullable = false) // 외래 키 설정
-    @ToString.Exclude // 순환 참조 방지 (ToString 에서 제외)
-    @JsonBackReference // JSON 직렬화 시 순환참조 방지
-    private User user;
-
     @Column(name ="event_id")
     private Integer eventId;
-
-    @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 공연 한개에 속함(N:1 관계)
-    @JoinColumn(name = "event_id", nullable = false, insertable = false, updatable = false) // 외래 키 설정
-    @ToString.Exclude
-    @JsonBackReference
-    private Event event;
 
     @Column(name = "rate", nullable = false)
     private Integer rate;
@@ -57,7 +47,24 @@ public class EventReview {
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;
 
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 유저 한명 (N:1 관계)
+    @JoinColumn(name = "user_id", nullable = false) // 외래 키 설정
+    @ToString.Exclude // 순환 참조 방지 (ToString 에서 제외)
+    @JsonBackReference // JSON 직렬화 시 순환참조 방지
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false) //리뷰는 공연 한개에 속함(N:1 관계)
+    @JoinColumn(name = "event_id", nullable = false, insertable = false, updatable = false) // 외래 키 설정
+    @ToString.Exclude
+    @JsonBackReference
+    private Event event;
+
+    //ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+
     @OneToMany(mappedBy = "eventReview", fetch = FetchType.LAZY) //여러 이미지 연결(1:N)
+    @JsonManagedReference
     private Set<EventReviewImage> eventReviewImages = new HashSet<>(); // 리뷰 이미지 목록
 
 }

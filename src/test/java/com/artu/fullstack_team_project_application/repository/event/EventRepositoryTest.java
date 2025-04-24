@@ -4,6 +4,8 @@ import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
@@ -11,18 +13,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 class EventRepositoryTest {
+
     @Autowired
-    private EventRepository eventRepository;
+    EventRepository eventRepository;
 
     @Test
-    void getAllEvents() {
-        List<Event> events = eventRepository.findAll();
-        assertNotNull(events);
-        assertTrue(events.size() > 0);
-    }
+    void findByCtgrId() {
+        Pageable pageable = PageRequest.of(0, 4);
+        List<Event> events = eventRepository.findByCtgrId((byte) 1,pageable);
+        System.out.println(events);
 
-    @Test
-    void findByCategoryId() {
-        List<Event> events = eventRepository.findByCtgrId(1);
     }
 }

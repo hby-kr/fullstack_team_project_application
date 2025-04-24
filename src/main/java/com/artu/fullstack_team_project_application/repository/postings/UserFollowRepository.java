@@ -9,15 +9,16 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Repository
 public interface UserFollowRepository extends JpaRepository<UserFollow, UserFollowId> {
-    @EntityGraph(attributePaths = {"followers", "followees"})
+    @EntityGraph(attributePaths = {"followees"})
+    Set<UserFollow> findByFollowerIdAndIsUsedTrue(String followerId);
 
-    Set<UserFollow> findByFollowerId(String followerId);
-    Set<UserFollow> findByFolloweeId(String followeeId);
-
+    @EntityGraph(attributePaths = {"followers"})
+    Set<UserFollow> findByFolloweeIdAndIsUsedTrue(String followeeId);
 
     // follow 수
     @Query("SELECT COUNT(uf.followeeId) " +
@@ -33,6 +34,9 @@ public interface UserFollowRepository extends JpaRepository<UserFollow, UserFoll
             "WHERE u.userId = :followeeId " +
             "GROUP BY u.userId")
     Long countFollowerByUserId(@Param("followeeId") String followeeId);
+
+    // 조회
+    Optional<UserFollow> findByFollowerIdAndFolloweeId(String followerId, String followeeId);
 
 
 

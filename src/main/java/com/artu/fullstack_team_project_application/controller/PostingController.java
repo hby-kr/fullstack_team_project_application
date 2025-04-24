@@ -19,8 +19,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-@Controller
+@RestController
+//@Controller
 @RequestMapping("/posting")
+@CrossOrigin(origins = "http://localhost:4775", allowCredentials = "true")
 @AllArgsConstructor
 public class PostingController {
     private final PostingService postingService;
@@ -39,19 +41,28 @@ public class PostingController {
     }
 
     @GetMapping("/{userId}/userpage.do")
-    public String userpage(
-            @PathVariable String userId,
-            Model model) {
-        UserPageDto userPageDto=userService.readUserPage(userId);
-        System.out.println("userPageDto:" + userPageDto);
-        if (userPageDto==null) {
-            return "redirect:/artu.do";
+    public ResponseEntity<Object> userPage(@PathVariable String userId, HttpSession session) {
+        UserPageDto userPageDto = userService.readUserPage(userId);
+        if (userPageDto == null) {
+            return ResponseEntity.notFound().build();
         }
-        model.addAttribute("userPage", userPageDto);
-
-        // 템플릿에 user, followerCounts, followeeCounts를 전달
-        return "/posting/userpage";
+        return ResponseEntity.ok(userPageDto);
     }
+
+//    @GetMapping("/{userId}/userpage.do")
+//    public String userpage(
+//            @PathVariable String userId,
+//            Model model) {
+//        UserPageDto userPageDto=userService.readUserPage(userId);
+//        System.out.println("userPageDto:" + userPageDto);
+//        if (userPageDto==null) {
+//            return "redirect:/artu.do";
+//        }
+//        model.addAttribute("userPage", userPageDto);
+//
+//        // 템플릿에 user, followerCounts, followeeCounts를 전달
+//        return "/posting/userpage";
+//    }
 
     // 게시물 비동기식
     @GetMapping("/{userId}/postpage.do")
@@ -63,12 +74,17 @@ public class PostingController {
         return ResponseEntity.status(201).body(postings);
     }
 
-    @GetMapping("/{userId}/postAdd.do")
-    public String postForm(
-            @ModelAttribute Posting posting
-    ){
-        return "/posting/postAdd";
+    @PostMapping
+    public ResponseEntity<Posting> createPosting(@ModelAttribute Posting posting, HttpSession session) {
+        return ResponseEntity.status(201).body(postingService.save(posting));
     }
+
+//    @GetMapping("/{userId}/postAdd.do")
+//    public String postForm(
+//            @ModelAttribute Posting posting
+//    ){
+//        return "/posting/postAdd";
+//    }
 
 
     @RestController

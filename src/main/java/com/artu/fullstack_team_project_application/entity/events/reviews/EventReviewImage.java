@@ -12,6 +12,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -23,6 +24,7 @@ public class EventReviewImage {
     @GeneratedValue(strategy = GenerationType.IDENTITY)//이미지 ID 자동 증가 생성
     @Column(name = "image_id", nullable = false)
     private Integer id;
+
     @Column(name = "review_id", nullable = false)
     private Integer reviewId;
 
@@ -31,7 +33,8 @@ public class EventReviewImage {
 
     @ColumnDefault("CURRENT_TIMESTAMP") //생성 시간 기본값 설정
     @Column(name = "create_at", nullable = false)
-    private Instant createAt; // 이미지 업로드 시각
+    private LocalDateTime createAt; // 이미지 업로드 시각
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false) // 이미지는 리뷰 하나 (N:1)
     @JoinColumn(name="review_id", nullable = false, insertable = false, updatable = false)

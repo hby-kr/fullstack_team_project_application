@@ -1,4 +1,4 @@
-//package com.artu.fullstack_team_project_application.controller;
+package com.artu.fullstack_team_project_application.controller;
 //
 //import com.artu.fullstack_team_project_application.entity.events.event.Event;
 //import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;

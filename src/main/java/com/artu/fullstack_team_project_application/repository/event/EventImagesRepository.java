@@ -7,5 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 @Repository
 public interface EventImagesRepository extends JpaRepository<EventImage, Integer> {
-    List<EventImage> findByEventId(Integer eventId);
+
+    List<EventImage> findByEventId(int eventId);
 }
