@@ -2,6 +2,8 @@ package com.artu.fullstack_team_project_application.entity.postings;
 
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.persistence.OrderBy;
@@ -33,8 +35,9 @@ public class Posting {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt", "events", "hibernateLazyInitializer", "handler"})
     private User user;
+//    @JsonBackReference
 
     @Lob
     @Column(name = "contents", nullable = false)
@@ -72,5 +75,10 @@ public class Posting {
      @OneToMany(mappedBy = "post")
      @JsonManagedReference
     private Set<PostingComment> postingComments = new LinkedHashSet<>();
+
+//     // 게시물 좋아요 조인
+//     @OneToMany(mappedBy = "post")
+//     @JsonIgnoreProperties({"post"})
+//     private Set<PostingLike> postingLikes = new LinkedHashSet<>();
 
 }

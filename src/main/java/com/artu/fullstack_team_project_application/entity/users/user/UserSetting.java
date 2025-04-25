@@ -29,7 +29,7 @@ public class UserSetting {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
 //    @JsonBackReference
-    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt"})
+    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt", "events"})
     private User user;
 
     @ColumnDefault("'Light'")

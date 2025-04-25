@@ -15,7 +15,7 @@ import java.util.Set;
 public interface PostingLikeRepository extends JpaRepository<PostingLike, PostingLikeId> {
     // 유저의 좋아요 목록
 //    @Query("SELECT * FROM PostingLike pl WHERE Posting p")
-    Set<PostingLike> findAllByUserId(String userId);
+    Set<PostingLike> findAllByUser_UserId(String userId);
 
     // 게시물 좋아요 카운트
     @Query("SELECT COUNT(pl.userId) FROM PostingLike pl GROUP BY pl.postId")

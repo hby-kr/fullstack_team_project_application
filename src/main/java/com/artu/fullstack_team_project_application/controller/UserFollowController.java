@@ -13,7 +13,7 @@ import java.util.*;
 
 //@Controller
 @RestController
-@RequestMapping("posting/{userId}")
+@RequestMapping("/api/posting/{userId}")
 @CrossOrigin(origins = "http://localhost:4775", allowCredentials = "true")
 @AllArgsConstructor
 public class UserFollowController {

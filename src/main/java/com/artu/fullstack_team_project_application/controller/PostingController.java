@@ -21,7 +21,7 @@ import java.util.Set;
 
 @RestController
 //@Controller
-@RequestMapping("/posting")
+@RequestMapping("/api/posting")
 @CrossOrigin(origins = "http://localhost:4775", allowCredentials = "true")
 @AllArgsConstructor
 public class PostingController {

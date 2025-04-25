@@ -13,7 +13,7 @@ import java.util.Optional;
 
 //@Controller
 @RestController
-@RequestMapping("posting/{userId}")
+@RequestMapping("/api/posting/{userId}")
 @AllArgsConstructor
 public class UserSettingController {
     private final UserSettingService userSettingService;
@@ -31,7 +31,7 @@ public class UserSettingController {
         return ResponseEntity.ok(userSetting);
     }
 
-    @PostMapping("setting.do")
+    @PutMapping("setting.do")
     public ResponseEntity<UserSetting> saveUserSetting(
             @PathVariable String userId,
             @RequestBody UserSetting userSetting
