@@ -28,17 +28,17 @@ public class PostingController {
     private final PostingService postingService;
     private final UserService userService;
 
-    @GetMapping("/findAll.do")
-    public String findAll(Model model, HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        model.addAttribute("user", user); // 세션관리
-
-        List<User> userList = userService.findAll();
-        model.addAttribute("users", userList);
-        model.addAttribute("headerNav", "personal");
-
-        return "/posting/findAll";
-    }
+//    @GetMapping("/findAll.do") // 2차 발표를 위해 만들어진 메서드
+//    public String findAll(Model model, HttpSession session) {
+//        User user = (User) session.getAttribute("user");
+//        model.addAttribute("user", user); // 세션관리
+//
+//        List<User> userList = userService.findAll();
+//        model.addAttribute("users", userList);
+//        model.addAttribute("headerNav", "personal");
+//
+//        return "/posting/findAll";
+//    }
 
     @GetMapping("/{userId}/userpage.do")
     public ResponseEntity<Object> userPage(@PathVariable String userId, HttpSession session) {

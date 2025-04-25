@@ -100,18 +100,6 @@ public class UserServiceImp implements UserService {
     }
 
 
-
-//
-//    @Override
-//    public List<UserInterest> readInterests(String userId) {
-//        return List.of();
-//    }
-//
-//    @Override
-//    public List<UserInterest> saveInterests(UserInterest userInterest) {
-//        return List.of();
-//    }
-
     @Override
     public List<User> findAll() {
         return userRepository.findAll();

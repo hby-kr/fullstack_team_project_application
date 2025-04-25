@@ -40,33 +40,39 @@ public class EventServiceImp implements EventService {
 
     @Override
     public List<Event> getEventsAllByCategory(byte ctgrId) {
-     return eventRepository.findByCtgrId(ctgrId);
+        return eventRepository.findByCtgrId(ctgrId);
     }
 
     @Override
     public List<Event> getEventsByCategoryForMain(byte ctgrId, Pageable pageable) {
         return eventRepository.findByCtgrId(ctgrId, pageable);
     }
+
     @Override
     public Optional<Event> getEventById(Integer eventId) {
         return eventRepository.findById(eventId);
     }
+
     @Override
     public List<EventDate> getEventDates(Integer eventId) {
         return eventDateRepository.findByEventId(eventId);
     }
+
     @Override
     public List<EventOption> getOptionsByDateId(Integer dateId) {
         return eventOptionRepository.findByDate_DateId(dateId);
     }
+
     @Override
     public List<EventDetailImage> getEventDetailImages(Integer eventId) {
         return eventDetailImageRepository.findByEventId(eventId);
     }
+
     @Override
     public List<EventReview> getReviewsByEventId(Integer eventId) {
         return eventReviewRepository.findByEventId(eventId);
     }
+
     @Override
     public List<EventReviewImage> getReviewImagesByEventId(Integer eventId) {
         return null;
