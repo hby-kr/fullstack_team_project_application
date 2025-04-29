@@ -3,17 +3,14 @@ spring:
     name: fullstack_team_project_application
   profiles:
     include: dev_db
-  jpa:
-#    hibernate:
-#      ddl-auto: update  # 기존 테이블을 수정 가능
-    show-sql: true
-#  web:
-#    resources:
-#      static-locations:  ${user.dir}/fullstack_team_project_application/src/main/resources/static/img
-#img:
-#  upload:
-#    path: ${user.dir}/spring_mybatis/src/main/resources/static/img
+#    include: deploy
+
+# 이미지 업로드 경로 설정:
+img:
+  upload:
+    path: ${user.dir}/spring_mybatis/src/main/resources/static/img
+
+# 로그 레벨 설정:
 logging:
   level:
     org.hibernate.orm.jdbc.bind: trace
-

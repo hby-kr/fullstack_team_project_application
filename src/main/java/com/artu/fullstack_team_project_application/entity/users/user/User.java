@@ -41,6 +41,7 @@ public class User implements Serializable {
 
 
     public enum Gender {M, F}
+    public enum Role { USER, ADMIN, MANAGER }
 
     @Id
     @Column(name = "user_id", nullable = false, length = 50)
@@ -49,7 +50,7 @@ public class User implements Serializable {
     @Column(name = "user_email", nullable = false, length = 100)
     private String userEmail;
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "user_name", nullable = false, length = 50)
@@ -58,11 +59,19 @@ public class User implements Serializable {
     @Column(name = "user_birth", nullable = false)
     private LocalDate userBirth;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-//  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
+    @Column(name = "gender", nullable = false)
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "memo")
+    private String memo;
+
+
+    //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     @Column(name = "created_at")
     private LocalDate createdAt;
 
