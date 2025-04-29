@@ -37,7 +37,7 @@ public class PostingLike {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt", "events", "hibernateLazyInitializer", "handler"})
     private User user;
 
     // @MapsId("postId")
