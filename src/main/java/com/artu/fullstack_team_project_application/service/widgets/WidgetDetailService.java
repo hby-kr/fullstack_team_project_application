@@ -33,25 +33,21 @@ public class WidgetDetailService {
     }
 
     @Transactional
-    public void addWidgetDetail(String userId, Integer widgetId) {
-        // 기존 widget 찾기
+    public void addWidgetDetail(String userId, Integer widgetId, String content) {
         Widget widget = widgetRepository.findById(widgetId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 widget_id입니다: " + widgetId));
-
-        // user 찾기
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 widget_id입니다."));
         User user = userRepository.findById(userId)
-                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user_id입니다: " + userId));
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user_id입니다."));
 
-        // WidgetDetail 생성
-        WidgetDetail detail = new WidgetDetail();// 복합키 (userId + widgetId)
+        WidgetDetail detail = new WidgetDetail();
         detail.setUser(user);
         detail.setWidget(widget);
-        detail.setWidgetContent(""); // 기본값
-        detail.setWidgetOrder(0);    // 기본값
+        detail.setWidgetContent(content);
+        detail.setWidgetOrder(0);  // 기본 순서
 
-        // 저장
         widgetDetailRepository.save(detail);
     }
+
 
     public List<Map<String, Object>> getUserWidgets(String userId) {
         return widgetDetailRepository.findAllByUserIdOrderByOrder(userId).stream().map(wd -> {
@@ -61,9 +57,11 @@ public class WidgetDetailService {
             m.put("widget_size", w.getWidgetSize());
             m.put("widget_theme", w.getWidgetTheme());
             m.put("widget_json", w.getWidgetJson());
+            m.put("widget_content", wd.getWidgetContent()); // 👈 반드시 추가
             return m;
         }).collect(Collectors.toList());
     }
+
 
     public void deleteWidget(String userId, Integer widgetId) {
         widgetDetailRepository.deleteByUserIdAndWidgetId(userId, widgetId);

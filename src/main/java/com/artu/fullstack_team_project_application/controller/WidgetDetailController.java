@@ -23,11 +23,12 @@ public class WidgetDetailController {
     }
 
     @PostMapping("/add")
-    public ResponseEntity<?> addWidgetDetail(@RequestBody Map<String, Object> request) {
-        String userId = (String) request.get("user_id");
-        Integer widgetId = (Integer) request.get("widget_id");
+    public ResponseEntity<?> addWidgetDetail(@RequestBody Map<String, Object> body) {
+        String userId = (String) body.get("user_id");
+        Integer widgetId = (Integer) body.get("widget_id");
+        String content = (String) body.getOrDefault("widget_content", "");
 
-        widgetDetailService.addWidgetDetail(userId, widgetId);
-        return ResponseEntity.ok("Widget 추가 성공");
+        widgetDetailService.addWidgetDetail(userId, widgetId, content);
+        return ResponseEntity.ok().build();
     }
 }
