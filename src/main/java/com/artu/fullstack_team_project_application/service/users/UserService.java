@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.service.users;
 
 import com.artu.fullstack_team_project_application.dto.UserPageDto;
+import com.artu.fullstack_team_project_application.dto.users.LoginRequestDto;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.users.user.UserImg;
@@ -35,6 +36,8 @@ public interface UserService {
 
 //    public List<UserInterest> readInterests(String userId);
 //    public List<UserInterest> saveInterests(UserInterest userInterest);
+
+    Optional<User> loginHashCheck(LoginRequestDto userDto);
 
     // ㅡㅡㅡㅡ 포스팅 관련
     UserPageDto readUserPage(String userId);

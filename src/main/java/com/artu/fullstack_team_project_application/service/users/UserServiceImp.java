@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.service.users;
 
 import com.artu.fullstack_team_project_application.dto.UserPageDto;
+import com.artu.fullstack_team_project_application.dto.users.LoginRequestDto;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollow;
 import com.artu.fullstack_team_project_application.entity.postings.UserFollowId;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
@@ -76,6 +77,18 @@ public class UserServiceImp implements UserService {
 
         existingUser.setPassword(BCrypt.hashpw(newPw, BCrypt.gensalt()));  // 새로운 비밀번호로 변경
         entityManager.merge(existingUser);         // 엔티티 업데이트 (merge)
+    }
+
+    @Override
+    public Optional<User> loginHashCheck(LoginRequestDto userDto) {
+        Optional<User> userOpt = userRepository.findById(userDto.getId());
+
+        if (userOpt.isPresent()) {
+            if (BCrypt.checkpw(userDto.getPw(), userOpt.get().getPassword())) {
+                return userOpt;
+            }
+        }
+        return Optional.empty();
     }
 
     @Override

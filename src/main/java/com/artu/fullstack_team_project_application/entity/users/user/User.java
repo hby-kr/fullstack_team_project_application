@@ -41,7 +41,8 @@ public class User implements Serializable {
 
 
     public enum Gender {M, F}
-    public enum Role { USER, ADMIN, MANAGER }
+
+    public enum Role {USER, ADMIN, MANAGER}
 
     @Id
     @Column(name = "user_id", nullable = false, length = 50)
@@ -50,6 +51,15 @@ public class User implements Serializable {
     @Column(name = "user_email", nullable = false, length = 100)
     private String userEmail;
 
+    /*
+    @NotBlank(message = "비밀번호는 필수입니다.")
+    @Size(min = 8, max = 100, message = "비밀번호는 최소 8자 이상이어야 합니다.")
+    @Pattern(
+        regexp = "^(?=.*[a-zA-Z])(?=.*\\d)(?=.*[!@#$%^&*]).+$",
+        message = "비밀번호는 영문, 숫자, 특수문자를 모두 포함해야 합니다."
+    ) 이렇게 검증 넣을 수 있음. 서버에서, 그리고 프론트에서 둘다.
+     */
+    @JsonIgnore
     @Column(name = "password")
     private String password;
 
@@ -59,11 +69,11 @@ public class User implements Serializable {
     @Column(name = "user_birth", nullable = false)
     private LocalDate userBirth;
 
-    @Column(name = "role", nullable = false)
+    @Column(name = "gender", nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @Column(name = "gender", nullable = false)
+    @Column(name = "role", nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;
 
@@ -82,7 +92,7 @@ public class User implements Serializable {
     @Column(name = "dropout_at")
     private LocalDate dropoutAt;
 
-//  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ join 설정 시작
+    //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ join 설정 시작
     @OneToMany(mappedBy = "user")
     @ToString.Exclude
     @JsonBackReference
