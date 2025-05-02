@@ -11,7 +11,7 @@ import java.util.Set;
 
 //@Controller
 @RestController
-@RequestMapping("/posting")
+@RequestMapping("/api/posting")
 @AllArgsConstructor
 public class PostingLikeController {
     private final PostingLikeService postingLikeService;
@@ -37,9 +37,9 @@ public class PostingLikeController {
     @GetMapping("/like/post.do")
     public ResponseEntity<Set<PostingLike>> findAllByUserId (@RequestParam String userId) {
         Set<PostingLike> likes = postingLikeService.findAllByUserId(userId);
-        for (PostingLike like : likes) {
-            like.getPost().getContents();
-        }
+//        for (PostingLike like : likes) {
+//            like.getPost().getContents();
+//        }
         return ResponseEntity.ok(likes);
     }
 

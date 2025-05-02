@@ -19,6 +19,7 @@ public class PostingLikeServiceImp implements PostingLikeService {
     private final PostingLikeRepository postingLikeRepository;
 
     @Override
+    @Transactional
     public PostingLike save(Integer postId, String userId) {
         if (postId != null && userId != null) {
             PostingLike postingLike = new PostingLike();
@@ -41,8 +42,9 @@ public class PostingLikeServiceImp implements PostingLikeService {
 
     // 유저의 좋아요 목록
     @Override
+    @Transactional
     public Set<PostingLike> findAllByUserId(String userId) {
-        return postingLikeRepository.findAllByUserId(userId);
+        return postingLikeRepository.findAllByUser_UserId(userId);
     }
 
     // 게시물 좋아요 카운트

@@ -3,7 +3,9 @@ package com.artu.fullstack_team_project_application.entity.users.user;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.OnDelete;
@@ -17,20 +19,30 @@ import java.time.Instant;
 @Table(name = "user_settings")
 public class UserSetting {
 
-    public enum DisplayColor {Light, Dark}
+    public enum DisplayColor {Light, Dark;
+        public static DisplayColor fromString(String value) {
+            for (DisplayColor color : DisplayColor.values()) {
+                if (color.name().equalsIgnoreCase(value)) {
+                    return color;
+                }
+            }
+            throw new IllegalArgumentException("Unknown DisplayColor: " + value);
+        }
+    }
 
-    public enum Language {System, English, Korean}
+    public enum Language {ko, en, ja, zh}
 
     @Id
     @Column(name = "setting_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer settingId;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-//    @JsonBackReference
-    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt"})
+    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt", "events", "hibernateLazyInitializer", "handler"})
     private User user;
+//    @JsonBackReference
 
     @ColumnDefault("'Light'")
 //    @Lob

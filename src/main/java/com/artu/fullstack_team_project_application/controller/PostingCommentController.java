@@ -16,7 +16,7 @@ import java.util.Set;
 
 //@Controller
 @RestController
-@RequestMapping("/posting")
+@RequestMapping("/api/posting")
 @AllArgsConstructor
 public class PostingCommentController {
     private final PostingService postingService;

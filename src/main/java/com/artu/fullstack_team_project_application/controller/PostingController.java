@@ -21,7 +21,7 @@ import java.util.Set;
 
 @RestController
 //@Controller
-@RequestMapping("/posting")
+@RequestMapping("/api/posting")
 @CrossOrigin(origins = "http://localhost:4775", allowCredentials = "true")
 @AllArgsConstructor
 public class PostingController {
@@ -41,7 +41,7 @@ public class PostingController {
 //    }
 
     @GetMapping("/{userId}/userpage.do")
-    public ResponseEntity<Object> userPage(@PathVariable String userId, HttpSession session) {
+    public ResponseEntity<Object> userPage(@PathVariable String userId) {
         UserPageDto userPageDto = userService.readUserPage(userId);
         if (userPageDto == null) {
             return ResponseEntity.notFound().build();

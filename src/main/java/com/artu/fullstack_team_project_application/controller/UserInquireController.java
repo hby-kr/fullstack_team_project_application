@@ -12,7 +12,7 @@ import java.util.*;
 
 //@Controller
 @RestController
-@RequestMapping("/inquire")
+@RequestMapping("/api/inquire")
 @AllArgsConstructor
 public class UserInquireController {
     private final UserInquireService userInquireService;

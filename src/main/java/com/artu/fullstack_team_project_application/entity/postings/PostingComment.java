@@ -16,7 +16,7 @@ import java.time.Instant;
 @Setter
 @Entity
 @ToString
-@SQLDelete(sql = "UPDATE posting_comments SET is_used = true WHERE comment_id = ?")
+@SQLDelete(sql = "UPDATE posting_comments SET is_used = false WHERE comment_id = ?")
 @Where(clause = "is_used = true")
 @Table(name = "posting_comments")
 public class PostingComment {
@@ -27,7 +27,8 @@ public class PostingComment {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties({"password", "userBirth", "gender", "createdAt", "isUsed", "dropoutAt", "events", "hibernateLazyInitializer", "handler"})
+//    @JsonBackReference
     @ToString.Exclude
     private User user;
 
