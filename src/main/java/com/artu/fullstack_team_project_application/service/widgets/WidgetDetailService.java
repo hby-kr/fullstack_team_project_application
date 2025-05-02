@@ -1,9 +1,13 @@
 package com.artu.fullstack_team_project_application.service.widgets;
 
+import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetailId;
+import com.artu.fullstack_team_project_application.repository.users.UserRepository;
 import com.artu.fullstack_team_project_application.repository.widgets.WidgetDetailRepository;
+import com.artu.fullstack_team_project_application.repository.widgets.WidgetRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,11 +20,34 @@ import java.util.stream.Collectors;
 public class WidgetDetailService {
 
     private final WidgetDetailRepository widgetDetailRepository;
+    private final WidgetRepository widgetRepository;
+    private final UserRepository userRepository;
 
     @Autowired
-    public WidgetDetailService(WidgetDetailRepository widgetDetailRepository) {
+    public WidgetDetailService(WidgetDetailRepository widgetDetailRepository,
+                               WidgetRepository widgetRepository,
+                               UserRepository userRepository) {
         this.widgetDetailRepository = widgetDetailRepository;
+        this.widgetRepository = widgetRepository;
+        this.userRepository = userRepository;
     }
+
+    @Transactional
+    public void addWidgetDetail(String userId, Integer widgetId, String content) {
+        Widget widget = widgetRepository.findById(widgetId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 widget_id입니다."));
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 user_id입니다."));
+
+        WidgetDetail detail = new WidgetDetail();
+        detail.setUser(user);
+        detail.setWidget(widget);
+        detail.setWidgetContent(content);
+        detail.setWidgetOrder(0);  // 기본 순서
+
+        widgetDetailRepository.save(detail);
+    }
+
 
     public List<Map<String, Object>> getUserWidgets(String userId) {
         return widgetDetailRepository.findAllByUserIdOrderByOrder(userId).stream().map(wd -> {
@@ -30,9 +57,11 @@ public class WidgetDetailService {
             m.put("widget_size", w.getWidgetSize());
             m.put("widget_theme", w.getWidgetTheme());
             m.put("widget_json", w.getWidgetJson());
+            m.put("widget_content", wd.getWidgetContent()); // 👈 반드시 추가
             return m;
         }).collect(Collectors.toList());
     }
+
 
     public void deleteWidget(String userId, Integer widgetId) {
         widgetDetailRepository.deleteByUserIdAndWidgetId(userId, widgetId);

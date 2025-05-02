@@ -2,6 +2,7 @@ package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.entity.events.event.Event;
 import com.artu.fullstack_team_project_application.entity.events.reviews.EventReview;
+import com.artu.fullstack_team_project_application.entity.events.reviews.EventReviewImage;
 import com.artu.fullstack_team_project_application.entity.events.tickets.EventDate;
 import com.artu.fullstack_team_project_application.entity.events.event.EventDetailImage;
 import com.artu.fullstack_team_project_application.entity.events.tickets.EventOption;
@@ -52,9 +53,9 @@ public class EventRestController2 {
     public List<EventReview> getReviews(@PathVariable Integer eventId) {
         return eventService.getReviewsByEventId(eventId);
     }
-//
-//    @GetMapping("/{eventId}/review-images")
-//    public List<EventReviewImage> getReviewImages(@PathVariable Integer eventId) {
-//        return eventService.getReviewImagesByEventId(eventId);
-//    }
+
+    @GetMapping("/{eventId}/review-images")
+    public List<EventReviewImage> getReviewImages(@PathVariable Integer eventId) {
+        return eventService.getReviewImagesByEventId(eventId);
+    }
 }
