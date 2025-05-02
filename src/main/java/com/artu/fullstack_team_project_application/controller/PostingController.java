@@ -78,6 +78,7 @@ public class PostingController {
     public ResponseEntity<Posting> createPosting(@ModelAttribute Posting posting, HttpSession session) {
         return ResponseEntity.status(201).body(postingService.save(posting));
     }
+}
 
 //    @GetMapping("/{userId}/postAdd.do")
 //    public String postForm(
@@ -85,42 +86,3 @@ public class PostingController {
 //    ){
 //        return "/posting/postAdd";
 //    }
-
-
-    @RestController
-    @RequestMapping("/api/widgets")
-    @CrossOrigin(origins = "http://localhost:5173", allowCredentials = "true")
-    public static class WidgetController {
-
-        private final WidgetService widgetService;
-        private final WidgetDetailService widgetDetailService;
-
-        @Autowired
-        public WidgetController(WidgetService widgetService, WidgetDetailService widgetDetailService) {
-            this.widgetService = widgetService;
-            this.widgetDetailService = widgetDetailService;
-        }
-
-        @GetMapping("/all")
-        public ResponseEntity<List<Map<String, Object>>> getAllWidgets() {
-            return ResponseEntity.ok(widgetService.getAllWidgets());
-        }
-
-        @GetMapping("/used")
-        public ResponseEntity<List<Map<String, Object>>> getUsedWidgetsByUserId(@RequestParam String userId) {
-            return ResponseEntity.ok(widgetDetailService.getUserWidgets(userId));
-        }
-
-        @PostMapping("/order")
-        public ResponseEntity<String> updateWidgetOrder(@RequestBody List<Map<String, Object>> orderList) {
-            widgetDetailService.updateWidgetOrder(orderList);
-            return ResponseEntity.ok("순서 저장 완료");
-        }
-
-        @DeleteMapping("/delete/{widgetId}")
-        public ResponseEntity<String> deleteWidget(@PathVariable Integer widgetId, @RequestParam String userId) {
-            widgetDetailService.deleteWidget(userId, widgetId);
-            return ResponseEntity.ok("삭제 완료");
-        }
-    }
-}

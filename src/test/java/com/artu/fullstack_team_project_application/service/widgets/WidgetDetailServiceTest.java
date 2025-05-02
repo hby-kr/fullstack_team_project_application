@@ -25,4 +25,10 @@ class WidgetDetailServiceTest {
 
     @Autowired
     private WidgetDetailService widgetDetailService;
+
+    @Test
+    void getUserWidgets() {
+        System.out.println( widgetDetailService.getUserWidgets("user1001"));
+
+    }
 }

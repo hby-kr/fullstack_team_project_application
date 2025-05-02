@@ -4,10 +4,12 @@ import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.entity.widgets.Widget;
 import com.artu.fullstack_team_project_application.entity.widgets.WidgetDetail;
 import com.artu.fullstack_team_project_application.service.widgets.WidgetDetailService;
+import com.artu.fullstack_team_project_application.service.widgets.WidgetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
