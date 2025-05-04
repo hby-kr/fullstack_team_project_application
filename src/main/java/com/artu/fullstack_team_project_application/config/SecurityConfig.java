@@ -1,6 +1,7 @@
 package com.artu.fullstack_team_project_application.config;
 
 
+import com.artu.fullstack_team_project_application.jwt.JwtLoginFilter;
 import lombok.AllArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,11 +14,14 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity // 스프링 시큐리티 커스텀 설정이라고 선언
 public class SecurityConfig {
+
+    private final JwtLoginFilter jwtLoginFilter;
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -41,8 +45,10 @@ public class SecurityConfig {
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         // 더이상 세션 기반의 인증을 사용하지 않겠다. -> jwt 기반 인증을 생성해서 추가해야함
+                .addFilterBefore(jwtLoginFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
 
     @Bean
     // 비밀번호를 암호화해서 비교하기 위해 어떤 인코딩 방식을 쓸지 명시함.

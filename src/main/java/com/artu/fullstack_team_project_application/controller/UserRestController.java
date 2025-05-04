@@ -39,18 +39,12 @@ public class UserRestController {
     public ResponseEntity<LoginResponseAuthDto> loginAction(
             @Valid @RequestBody LoginRequestDto loginRequestDto) {
 
-        System.out.println("ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ  loginRequestDto : " + loginRequestDto);
         Optional<User> userOpt = userService.loginHashCheck(loginRequestDto);
-        System.out.println("ㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏㅏ   userOpt.get() : " + userOpt.get());
 
         if (userOpt.isPresent()) {
             String jwt = jwtUtil.generateToken(userOpt.get().getUserId()); // user의 아이디로 jwt 만들기
-
             LoginResponseAuthDto loginResponseAuthDto
                     = LoginResponseAuthDto.builder().jwt(jwt).user(userOpt.get()).build();
-
-            System.out.println(loginResponseAuthDto);
-
             return ResponseEntity.ok(loginResponseAuthDto);
             // -> 그러면 뷰에서 다시 jwt new 토큰을 받아서 로컬스토리지에 저장
         }
@@ -62,10 +56,12 @@ public class UserRestController {
 
     @GetMapping("/jwt/check.do")
     public ResponseEntity<LoginResponseAuthDto> checkLogin(
+
             @AuthenticationPrincipal UserDetails userDetails // userDetails가 null이 아니면 로그인 되어있다는 말.
             // 이미 앞선 필터에서 인증인가 과정을 마치고 이곳에 도착한 것.
             // @AuthenticationPrincipal 는 로그인된 사용자 정보를 컨트롤러에서 바로 꺼내쓸 수 있게 해주는 도구
     ) {
+        System.out.println("ㅏㅏㅏㅏㅏㅏㅏ$%^*$*#^$%#*&(&*(*$%^$%^$%$#: 로그인 되었는지 체크 시작" + userDetails);
         String userId = userDetails.getUsername();
         String jwt = jwtUtil.generateToken(userId); // 로그인 사용자의 id로 새로운 토큰 만들기
         Optional<User> userOpt = userService.readOne(userId); //  로그인 사용자의 id로 DB에서 User 찾기
