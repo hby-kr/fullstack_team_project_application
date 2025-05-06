@@ -48,8 +48,12 @@ public class WidgetDetailService {
         widgetDetailRepository.save(detail);
     }
 
-
+    @Transactional
     public List<Map<String, Object>> getUserWidgets(String userId) {
+        System.out.println("userId: " + userId);
+        List<WidgetDetail> details = widgetDetailRepository.findAllByUserIdOrderByOrder(userId);
+        System.out.println("조회된 위젯 수: " + details.size());
+
         return widgetDetailRepository.findAllByUserIdOrderByOrder(userId).stream().map(wd -> {
             Widget w = wd.getWidget();
             Map<String, Object> m = new HashMap<>();
@@ -62,11 +66,12 @@ public class WidgetDetailService {
         }).collect(Collectors.toList());
     }
 
-
+    @Transactional
     public void deleteWidget(String userId, Integer widgetId) {
         widgetDetailRepository.deleteByUserIdAndWidgetId(userId, widgetId);
     }
 
+    @Transactional
     public void updateWidgetOrder(List<Map<String, Object>> orders) {
         orders.forEach(entry -> {
             String userId = (String) entry.get("user_id");

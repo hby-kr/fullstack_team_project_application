@@ -19,16 +19,16 @@ import java.util.Map;
 @AllArgsConstructor
 public class WidgetDetail {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "widget_detail_id")  // ✅ 여기 column명 명시
-    private Integer widgetDetailId;      // ✅ id 필드 이름도 widgetDetailId로 정확히
+    @EmbeddedId
+    private WidgetDetailId id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")  // 복합키의 userId 필드에 매핑
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("widgetId") // 복합키의 widgetId 필드에 매핑
     @JoinColumn(name = "widget_id")
     private Widget widget;
 
@@ -38,4 +38,3 @@ public class WidgetDetail {
     @Column(name = "widget_order")
     private Integer widgetOrder;
 }
-

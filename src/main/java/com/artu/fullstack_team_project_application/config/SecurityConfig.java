@@ -32,7 +32,8 @@ public class SecurityConfig {
                                         "/favicon.ico",
                                         "/event/**",
                                         "/user/jwt/check.do",
-                                        "/user/jwt/login.do"
+                                        "/user/jwt/login.do",
+                                        "/api/widgets/**"
 //                                        "/user/oauth/login.do",
 //                                        "/user/oauth/signup.do"
                                 ).permitAll()
@@ -40,7 +41,7 @@ public class SecurityConfig {
                                 .anyRequest().authenticated())
                 .sessionManagement(session ->
                         session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                        // 더이상 세션 기반의 인증을 사용하지 않겠다. -> jwt 기반 인증을 생성해서 추가해야함
+                // 더이상 세션 기반의 인증을 사용하지 않겠다. -> jwt 기반 인증을 생성해서 추가해야함
                 .build();
     }
 
