@@ -30,8 +30,13 @@ public class WidgetController {
 
     @GetMapping("/used")
     public ResponseEntity<List<Map<String, Object>>> getUsedWidgetsByUserId(@RequestParam String userId) {
-        return ResponseEntity.ok(widgetDetailService.getUserWidgets(userId));
+        List<Map<String, Object>> result = widgetDetailService.getUserWidgets(userId);
+        if (result == null) {
+            return ResponseEntity.ok(List.of());  // 👈 반드시 빈 리스트라도 리턴
+        }
+        return ResponseEntity.ok(result);
     }
+
 
     @PostMapping("/order")
     public ResponseEntity<String> updateWidgetOrder(@RequestBody List<Map<String, Object>> orderList) {

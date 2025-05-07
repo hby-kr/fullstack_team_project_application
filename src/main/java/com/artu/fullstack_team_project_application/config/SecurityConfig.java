@@ -3,6 +3,7 @@ package com.artu.fullstack_team_project_application.config;
 
 import com.artu.fullstack_team_project_application.jwt.JwtLoginFilter;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -36,6 +37,7 @@ public class SecurityConfig {
                                         "/favicon.ico",
                                         "/event/**",
                                         "/api/events/**",
+                                        "/api/widgets/**",
                                         "/user/jwt/check.do",
                                         "/user/jwt/login.do"
 //                                        "/user/oauth/login.do",
