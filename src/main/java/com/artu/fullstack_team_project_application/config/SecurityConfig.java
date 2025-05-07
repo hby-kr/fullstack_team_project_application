@@ -40,6 +40,9 @@ public class SecurityConfig {
                                         "/api/widgets/**",
                                         "/user/jwt/check.do",
                                         "/user/jwt/login.do"
+                                        "/user/jwt/login.do",
+                                        "/api/widgets/**",
+                                        "/api/**"
 //                                        "/user/oauth/login.do",
 //                                        "/user/oauth/signup.do"
                                 ).permitAll()

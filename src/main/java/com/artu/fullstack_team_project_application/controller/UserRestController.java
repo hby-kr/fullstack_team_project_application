@@ -11,12 +11,14 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
 import java.util.Optional;
 
 
@@ -63,19 +65,29 @@ public class UserRestController {
             // @AuthenticationPrincipal 는 로그인된 사용자 정보를 컨트롤러에서 바로 꺼내쓸 수 있게 해주는 도구
     ) {
         System.out.println("ㅏㅏㅏㅏㅏㅏㅏ$%^*$*#^$%#*&(&*(*$%^$%^$%$#: 로그인 되었는지 체크 시작" + userDetails);
-        String userId = userDetails.getUsername();
-        String jwt = jwtUtil.generateToken(userId); // 로그인 사용자의 id로 새로운 토큰 만들기
-        Optional<User> userOpt = userService.readOne(userId); //  로그인 사용자의 id로 DB에서 User 찾기
-
         LoginResponseAuthDto loginResponseAuthDto = new LoginResponseAuthDto();
-        if (userOpt.isPresent()) { // 있다는 것은 사용자 정보가 있다는 것.
-            User user = userOpt.get();
-            loginResponseAuthDto.setUser(user);
-            loginResponseAuthDto.setJwt(jwt);
-            return ResponseEntity.ok(loginResponseAuthDto);
+
+        if (userDetails == null) {
+            // 로그인 안 된 경우: 비어 있는 응답을 정상적으로 반환
+            loginResponseAuthDto.setUser(null);
+            loginResponseAuthDto.setJwt(null);
+            return ResponseEntity.ok(loginResponseAuthDto); // 200 OK, 빈 유저 정보
         }
-        return ResponseEntity.badRequest().build();
+
+        // 로그인 된 경우
+        String userId = userDetails.getUsername();
+        String jwt = jwtUtil.generateToken(userId);
+        Optional<User> userOpt = userService.readOne(userId);
+
+        if (userOpt.isPresent()) {
+            loginResponseAuthDto.setUser(userOpt.get());
+            loginResponseAuthDto.setJwt(jwt);
+        }
+
+        return ResponseEntity.ok(loginResponseAuthDto);
     }
+
+
 
 
 
