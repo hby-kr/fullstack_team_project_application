@@ -35,6 +35,7 @@ public class SecurityConfig {
                                         "/",
                                         "/favicon.ico",
                                         "/event/**",
+                                        "/api/events/**",
                                         "/user/jwt/check.do",
                                         "/user/jwt/login.do"
 //                                        "/user/oauth/login.do",

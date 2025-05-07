@@ -2,6 +2,7 @@ package com.artu.fullstack_team_project_application.controller;
 
 import com.artu.fullstack_team_project_application.dto.users.LoginRequestDto;
 import com.artu.fullstack_team_project_application.dto.users.LoginResponseAuthDto;
+import com.artu.fullstack_team_project_application.dto.users.OAuthUser;
 import com.artu.fullstack_team_project_application.entity.users.user.User;
 import com.artu.fullstack_team_project_application.jwt.JwtUtil;
 import com.artu.fullstack_team_project_application.service.users.CustomUserDetailsService;
@@ -78,7 +79,35 @@ public class UserRestController {
 
 
 
-    // oauth컨트롤러 작업해야.
+    @PostMapping("/oauth/login.do")
+    public ResponseEntity<LoginResponseAuthDto> oauthLoginAction(@Valid @RequestBody OAuthUser oAuthUser) {
+        // 보내진 객체 데이터를 OAuthUser DTO에 맞게 받음
+
+        System.out.println("ㅏㅏㅏㅏㅏㅏㅏ$%^*$*#^$%#*&(&*(*$%^$%^$%$#:  oAuthUser: " + oAuthUser);
+
+        Optional<User> userOpt = userService.readOne(oAuthUser.getEmail());
+
+        if (userOpt.isPresent()) { // 있음
+            User user = userOpt.get();
+            LoginResponseAuthDto loginResponseAuthDto = new LoginResponseAuthDto(); // 로그인 dto 만들기
+            loginResponseAuthDto.setUser(user); // user 넣기
+            if (user.getOauth().equals(oAuthUser.getOauth())) { // 구글로 가입했는데, 들어온 요청인 구글인지. 카카오는 아닌지.
+
+                // 맞으면 로그인 성공 => jwt 발급해서 로그인 유지할 수 있게 보내기.
+                String jwt = jwtUtil.generateToken(user.getUserId());
+                loginResponseAuthDto.setJwt(jwt);
+
+                return ResponseEntity.ok(loginResponseAuthDto);
+            }
+            return ResponseEntity.status(409).body(loginResponseAuthDto); // 가입된 소셜 아이디말고 다른 소셜로 로그인 시도했을 경우
+
+        }
+        return ResponseEntity.notFound().build(); // 404 / 가입된 유저가 없어서 가입페이지로 이동
+
+    }
+
+
+
 
 }
 

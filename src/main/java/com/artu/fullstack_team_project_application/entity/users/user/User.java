@@ -81,6 +81,8 @@ public class User implements Serializable {
     @Column(name = "memo")
     private String memo;
 
+    @Column(name = "oauth")
+    private String oauth;
 
     //  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
     @Column(name = "created_at")
