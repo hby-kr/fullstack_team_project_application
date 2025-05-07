@@ -39,7 +39,7 @@ public class SecurityConfig {
                                         "/api/events/**",
                                         "/api/widgets/**",
                                         "/user/jwt/check.do",
-                                        "/user/jwt/login.do"
+                                        "/user/jwt/login.do",
                                         "/user/jwt/login.do",
                                         "/api/widgets/**",
                                         "/api/**"
